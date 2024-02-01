@@ -2,10 +2,9 @@
 
 namespace App\DTO;
 
-use App\Enums\UserTypes;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+
 use Illuminate\Auth\Events\Login;
+
 
 class LoginDTO {
 
