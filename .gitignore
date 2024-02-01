@@ -5,6 +5,10 @@
 /public/storage
 /storage/*.key
 /vendor
+/composer.lock
+/storage/framework
+/storage/logs
+/storage/app
 /tmp
 .env
 .env.backup
