@@ -1,11 +1,12 @@
 <?php
 
+namespace App\Repositories\Contracts;
+
+use App\DTO\LoginDTO;
 use Illuminate\Http\JsonResponse;
 
 interface AuthRepositoryInterface {
 
-    public function register() :JsonResponse;
-
-
+    public function checkLogin(LoginDTO $dto);
 
 }

@@ -23,6 +23,24 @@ Route::group(['prefix' => 'currencyRate'], function () {
     Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
 });
 
+    Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
