@@ -16,7 +16,7 @@ class CurrencyResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'digital_code' => $this->degital_code,
+            'digital_code' => $this->digital_code,
             'symbol_code' => $this->symbol_code
         ];
     }

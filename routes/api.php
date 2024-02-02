@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('currency', CurrencyController::class);
 
+Route::group(['prefix' => 'currencyRate'], function () {
+    Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
+    Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
+    Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

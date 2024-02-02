@@ -6,9 +6,9 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponse
 {
-    public function success($result, $code = 200): \Illuminate\Http\JsonResponse
+    public function success($result = null, $code = 200): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['result' => ApiResponseEnum::Success, 'errors' => null], $code);
+        return response()->json(['result' => $result ?? ApiResponseEnum::Success, 'errors' => null], $code);
     }
 
     public function error($code = 400): \Illuminate\Http\JsonResponse
@@ -24,6 +24,6 @@ trait ApiResponse
     public function created($result, $code = 201) :JsonResponse
     {
 
-        return response()->json(['result' => ApiResponseEnum::Created, 'errors' => null], $code);
+        return response()->json(['result' => $result ?? ApiResponseEnum::Created, 'errors' => null], $code);
     }
 }

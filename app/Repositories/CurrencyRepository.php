@@ -42,6 +42,8 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
             'date' => $dto->date,
             'value' => $dto->value
         ]);
+
+        return $currency->exchangeRates()->get();
     }
 
     public function deleteExchangeRate(ExchangeRate $exchangeRate)
@@ -55,5 +57,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
             'date' => $dto->date,
             'value' => $dto->value
         ]);
+
+        return $exchangeRate;
     }
 }

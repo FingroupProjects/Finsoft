@@ -14,6 +14,11 @@ class ExchangeRateResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+
+        return [
+            'date' => $this->date,
+            'currency' => $this->currency->symbol_code,
+            'value' => $this->value
+        ];
     }
 }
