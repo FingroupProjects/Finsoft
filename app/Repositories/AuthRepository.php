@@ -2,8 +2,10 @@
 
 class AuthRepository implements AuthRepositoryInterface {
 
-    public function login(): \Illuminate\Http\JsonResponse
+    public function register(): \Illuminate\Http\JsonResponse
     {
-        // TODO: Implement login() method.
+
     }
 }
+
+
