@@ -23,6 +23,11 @@ class CurrencyController extends Controller
 
     public function __construct(public CurrencyRepositoryInterface $repository){ }
 
+    public function index() :JsonResponse
+    {
+        return $this->success(CurrencyResource::collection(Currency::get()));
+    }
+
     public function store(CurrencyRequest $request) :JsonResponse
     {
        return $this->created($this->repository->store(CurrencyDTO::fromRequest($request)));
