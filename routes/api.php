@@ -30,6 +30,11 @@ Route::group(['prefix' => 'priceType'], function (){
     Route::post('/{priceType}', [PriceTypeController::class, 'delete']);
 });
 
+    Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+    Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

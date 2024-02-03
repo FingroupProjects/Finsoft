@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Auth\Events\Login;
 
 
