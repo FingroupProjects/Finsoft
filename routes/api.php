@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CurrencyController;
+use App\Http\Controllers\Api\PriceTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,12 @@ Route::group(['prefix' => 'currencyRate'], function () {
     Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
     Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
     Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
+});
+
+Route::group(['prefix' => 'priceType'], function (){
+    Route::post('/', [PriceTypeController::class, 'store']);
+    Route::post('/{priceType}', [PriceTypeController::class, 'update']);
+    Route::post('/{priceType}', [PriceTypeController::class, 'delete']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
