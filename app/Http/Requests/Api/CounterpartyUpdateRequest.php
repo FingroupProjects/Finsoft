@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class PriceTypeRequest extends FormRequest
+class CounterpartyUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,11 +29,19 @@ class PriceTypeRequest extends FormRequest
                 'min:3',
                 'max:25'
             ],
-            'currency_id' => [
-                'numeric',
+            'address' => [
+                'string',
                 'required',
-                'exists:currencies,id'
-            ]
+                'min:3'
+            ],
+            'phone' => [
+                'required',
+                'min:9'],
+            'email' => [
+                'email',
+                'required'
+            ],
+            'roles' => ['required', 'array', Rule::exists('roles', 'id')],
         ];
     }
 }

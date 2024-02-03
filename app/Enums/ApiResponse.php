@@ -8,5 +8,6 @@ enum ApiResponse :string
     case Error = 'Something went wrong';
     case NotAccess = 'you dont have access';
     case Created = 'created';
+    case Deleted = 'deleted';
 
 }

@@ -7,11 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\AuthRepository;
+use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+
+    use ApiResponse;
     public function __construct(public AuthRepository $repository)
     {
     }
@@ -21,25 +25,18 @@ class AuthController extends Controller
         $user = $this->repository->checkLogin(LoginDTO::fromRequest($request));
 
         if (!$user) {
-            return response()->json([
-                'error' => 'Логин или пароль не правильный!'
-            ]);
+            throw ValidationException::withMessages(['message' => __('auth.failed')]);
         }
 
         return response()->json([
             'token' => $user->createToken("API TOKEN")->plainTextToken,
             'user' => UserResource::make($user)
-        ], 200);
+        ]);
     }
 
-    public function logout(Request $request): JsonResponse
+    public function logout(): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'status' => true,
-        ], 200);
-
+       return $this->deleted(auth()->user()->tokens()->delete());
     }
 
 }

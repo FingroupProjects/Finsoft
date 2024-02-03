@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
+use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\PriceTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,25 +18,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('currency', CurrencyController::class);
+Route::group(['middleware' => 'auth:sanctum'], function (){
 
-Route::group(['prefix' => 'currencyRate'], function () {
-    Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
-    Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
-    Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
-});
+    Route::apiResource('currency', CurrencyController::class);
+    Route::apiResource('organizationBill', OrganizationBillController::class);
+    Route::apiResource('counterparty', CounterpartyController::class);
 
-Route::group(['prefix' => 'priceType'], function (){
-    Route::post('/', [PriceTypeController::class, 'store']);
-    Route::post('/{priceType}', [PriceTypeController::class, 'update']);
-    Route::post('/{priceType}', [PriceTypeController::class, 'delete']);
+    Route::group(['prefix' => 'currencyRate'], function () {
+        Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
+        Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
+        Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
+    });
+
+    Route::group(['prefix' => 'priceType'], function (){
+        Route::get('/', [PriceTypeController::class, 'index']);
+        Route::post('/', [PriceTypeController::class, 'store']);
+        Route::patch('/{priceType}', [PriceTypeController::class, 'update']);
+        Route::delete('/{priceType}', [PriceTypeController::class, 'delete']);
+    });
+
+
+    Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+
 });
 
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
-    Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});

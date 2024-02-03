@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('price_types', function (Blueprint $table) {
+        Schema::create('counterparty_roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('currency_id')->constrained();
+            $table->foreignId('role_id')->constrained();
+            $table->foreignId('counterparty_id')->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('price_types');
+        Schema::dropIfExists('coounterparty');
     }
 };

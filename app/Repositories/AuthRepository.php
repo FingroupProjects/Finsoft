@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function checkLogin(LoginDTO $dto)
+    public function checkLogin(LoginDTO $dto) :User|null
     {
-         $user = User::where('login', $dto->login)->first();
+        $user = User::where('login', $dto->login)->first();
 
         if ($user && Auth::attempt(['login' => $dto->login, 'password' => $dto->password])) {
             return $user;
         }
 
-        return false;
+        return null;
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PriceTypeRequest extends FormRequest
+class OrganizationBillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,21 @@ class PriceTypeRequest extends FormRequest
         return [
             'name' => [
                 'string',
+                'required'
+            ],
+            'organization_id' => [
+                'exists:organizations,id',
                 'required',
-                'min:3',
-                'max:25'
+                'numeric'
             ],
             'currency_id' => [
-                'numeric',
+                'exists:currencies,id',
                 'required',
-                'exists:currencies,id'
+                'numeric'
+            ],
+            'bill_number' => [
+                'string',
+                'required'
             ]
         ];
     }

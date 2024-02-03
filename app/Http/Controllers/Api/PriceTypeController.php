@@ -28,6 +28,11 @@ class PriceTypeController extends Controller
 
     public function __construct(public PriceTypeRepository $repository){ }
 
+    public function index() :JsonResponse
+    {
+        return $this->success(PriceTypeResource::collection(PriceType::get()));
+    }
+
     public function store(PriceTypeRequest $request) :JsonResponse
     {
        return $this->created($this->repository->store(PriceTypeDTO::fromRequest($request)));
@@ -40,6 +45,6 @@ class PriceTypeController extends Controller
 
     public function delete(PriceType $priceType) :JsonResponse
     {
-        return $this->success($priceType->delete());
+        return $this->deleted($priceType->delete());
     }
 }

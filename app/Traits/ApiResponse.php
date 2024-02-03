@@ -11,19 +11,23 @@ trait ApiResponse
         return response()->json(['result' => $result ?? ApiResponseEnum::Success, 'errors' => null], $code);
     }
 
-    public function error($code = 400): \Illuminate\Http\JsonResponse
+    public function error($result, $code = 400): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['result' => null, 'errors' => ApiResponseEnum::Error], $code);
+        return response()->json(['result' => null, 'errors' => $result ?? ApiResponseEnum::Error], $code);
     }
 
-    public function notAccess($code = 403): \Illuminate\Http\JsonResponse
+    public function notAccess($result, $code = 403): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['result' => null, 'errors' => ApiResponseEnum::Error], $code);
+        return response()->json(['result' => null, 'errors' => $result ?? ApiResponseEnum::Error], $code);
     }
 
     public function created($result, $code = 201) :JsonResponse
     {
-
         return response()->json(['result' => $result ?? ApiResponseEnum::Created, 'errors' => null], $code);
+    }
+
+    public function deleted($result, $code = 201) :JsonResponse
+    {
+        return response()->json(['result' => ApiResponseEnum::Deleted, 'errors' => null], $code);
     }
 }

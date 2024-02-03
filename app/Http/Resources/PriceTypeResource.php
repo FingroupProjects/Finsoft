@@ -16,7 +16,7 @@ class PriceTypeResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'currency' => $this->currency->symbol_coe
+            'currency' => $this->currency->symbol_code
         ];
     }
 }
