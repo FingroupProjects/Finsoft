@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\OrganizationBillController;
@@ -37,6 +38,11 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::delete('/{priceType}', [PriceTypeController::class, 'delete']);
     });
 
+    Route::group(['prefix' => 'cpAgreement'], function () {
+        Route::get('/', [CounterpartyAgreementController::class, 'index']);
+        Route::post('/store', [CounterpartyAgreementController::class, 'store']);
+        Route::patch('/update/{counterpartyAgreement}', [CounterpartyAgreementController::class, 'update']);
+    });
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 

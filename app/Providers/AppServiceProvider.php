@@ -5,10 +5,12 @@ namespace App\Providers;
 
 use App\Repositories\AuthRepository;
 use App\Repositories\Contracts\AuthRepositoryInterface;
+use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
+use App\Repositories\CounterpartyAgreementRepository;
 use App\Repositories\CounterpartyRepository;
 use App\Repositories\CurrencyRepository;
 
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PriceTypeRepository::class, \App\Repositories\PriceTypeRepository::class);
         $this->app->singleton(OrganizationBillRepositoryInterface::class, OrganizationBillRepository::class);
         $this->app->singleton(CounterpartyRepositoryInterface::class, CounterpartyRepository::class);
+        $this->app->singleton(CounterpartyAgreementRepositoryInterface::class, CounterpartyAgreementRepository::class);
     }
 
     /**
