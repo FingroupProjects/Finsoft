@@ -28,6 +28,8 @@ class CurrencyController extends Controller
         return $this->success(CurrencyResource::collection(Currency::get()));
     }
 
+
+
     public function store(CurrencyRequest $request) :JsonResponse
     {
        return $this->created($this->repository->store(CurrencyDTO::fromRequest($request)));
@@ -51,6 +53,11 @@ class CurrencyController extends Controller
     public function updateExchange(ExchangeRate $exchangeRate, ExchangeRequest $request) :JsonResponse
     {
         return $this->success(ExchangeRateResource::make($this->repository->updateExchangeRate($exchangeRate, ExchangeRateDTO::fromRequest($request))));
+    }
+
+    public function getExchangeRateByCyrrencyId(Currency $currency) :JsonResponse
+    {
+        return $this->success(ExchangeRateResource::make($this->repository->));
     }
 
     public function delete(Currency $currency) :JsonResponse

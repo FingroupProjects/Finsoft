@@ -6,6 +6,7 @@ use App\DTO\CurrencyDTO;
 use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
+use Ramsey\Collection\Collection;
 
 
 interface CurrencyRepositoryInterface {
@@ -19,6 +20,8 @@ interface CurrencyRepositoryInterface {
     public function deleteExchangeRate(ExchangeRate $exchangeRate);
 
     public function updateExchangeRate(ExchangeRate $exchangeRate, ExchangeRateDTO $dto);
+
+    public function getCurrencyExchangeRateByCurrencyRate(Currency $currency) :Collection;
 
     public function delete(Currency $currency);
 }

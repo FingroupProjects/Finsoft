@@ -7,6 +7,7 @@ use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use Ramsey\Collection\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface {
 
@@ -59,5 +60,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
         ]);
 
         return $exchangeRate;
+    }
+
+    public function getCurrencyExchangeRateByCurrencyRate(Currency $currency): Collection
+    {
+
     }
 }
