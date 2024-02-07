@@ -7,14 +7,13 @@ use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
-use Ramsey\Collection\Collection;
+use \Illuminate\Support\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface {
 
-
-    public function store(CurrencyDTO $dto)
+    public function store(CurrencyDTO $dto) :Currency
     {
-        Currency::create([
+       return Currency::create([
             'name' => $dto->name,
             'digital_code' => $dto->digital_code,
             'symbol_code' => $dto->symbol_code
@@ -64,6 +63,6 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
 
     public function getCurrencyExchangeRateByCurrencyRate(Currency $currency): Collection
     {
-
+        return $currency->exchangeRates()->get();
     }
 }

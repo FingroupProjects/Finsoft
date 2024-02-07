@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function (){
 
     Route::apiResource('currency', CurrencyController::class);
+    Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
     Route::apiResource('organizationBill', OrganizationBillController::class);
     Route::apiResource('counterparty', CounterpartyController::class);
 
