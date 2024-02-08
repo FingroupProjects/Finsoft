@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\OrganizationBillController;
+use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,13 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::get('/', [CounterpartyAgreementController::class, 'index']);
         Route::post('/store', [CounterpartyAgreementController::class, 'store']);
         Route::patch('/update/{counterpartyAgreement}', [CounterpartyAgreementController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'position'], function () {
+        Route::get('/', [PositionController::class, 'index']);
+        Route::post('/store', [PositionController::class, 'store']);
+        Route::patch('/update/{position}', [PositionController::class, 'update']);
+        Route::delete('/delete/{position}', [PositionController::class, 'delete']);
     });
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
