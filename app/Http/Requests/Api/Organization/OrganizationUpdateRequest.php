@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Position;
+namespace App\Http\Requests\Api\Organization;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class PositionRequest extends FormRequest
+class OrganizationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

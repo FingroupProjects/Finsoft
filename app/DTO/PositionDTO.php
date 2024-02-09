@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-use App\Http\Requests\Position\PositionRequest;
+use App\Http\Requests\Api\Position\PositionRequest;
 
 class PositionDTO
 {

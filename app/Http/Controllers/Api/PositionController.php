@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\PositionDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Position\PositionRequest;
+use App\Http\Requests\Api\Position\PositionRequest;
 use App\Http\Resources\PositionResource;
 use App\Models\Position;
 use App\Repositories\PositionRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\OrganizationBillController;
+use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
 use Illuminate\Http\Request;
@@ -53,10 +55,22 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::delete('/delete/{position}', [PositionController::class, 'delete']);
     });
 
+    Route::group(['prefix' => 'cashRegister'], function () {
+        Route::get('/', [CashRegisterController::class, 'index']);
+        Route::post('/store', [CashRegisterController::class, 'store']);
+        Route::patch('/update/{cashRegister}', [CashRegisterController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'organization'], function () {
+        Route::get('/', [OrganizationController::class, 'index']);
+        Route::post('/store', [OrganizationController::class, 'store']);
+        Route::patch('/update/{organization}', [OrganizationController::class, 'update']);
+        Route::delete('/delete/{organization}', [OrganizationController::class, 'delete']);
+    });
+
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 });
 
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
-
 

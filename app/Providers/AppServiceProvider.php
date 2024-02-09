@@ -4,18 +4,24 @@ namespace App\Providers;
 
 
 use App\Repositories\AuthRepository;
+use App\Repositories\CashRegisterRepository;
 use App\Repositories\Contracts\AuthRepositoryInterface;
+use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
+use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Repositories\CounterpartyAgreementRepository;
 use App\Repositories\CounterpartyRepository;
 use App\Repositories\CurrencyRepository;
 
+use App\Repositories\EmployeeRepository;
 use App\Repositories\OrganizationBillRepository;
+use App\Repositories\OrganizationRepository;
 use App\Repositories\PositionRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CounterpartyRepositoryInterface::class, CounterpartyRepository::class);
         $this->app->singleton(CounterpartyAgreementRepositoryInterface::class, CounterpartyAgreementRepository::class);
         $this->app->singleton(PositionRepositoryInterface::class, PositionRepository::class);
+        $this->app->singleton(CashRegisterRepositoryInterface::class, CashRegisterRepository::class);
+        $this->app->singleton(OrganizationRepositoryInterface::class, OrganizationRepository::class);
+        $this->app->singleton(EmployeeRepositoryInterface::class, EmployeeRepository::class);
     }
 
     /**

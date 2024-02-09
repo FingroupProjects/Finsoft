@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->nullable();
+        Schema::create('cash_registers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->foreignId('currency_id')->constrained();
+            $table->foreignId('organization_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('cash_registers');
     }
 };
