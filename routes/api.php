@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CashRegisterController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
@@ -9,8 +10,8 @@ use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,7 +81,19 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/store', [UserController::class, 'store']);
-        Route::patch('/update/{employee}', [UserController::class, 'update']);
+        Route::patch('/update/{user}', [UserController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'storage'], function () {
+        Route::get('/', [StorageController::class, 'index']);
+        Route::post('/store', [StorageController::class, 'store']);
+        Route::patch('/update/{storage}', [StorageController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::post('/store', [CategoryController::class, 'store']);
+        Route::patch('/update/{category}', [CategoryController::class, 'update']);
     });
 
 

@@ -10,7 +10,7 @@ class UserRepository
 {
     public function index()
     {
-        return User::whereHas('userRoles', function ($query) {
+        return User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })->get();
     }
@@ -26,11 +26,22 @@ class UserRepository
             'password' => Hash::make($DTO->password),
             'phone' => $DTO->phone,
             'email' => $DTO->email
-        ])->userRole()->attach('user');
+        ])->assignRole('user');
     }
 
     public function update(User $user, UserDTO $DTO)
     {
-//        $user
+        $user->update([
+            'name' => $DTO->name,
+            'surname' => $DTO->surname,
+            'lastname' => $DTO->lastname,
+            'organization_id' => $DTO->organization_id,
+            'login' => $DTO->login,
+            'password' => Hash::make($DTO->password),
+            'phone' => $DTO->phone,
+            'email' => $DTO->email
+        ]);
+
+        return $user;
     }
 }

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $guarded = false;
 
@@ -30,8 +31,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function userRoles(): BelongsToMany
+    public function organization()
     {
-        return $this->belongsToMany(UserRole::class);
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 }

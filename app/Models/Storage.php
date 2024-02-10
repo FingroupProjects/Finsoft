@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Storage extends Model
 {
+    use HasFactory;
+
     protected $guarded = false;
 
-    protected $table = 'user_roles';
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

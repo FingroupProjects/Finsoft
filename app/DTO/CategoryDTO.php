@@ -2,14 +2,14 @@
 
 namespace App\DTO;
 
-use App\Http\Requests\Api\Organization\OrganizationRequest;
+use App\Http\Requests\Api\Category\CategoryRequest;
 use Illuminate\Http\Request;
 
-class OrganizationDTO
+class CategoryDTO
 {
     public function __construct(public string $name) { }
 
-    public static function fromRequest(OrganizationRequest $request) :OrganizationDTO
+    public static function fromRequest(CategoryRequest $request) :CategoryDTO
     {
         return new static(
             $request->get('name'),
