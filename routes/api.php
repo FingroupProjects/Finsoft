@@ -4,10 +4,12 @@ use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +69,21 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::patch('/update/{organization}', [OrganizationController::class, 'update']);
         Route::delete('/delete/{organization}', [OrganizationController::class, 'delete']);
     });
+
+    Route::group(['prefix' => 'employee'], function () {
+        Route::get('/', [EmployeeController::class, 'index']);
+        Route::post('/store', [EmployeeController::class, 'store']);
+        Route::patch('/update/{employee}', [EmployeeController::class, 'update']);
+        Route::delete('/delete/{employee}', [EmployeeController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::post('/store', [UserController::class, 'store']);
+        Route::patch('/update/{employee}', [UserController::class, 'update']);
+    });
+
+
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
