@@ -21,9 +21,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function store(EmployeeDTO $DTO)
     {
-        $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
 
-        return CashRegister::create([
+        if ($DTO->image != null) $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
+
+        return Employee::create([
            'name' => $DTO->name,
            'surname' => $DTO->surname,
            'lastname' => $DTO->lastname,
@@ -34,13 +35,13 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function update(Employee $employee, EmployeeDTO $DTO): Employee
     {
-        $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
+        if ($DTO->image != null) $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
 
         $employee->update([
             'name' => $DTO->name,
             'surname' => $DTO->surname,
             'lastname' => $DTO->lastname,
-            'image' => $image ?? '',
+            'image' => $image ?? $employee->image,
         ]);
 
         return $employee;
