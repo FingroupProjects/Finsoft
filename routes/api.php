@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => 'auth:sanctum'], function (){
 
     Route::apiResource('currency', CurrencyController::class);
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
@@ -99,7 +100,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-
+});
 
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 
