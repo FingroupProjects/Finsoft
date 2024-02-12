@@ -26,7 +26,7 @@ class OrganizationController extends Controller
         return $this->created(OrganizationResource::make($repository->store(OrganizationDTO::fromRequest($request))));
     }
 
-    public function update(Organization $organization, OrganizationUpdateRequest $request, OrganizationRepository $repository)
+    public function update(Organization $organization, OrganizationRequest $request, OrganizationRepository $repository)
     {
         return $this->success(OrganizationResource::make($repository->update($organization, OrganizationDTO::fromRequest($request))));
     }
