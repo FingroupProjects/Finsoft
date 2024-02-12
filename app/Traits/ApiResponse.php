@@ -26,8 +26,8 @@ trait ApiResponse
         return response()->json(['result' => $result ?? ApiResponseEnum::Created, 'errors' => null], $code);
     }
 
-    public function deleted($result, $code = 201) :JsonResponse
+    public function deleted() :JsonResponse
     {
-        return response()->json(['result' => ApiResponseEnum::Deleted, 'errors' => null], $code);
+        return response()->json(['result' => ApiResponseEnum::Deleted, 'errors' => null]);
     }
 }

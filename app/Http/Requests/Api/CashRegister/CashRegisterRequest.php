@@ -23,7 +23,8 @@ class CashRegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'currency_id' => ['required'],
+            'currency_id' => ['required', 'exists:currencies,id'],
+            'organization_id' => ['required', 'exists:organizations,id']
         ];
     }
 }
