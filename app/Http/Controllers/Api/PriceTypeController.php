@@ -43,7 +43,7 @@ class PriceTypeController extends Controller
         return $this->success(PriceTypeResource::make($this->repository->update($priceType,  PriceTypeDTO::fromRequest($request))));
     }
 
-    public function delete(PriceType $priceType) :JsonResponse
+    public function destroy(PriceType $priceType) :JsonResponse
     {
         return $this->deleted($priceType->delete());
     }

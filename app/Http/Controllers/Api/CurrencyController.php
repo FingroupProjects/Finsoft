@@ -28,8 +28,6 @@ class CurrencyController extends Controller
         return $this->success(CurrencyResource::collection(Currency::get()));
     }
 
-
-
     public function store(CurrencyRequest $request) :JsonResponse
     {
        return $this->created(CurrencyResource::make($this->repository->store(CurrencyDTO::fromRequest($request))));

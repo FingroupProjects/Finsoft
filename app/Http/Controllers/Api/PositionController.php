@@ -30,7 +30,7 @@ class PositionController extends Controller
         return $this->success(PositionResource::make($repository->update($position, PositionDTO::formRequest($request))));
     }
 
-    public function delete(Position $position)
+    public function destroy(Position $position)
     {
         return $this->deleted($position->delete());
     }

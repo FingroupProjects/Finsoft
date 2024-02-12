@@ -31,7 +31,7 @@ class OrganizationController extends Controller
         return $this->success(OrganizationResource::make($repository->update($organization, OrganizationDTO::fromRequest($request))));
     }
 
-    public function delete(Organization $organization)
+    public function destroy(Organization $organization)
     {
         return $this->deleted($organization->delete());
     }

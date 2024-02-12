@@ -31,7 +31,7 @@ class EmployeeController extends Controller
         return $this->success(EmployeeResource::make($repository->update($employee ,EmployeeDTO::fromRequest($request))));
     }
 
-    public function delete(Employee $employee)
+    public function destroy(Employee $employee)
     {
         return $this->deleted($employee->delete());
     }
