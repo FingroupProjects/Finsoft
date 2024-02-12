@@ -23,7 +23,8 @@ class ImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'good_id' => ['required', '']
+            'good_id' => ['required', 'exists:goods,id'],
+            'images' => ['required', 'array']
         ];
     }
 }

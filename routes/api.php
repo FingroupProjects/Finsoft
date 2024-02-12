@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
+        Route::get('/{currency}', [CurrencyController::class, 'showExchangeRate']);
         Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
         Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
     });
