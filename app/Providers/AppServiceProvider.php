@@ -13,21 +13,25 @@ use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Repositories\Contracts\GoodRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Repositories\Contracts\StorageRepositoryInterface;
+use App\Repositories\Contracts\UnitRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\CounterpartyAgreementRepository;
 use App\Repositories\CounterpartyRepository;
 use App\Repositories\CurrencyRepository;
 
 use App\Repositories\EmployeeRepository;
+use App\Repositories\GoodRepository;
 use App\Repositories\OrganizationBillRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\PositionRepository;
 use App\Repositories\StorageRepository;
+use App\Repositories\UnitRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -51,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(StorageRepositoryInterface::class, StorageRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->singleton(UnitRepositoryInterface::class, UnitRepository::class);
+        $this->app->singleton(GoodRepositoryInterface::class, GoodRepository::class);
     }
 
     /**

@@ -4,9 +4,10 @@ namespace App\Repositories;
 
 use App\DTO\OrganizationDTO;
 use App\Models\Organization;
+use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use Illuminate\Support\Collection;
 
-class OrganizationRepository
+class OrganizationRepository implements OrganizationRepositoryInterface
 {
     public function index() :Collection
     {

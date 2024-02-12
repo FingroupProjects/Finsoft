@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api\Good;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class GoodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +26,12 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'surname' => ['required', 'string'],
-            'lastname' => [''],
-            'organization_id' => [''],
-            'login' => ['required'],
-            'password' => ['required'],
-            'phone' => [''],
-            'email' => ['nullable', 'email', 'unique:users,email']
+            'vendor_code' => ['required', 'unique:goods,vendor_code'],
+            'description' => [''],
+            'category_id' => ['required', 'exists:categories,id'],
+            'unit_id' => ['required', 'exists:units,id'],
+            'barcode' => ['required', 'unique:goods,barcode'],
+            'storage_id' => ['required', 'exists:storages,id'],
         ];
     }
 
