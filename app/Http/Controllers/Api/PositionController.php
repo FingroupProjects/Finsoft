@@ -20,6 +20,11 @@ class PositionController extends Controller
         return $this->success(PositionResource::collection(Position::get()));
     }
 
+    public function show(Position $position) :JsonResponse
+    {
+        return $this->success(PositionResource::make($position));
+    }
+
     public function store(PositionRepository $repository, PositionRequest $request): JsonResponse
     {
         return $this->created(PositionResource::make($repository->store(PositionDTO::formRequest($request))));

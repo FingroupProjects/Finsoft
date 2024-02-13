@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Repositories\StorageRepository;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class StorageController extends Controller
@@ -23,6 +24,11 @@ class StorageController extends Controller
     public function index(StorageRepository $repository)
     {
         return $this->success(StorageResource::collection($repository->index()));
+    }
+
+    public function show(Storage $storage) :JsonResponse
+    {
+        return $this->success(StorageResource::make($storage));
     }
 
     public function store(StorageRepository $repository, StorageRequest $request)

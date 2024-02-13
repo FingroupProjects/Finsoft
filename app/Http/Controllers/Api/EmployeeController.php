@@ -10,6 +10,7 @@ use App\Http\Resources\EmployeeResource;
 use App\Models\Employee;
 use App\Repositories\EmployeeRepository;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -19,6 +20,11 @@ class EmployeeController extends Controller
     public function index(EmployeeRepository $repository)
     {
         return $this->success(EmployeeResource::collection($repository->index()));
+    }
+
+    public function show(Employee $employee) :JsonResponse
+    {
+        return $this->success(EmployeeResource::make($employee));
     }
 
     public function store(EmployeeRepository $repository, EmployeeRequest $request)

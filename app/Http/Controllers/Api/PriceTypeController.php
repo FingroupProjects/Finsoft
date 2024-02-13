@@ -33,6 +33,11 @@ class PriceTypeController extends Controller
         return $this->success(PriceTypeResource::collection(PriceType::get()));
     }
 
+    public function show(PriceType $priceType) :JsonResponse
+    {
+        return $this->success(PriceTypeResource::make($priceType));
+    }
+
     public function store(PriceTypeRequest $request) :JsonResponse
     {
        return $this->created($this->repository->store(PriceTypeDTO::fromRequest($request)));

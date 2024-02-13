@@ -21,6 +21,11 @@ class CashRegisterController extends Controller
         return $this->success(CashRegisterResource::collection($repository->index()));
     }
 
+    public function show(CashRegister $cashRegister)
+    {
+       return $this->success(CashRegisterResource::make($cashRegister));
+    }
+
     public function store(CashRegisterRepository $repository ,CashRegisterRequest $request)
     {
         return $this->created(CashRegisterResource::make($repository->store(CashRegisterDTO::fromRequest($request))));

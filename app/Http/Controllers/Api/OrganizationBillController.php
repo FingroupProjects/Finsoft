@@ -38,6 +38,11 @@ class OrganizationBillController extends Controller
         return $this->success(OrganizationBillResource::collection($this->repository->index()));
     }
 
+    public function show(OrganizationBill $organizationBill) :JsonResponse
+    {
+        return $this->success(OrganizationBillResource::make($organizationBill));
+    }
+
     public function store(OrganizationBillRequest $request) :JsonResponse
     {
        return $this->created($this->repository->store(OrganizationBillDTO::fromRequest($request)));

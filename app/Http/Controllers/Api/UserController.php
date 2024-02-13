@@ -9,6 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,6 +19,11 @@ class UserController extends Controller
     public function index(UserRepository $repository)
     {
         return $this->success(UserResource::collection($repository->index()));
+    }
+
+    public function show(User $user) :JsonResponse
+    {
+        return $this->success(UserResource::make($user));
     }
 
     public function store(UserRepository $repository, UserRequest $request)

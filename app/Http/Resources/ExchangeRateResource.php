@@ -16,6 +16,7 @@ class ExchangeRateResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'date' => $this->date,
             'currency' => $this->currency->symbol_code,
             'value' => $this->value
