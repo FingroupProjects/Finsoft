@@ -17,7 +17,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
     public function index(): Collection
     {
-        return Counterparty::get();
+        return Counterparty::orderBy('created_at', 'desc')->get();
     }
 
     public function store(CounterpartyDTO $DTO)
