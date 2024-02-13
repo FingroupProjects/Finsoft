@@ -29,7 +29,6 @@ class CashRegisterRequest extends FormRequest
             'organization_id' => ['required', 'exists:organizations,id']
         ];
     }
-    
     protected function failedValidation(Validator $validator)
     {
         $response = response()->json([
