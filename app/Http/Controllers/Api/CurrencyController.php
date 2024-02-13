@@ -25,7 +25,7 @@ class CurrencyController extends Controller
 
     public function index() :JsonResponse
     {
-        return $this->success(CurrencyResource::collection(Currency::get()));
+        return $this->success(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->get()));
     }
 
     public function showExchangeRate(Currency $currency)
