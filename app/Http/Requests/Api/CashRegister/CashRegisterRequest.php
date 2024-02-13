@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Api\CashRegister;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CashRegisterRequest extends FormRequest
 {
@@ -26,5 +28,15 @@ class CashRegisterRequest extends FormRequest
             'currency_id' => ['required', 'exists:currencies,id'],
             'organization_id' => ['required', 'exists:organizations,id']
         ];
+    }
+    
+    protected function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            'status' => false,
+            'errors' => $validator->errors()
+        ], 422);
+
+        throw new HttpResponseException($response);
     }
 }

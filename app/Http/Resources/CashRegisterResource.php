@@ -16,7 +16,9 @@ class CashRegisterResource extends JsonResource
     {
         return [
             'name' => $this->name,
+            'currency_id' => $this->currency_id,
             'currency' => $this->currency->name ?? '',
+            'organization_id' => $this->organization_id,
             'organization' => $this->organization->name ?? '',
         ];
     }
