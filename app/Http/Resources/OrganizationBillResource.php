@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class OrganizationBillResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource into afn array.
      *
      * @return array<string, mixed>
      */
