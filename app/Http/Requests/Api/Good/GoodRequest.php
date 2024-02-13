@@ -32,6 +32,9 @@ class GoodRequest extends FormRequest
             'unit_id' => ['required', 'exists:units,id'],
             'barcode' => ['required', 'unique:goods,barcode'],
             'storage_id' => ['required', 'exists:storages,id'],
+            'images' => ['required', 'array'],
+            'images.*.image' => ['required', 'file'],
+            'images.*.is_main' => ['required'],
         ];
     }
 

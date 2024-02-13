@@ -14,6 +14,7 @@ use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\Contracts\GoodRepositoryInterface;
+use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
@@ -27,6 +28,7 @@ use App\Repositories\CurrencyRepository;
 
 use App\Repositories\EmployeeRepository;
 use App\Repositories\GoodRepository;
+use App\Repositories\ImageRepository;
 use App\Repositories\OrganizationBillRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\PositionRepository;
@@ -57,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->singleton(UnitRepositoryInterface::class, UnitRepository::class);
         $this->app->singleton(GoodRepositoryInterface::class, GoodRepository::class);
+        $this->app->singleton(ImageRepositoryInterface::class, ImageRepository::class);
     }
 
     /**

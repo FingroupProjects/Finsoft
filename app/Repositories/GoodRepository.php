@@ -18,7 +18,8 @@ class GoodRepository implements GoodRepositoryInterface
 
     public function store(GoodDTO $DTO)
     {
-        return Good::create([
+
+        $good = Good::create([
             'name' => $DTO->name,
             'vendor_code' => $DTO->vendor_code,
             'description' => $DTO->description,
@@ -27,6 +28,8 @@ class GoodRepository implements GoodRepositoryInterface
             'barcode' => $DTO->barcode,
             'storage_id' => $DTO->storage_id
         ]);
+
+
 
     }
 
