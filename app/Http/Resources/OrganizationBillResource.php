@@ -15,9 +15,10 @@ class OrganizationBillResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'currency' => $this->currency->symbol_code,
-            'organization' => $this->organization->id,
+            'organization' => $this->organization->name,
             'bill_number' => $this->bill_number
         ];
     }

@@ -10,7 +10,9 @@ use App\Http\Resources\OrganizationResource;
 use App\Models\Organization;
 use App\Repositories\OrganizationRepository;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrganizationController extends Controller
 {
@@ -19,6 +21,11 @@ class OrganizationController extends Controller
     public function index(OrganizationRepository $repository)
     {
         return $this->success(OrganizationResource::collection($repository->index()));
+    }
+
+    public function show(Organization $organization) :JsonResponse
+    {
+        return $this->success(OrganizationResource::make($organization));
     }
 
     public function store(OrganizationRequest $request, OrganizationRepository $repository)

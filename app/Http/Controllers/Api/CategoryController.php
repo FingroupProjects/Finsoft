@@ -9,6 +9,7 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
@@ -17,6 +18,11 @@ class CategoryController extends Controller
     public function index(CategoryRepository $repository)
     {
         return $this->success(CategoryResource::collection($repository->index()));
+    }
+
+    public function show(Category $category) :JsonResponse
+    {
+        return $this->success(CategoryResource::make($category));
     }
 
     public function store(CategoryRequest $request, CategoryRepository $repository)
