@@ -17,8 +17,8 @@ class OrganizationBillResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'currency_id' => $this->currency_id,
-            'organization_id' => $this->organization_id,
+            'currency_id' => $this->currency,
+            'organization_id' => $this->organization,
             'bill_number' => $this->bill_number
         ];
     }
