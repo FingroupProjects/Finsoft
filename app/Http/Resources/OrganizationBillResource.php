@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class OrganizationBillResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource into afn array.
      *
      * @return array<string, mixed>
      */
@@ -17,8 +17,8 @@ class OrganizationBillResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'currency' => $this->currency->symbol_code,
-            'organization' => $this->organization->name,
+            'currency_id' => $this->currency_id,
+            'organization_id' => $this->organization_id,
             'bill_number' => $this->bill_number
         ];
     }
