@@ -42,7 +42,7 @@ class GoodRequest extends FormRequest
 
 
 
-    
+
     protected function failedValidation(Validator $validator)
     {
         $response = response()->json([
