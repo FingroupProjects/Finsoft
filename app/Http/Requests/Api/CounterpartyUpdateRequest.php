@@ -41,7 +41,7 @@ class CounterpartyUpdateRequest extends FormRequest
                 'email',
                 'required'
             ],
-            'roles' => ['required', 'array', Rule::exists('roles', 'id')],
+            'roles' => ['required', 'array'],
         ];
     }
 }
