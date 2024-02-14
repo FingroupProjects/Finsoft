@@ -37,7 +37,7 @@ class CounterpartyRequest extends FormRequest
             'phone' => [
                 'required',
                 'unique:counterparties,phone',
-                'min:9'
+                'min:13'
             ],
             'email' =>[
                 'email',
