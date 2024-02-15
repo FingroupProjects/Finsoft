@@ -17,7 +17,7 @@ class OrganizationBillRepository implements OrganizationBillRepositoryInterface
 
     public function index(): Collection
     {
-        return OrganizationBill::get();
+        return OrganizationBill::with(['currency', 'organization'])->get();
     }
 
     public function store(OrganizationBillDTO $dto)
@@ -30,6 +30,6 @@ class OrganizationBillRepository implements OrganizationBillRepositoryInterface
 
         $bill->update(get_object_vars($dto));
 
-        return $bill;
+        return $bill->load(['currency', 'organization']);
     }
 }

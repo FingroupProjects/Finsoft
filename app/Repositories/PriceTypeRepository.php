@@ -28,6 +28,6 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface {
             'currency_id' => $DTO->currency_id
         ]);
 
-        return $priceType;
+        return $priceType->load('currency');
     }
 }

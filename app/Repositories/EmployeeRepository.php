@@ -22,13 +22,13 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     public function store(EmployeeDTO $DTO)
     {
 
-        if ($DTO->image != null) $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
+        $image = $DTO->image ? Storage::disk('public')->put('employeePhoto', $DTO->image) : null;
 
         return Employee::create([
            'name' => $DTO->name,
            'surname' => $DTO->surname,
            'lastname' => $DTO->lastname,
-           'image' => $image ?? ''
+           'image' => $image
        ]);
 
     }

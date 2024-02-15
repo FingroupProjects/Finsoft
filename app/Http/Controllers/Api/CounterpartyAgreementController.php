@@ -8,6 +8,7 @@ use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementRequest;
 use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementUpdateRequest;
 use App\Http\Resources\CounterpartyAgreementResource;
 use App\Models\CounterpartyAgreement;
+use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Repositories\CounterpartyAgreementRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,7 @@ class CounterpartyAgreementController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public CounterpartyAgreementRepository $repository){ }
+    public function __construct(public CounterpartyAgreementRepositoryInterface $repository){ }
 
     public function index() :JsonResponse
     {
@@ -30,7 +31,7 @@ class CounterpartyAgreementController extends Controller
 
     public function store(CounterpartyAgreementRequest $request) :JsonResponse
     {
-       return $this->created(CounterpartyAgreementResource::make($this->repository->store(CounterpartyAgreementDTO::fromRequest($request))));
+       return $this->created($this->repository->store(CounterpartyAgreementDTO::fromRequest($request)));
     }
 
     public function update(CounterpartyAgreement $counterpartyAgreement, CounterpartyAgreementUpdateRequest $request) :JsonResponse

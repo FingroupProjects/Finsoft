@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Employee\EmployeeRequest;
 use App\Http\Requests\Api\Employee\EmployeeUpdateRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Models\Employee;
+use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\EmployeeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,7 @@ class EmployeeController extends Controller
 {
     use ApiResponse;
 
-    public function index(EmployeeRepository $repository)
+    public function index(EmployeeRepositoryInterface $repository)
     {
         return $this->success(EmployeeResource::collection($repository->index()));
     }
@@ -27,12 +28,12 @@ class EmployeeController extends Controller
         return $this->success(EmployeeResource::make($employee));
     }
 
-    public function store(EmployeeRepository $repository, EmployeeRequest $request)
+    public function store(EmployeeRepositoryInterface $repository, EmployeeRequest $request)
     {
         return $this->created(EmployeeResource::make($repository->store(EmployeeDTO::fromRequest($request))));
     }
 
-    public function update(Employee $employee, EmployeeRequest $request, EmployeeRepository $repository)
+    public function update(Employee $employee, EmployeeRequest $request, EmployeeRepositoryInterface $repository)
     {
         return $this->success(EmployeeResource::make($repository->update($employee ,EmployeeDTO::fromRequest($request))));
     }

@@ -17,10 +17,9 @@ class CashRegisterResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'currency_id' => $this->currency_id,
-            'currency' => $this->currency->name ?? '',
-            'organization_id' => $this->organization_id,
-            'organization' => $this->organization->name ?? '',
+            'currency' => CurrencyResource::make($this->whenLoaded('currency')),
+            'organization' => CurrencyResource::make($this->whenLoaded('organization')),
         ];
     }
+
 }

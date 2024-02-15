@@ -17,8 +17,8 @@ class OrganizationBillResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'currency' => CurrencyResource::make($this->currency),
-            'organization' => OrganizationResource::make($this->organization),
+            'currency' => CurrencyResource::make($this->whenLoaded('currency')),
+            'organization' => OrganizationResource::make($this->whenLoaded('organizationдух')),
             'bill_number' => $this->bill_number
         ];
     }
