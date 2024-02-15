@@ -9,15 +9,19 @@ use App\Models\User;
 use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class CounterpartyRepository implements CounterpartyRepositoryInterface
 {
 
+    private $model = Counterparty::class;
+    private const ON_PAGE =10;
+
     public function index(): Collection
     {
-        return Counterparty::orderBy('created_at', 'desc')->get();
+        return $this->model::orderBy('created_at', 'desc')->get();
     }
 
     public function store(CounterpartyDTO $DTO)
@@ -47,5 +51,10 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
         return $counterparty;
 
+    }
+
+    public function search(string $search): LengthAwarePaginator
+    {
+        return $this->model::where('name', 'like', "%$search%")->orWhere('phone', 'like', "$$search%")->orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
     }
 }

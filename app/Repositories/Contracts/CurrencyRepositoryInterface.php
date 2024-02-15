@@ -9,7 +9,7 @@ use App\Models\ExchangeRate;
 use Illuminate\Support\Collection;
 
 
-interface CurrencyRepositoryInterface {
+interface CurrencyRepositoryInterface extends SearchInterface {
 
     public function store(CurrencyDTO $dto) :Currency;
 
@@ -22,5 +22,6 @@ interface CurrencyRepositoryInterface {
     public function updateExchangeRate(ExchangeRate $exchangeRate, ExchangeRateDTO $dto);
 
     public function getCurrencyExchangeRateByCurrencyRate(Currency $currency) :Collection;
+
     public function delete(Currency $currency);
 }

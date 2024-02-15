@@ -54,4 +54,8 @@ class CounterpartyController extends Controller
         return $this->success(CounterpartyResource::make($this->repository->update($counterparty,  CounterpartyDTO::fromRequest($request))));
     }
 
+    public function search(Request $request) :JsonResponse
+    {
+        return $this->success(CounterpartyResource::collection($this->repository->search($request->search)));
+    }
 }
