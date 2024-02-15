@@ -30,6 +30,9 @@ class CashRegisterRequest extends FormRequest
         ];
     }
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 }
