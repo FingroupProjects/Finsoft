@@ -18,14 +18,10 @@ use App\Http\Resources\PriceTypeResource;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Models\OrganizationBill;
-use App\Models\PriceType;
-use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
-use App\Repositories\Contracts\PriceTypeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Psy\Util\Json;
+
 
 class OrganizationBillController extends Controller
 {
