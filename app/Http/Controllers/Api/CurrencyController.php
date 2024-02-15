@@ -30,7 +30,7 @@ class CurrencyController extends Controller
 
     public function showExchangeRate(Currency $currency)
     {
-        return $this->success(ExchangeRateResource::collection($currency->exchangeRates()->get()));
+        return $this->success(CurrencyResource::make($currency->load('exchangeRates')));
     }
 
     public function store(CurrencyRequest $request) :JsonResponse
