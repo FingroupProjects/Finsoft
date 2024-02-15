@@ -23,6 +23,7 @@ class CurrencyController extends Controller
 
     public function __construct(public CurrencyRepositoryInterface $repository){ }
 
+
     public function index() :JsonResponse
     {
         return $this->success(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->get()));
@@ -66,5 +67,10 @@ class CurrencyController extends Controller
     public function delete(Currency $currency) :JsonResponse
     {
         return $this->success($this->repository->delete($currency));
+    }
+
+    public function search(Request $request) :JsonResponse
+    {
+        return $this->paginate(CurrencyResource::collection($this->repository->search($request->search)));
     }
 }

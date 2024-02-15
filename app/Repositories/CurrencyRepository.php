@@ -7,9 +7,13 @@ use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 use \Illuminate\Support\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface {
+
+    private $model = Currency::class;
+    const ON_PAGE = 10;
 
     public function store(CurrencyDTO $dto) :Currency
     {
@@ -64,5 +68,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
     public function getCurrencyExchangeRateByCurrencyRate(Currency $currency): Collection
     {
         return $currency->exchangeRates()->get();
+    }
+
+    public function search(string $search): LengthAwarePaginator
+    {
+       return $this->model::where('name', 'like', "%$search%")->orWhere('symbol_code', 'like', "%$search")->paginate(self::ON_PAGE);
     }
 }

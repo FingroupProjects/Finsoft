@@ -30,4 +30,11 @@ trait ApiResponse
     {
         return response()->json(['result' => ApiResponseEnum::Deleted, 'errors' => null]);
     }
+
+    public function paginate($result = 'Успешно', $code = 200): JsonResponse
+    {
+        if (is_string($result))
+            return $this->success($result, $code);
+        return response()->json(['result' => paginatedResponse($result)], $code);
+    }
 }
