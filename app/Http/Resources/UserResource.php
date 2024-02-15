@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'lastname' => $this->lastname ?? '',
             'login' => $this->login,
             'email'=> $this->email ?? '',
-            'organization' => $this->organization->name ?? '',
+            'organization' => OrganizationResource::make($this->whenLoaded('organization')),
             'phone' => $this->phone ?? '',
         ];
     }

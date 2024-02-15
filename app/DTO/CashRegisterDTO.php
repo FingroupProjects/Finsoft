@@ -2,12 +2,13 @@
 
 namespace App\DTO;
 
+use App\Http\Requests\Api\CashRegister\CashRegisterRequest;
 use Illuminate\Http\Request;
 
 
 class CashRegisterDTO {
 
-    public function __construct(public GoodDTO $good, public int $currency_id, public int $organization_id){ }
+    public function __construct(public string $name, public int $currency_id, public int $organization_id){ }
 
 
     public static function fromRequest(Request $request) :CashRegisterDTO {

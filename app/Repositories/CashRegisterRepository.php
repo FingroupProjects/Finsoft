@@ -12,12 +12,12 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
     public function index(): Collection
     {
-        return CashRegister::get();
+        return CashRegister::with(['currency', 'organization'])->get();
     }
 
     public function store(CashRegisterDTO $DTO)
     {
-        return CashRegister::create([
+        CashRegister::create([
            'name' => $DTO->name,
            'currency_id' => $DTO->currency_id,
            'organization_id' => $DTO->organization_id
@@ -33,6 +33,6 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             'organization_id' => $DTO->organization_id
         ]);
 
-        return $cashRegister;
+        return $cashRegister->load(['currency', 'organization']);
     }
 }

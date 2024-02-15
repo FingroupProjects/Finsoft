@@ -41,7 +41,7 @@ class CounterpartyUpdateRequest extends FormRequest
                 'email',
                 'required'
             ],
-            'roles' => ['required', 'array'],
+            'roles' => ['required', 'array', 'exists:roles,id'],
         ];
     }
 }

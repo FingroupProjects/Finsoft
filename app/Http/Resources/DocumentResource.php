@@ -18,11 +18,12 @@ class DocumentResource extends JsonResource
             'id' => $this->id,
             'doc_number' => $this->doc_number,
             'date' => $this->date,
-            'counterparty' => $this->counterparty->name ?? '',
-            'counterparty_agreement' => $this->counterparty_agreement->name ?? '',
-            'organization' => $this->organization->name ?? '',
-            'storage' => $this->storage->name ?? '',
-            'author' => $this->author->name ?? ''
+            'counterparty' => CounterpartyResource::make($this->whenLoaded('counterparty')),
+            'counterparty_agreement' => CounterpartyAgreementResource::make($this->whenLoaded('counterpartyAgreement')),
+            'organization' => OrganizationResource::make($this->whenLoaded('organization')),
+            'storage' => StorageResource::make($this->whenLoaded('storage')),
+            'author' => UserResource::make($this->whenLoaded('author')),
         ];
     }
+
 }

@@ -37,14 +37,14 @@ class CounterpartyRequest extends FormRequest
             'phone' => [
                 'required',
                 'unique:counterparties,phone',
-                'min:9'
+                'min:13'
             ],
             'email' =>[
                 'email',
                 'required',
                 'unique:counterparties,email'
             ],
-            'roles' => ['required', 'array', Rule::exists('user_roles', 'id')],
+            'roles' => ['required', 'array', Rule::exists('roles', 'id')],
         ];
     }
 }
