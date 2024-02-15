@@ -19,10 +19,10 @@ class GoodResource extends JsonResource
             'name' => $this->name,
             'vendor_code' => $this->vendor_code,
             'description' => $this->description,
-            'category_id' => $this->category_id,
+            'category_id' => CategoryResource::make($this->whenLoaded('category')),
             'unit_id' => $this->unit_id,
             'barcode' => $this->barcode,
-            'storage_id' => $this->storage_id,
+            'storage_id' => StorageResource::make($this->whenLoaded('storage')),
         ];
     }
 }

@@ -27,21 +27,12 @@ class UserRequest extends FormRequest
             'name' => ['required', 'string'],
             'surname' => ['required', 'string'],
             'lastname' => [''],
-            'organization_id' => [''],
-            'login' => ['required'],
+            'organization_id' => ['exists:organizations,id'],
+            'login' => ['required', 'unique:users,login'],
             'password' => ['required'],
-            'phone' => [''],
+            'phone' => ['unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email']
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json([
-            'status' => false,
-            'errors' => $validator->errors()
-        ], 422);
-
-        throw new HttpResponseException($response);
-    }
 }

@@ -30,19 +30,11 @@ class DocumentRequest extends FormRequest
             'organization_id' => ['required', 'exists:organizations,id'],
             'storage_id' => ['required', 'exists:storages,id'],
             'author_id' => ['required', 'exists:users,id'],
-            'goods' => ['required', 'array'],
+            'goods' => ['nullable', 'array'],
             'goods.*.good_id' => ['required', 'exists:goods,id'],
-            'goods.*.price' => ['required'],
+            'goods.*.amount' => ['required', 'min:1'],
+            'goods.*.price' => ['required', 'float'],
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = response()->json([
-            'status' => false,
-            'errors' => $validator->errors()
-        ], 422);
-
-        throw new HttpResponseException($response);
-    }
 }

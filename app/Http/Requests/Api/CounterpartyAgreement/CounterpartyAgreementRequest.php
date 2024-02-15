@@ -35,18 +35,8 @@ class CounterpartyAgreementRequest extends FormRequest
             'comment' => [''],
             'price_type_id' => ['required', Rule::exists('price_types', 'id')],
 
-
         ];
     }
 
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = response()->json([
-            'status' => false,
-            'errors' => $validator->errors()
-        ], 422);
-
-        throw new HttpResponseException($response);
-    }
 }

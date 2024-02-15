@@ -13,12 +13,12 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
 
     public function index(): Collection
     {
-        return CounterpartyAgreement::get();
+        return CounterpartyAgreement::with(['organization', 'counterparty', 'currency', 'payment', 'priceType'])->get();
     }
 
     public function store(CounterpartyAgreementDTO $DTO)
     {
-        return CounterpartyAgreement::create([
+        CounterpartyAgreement::create([
             'name' => $DTO->name,
             'contract_number' => $DTO->contract_number,
             'date' => $DTO->date,
@@ -30,7 +30,6 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
             'comment' => $DTO->comment,
             'price_type_id' => $DTO->price_type_id,
         ]);
-
     }
 
     public function update(CounterpartyAgreement $counterpartyAgreement, CounterpartyAgreementDTO $DTO): CounterpartyAgreement
@@ -48,6 +47,6 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
             'price_type_id' => $DTO->price_type_id,
         ]);
 
-        return $counterpartyAgreement;
+        return $counterpartyAgreement->load(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
     }
 }

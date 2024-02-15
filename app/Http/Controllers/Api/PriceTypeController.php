@@ -30,12 +30,12 @@ class PriceTypeController extends Controller
 
     public function index() :JsonResponse
     {
-        return $this->success(PriceTypeResource::collection(PriceType::get()));
+        return $this->success(PriceTypeResource::collection(PriceType::with('currency')->get()));
     }
 
     public function show(PriceType $priceType) :JsonResponse
     {
-        return $this->success(PriceTypeResource::make($priceType));
+        return $this->success(PriceTypeResource::make($priceType->load('currency')));
     }
 
     public function store(PriceTypeRequest $request) :JsonResponse
