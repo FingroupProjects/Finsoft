@@ -21,7 +21,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
     public function index(): Collection
     {
-        return $this->model::orderBy('created_at', 'desc')->get();
+        return $this->model::orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
     }
 
     public function store(CounterpartyDTO $DTO)
