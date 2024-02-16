@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use JeroenG\Explorer\Application\Explored;
 use Laravel\Scout\Searchable;
 
-class Currency extends Model implements Explored
+class Currency extends Model
 {
     use Searchable;
     protected $fillable = ['name', 'digital_code', 'symbol_code'];
@@ -16,16 +16,5 @@ class Currency extends Model implements Explored
     public function exchangeRates() :HasMany
     {
        return $this->hasMany(ExchangeRate::class, 'currency_id');
-    }
-
-    public function mappableAs(): array
-    {
-        return [
-            'id' => 'keyword',
-            'name' => 'text',
-            'digital_code' => 'int',
-            'symbol_code' => 'text'
-
-        ];
     }
 }
