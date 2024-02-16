@@ -19,7 +19,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
     private $model = Counterparty::class;
     private const ON_PAGE =10;
 
-    public function index(): Collection
+    public function index()
     {
         return $this->model::orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
     }
