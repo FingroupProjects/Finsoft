@@ -36,7 +36,7 @@ class CounterpartyController extends Controller
 
     public function index() :JsonResponse
     {
-        return $this->success(CounterpartyResource::collection($this->repository->index()));
+        return $this->paginate(CounterpartyResource::collection($this->repository->index()));
     }
 
     public function show(Counterparty $counterparty)
@@ -56,6 +56,6 @@ class CounterpartyController extends Controller
 
     public function search(Request $request) :JsonResponse
     {
-        return $this->success(CounterpartyResource::collection($this->repository->search($request->search)));
+        return $this->paginate(CounterpartyResource::collection($this->repository->search($request->search)));
     }
 }

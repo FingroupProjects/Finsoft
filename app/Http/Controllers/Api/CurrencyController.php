@@ -26,12 +26,12 @@ class CurrencyController extends Controller
 
     public function index() :JsonResponse
     {
-        return $this->success(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->get()));
+        return $this->paginate(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->get()));
     }
 
     public function showExchangeRate(Currency $currency)
     {
-        return $this->success(CurrencyResource::make($currency->load('exchangeRates')));
+        return $this->paginate(CurrencyResource::make($currency->load('exchangeRates')));
     }
 
     public function store(CurrencyRequest $request) :JsonResponse
