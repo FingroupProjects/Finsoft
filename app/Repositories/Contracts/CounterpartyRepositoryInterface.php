@@ -12,7 +12,7 @@ use SebastianBergmann\LinesOfCode\Counter;
 
 interface CounterpartyRepositoryInterface extends SearchInterface {
 
-    public function index() :Collection;
+    public function index() ;
 
     public function store(CounterpartyDTO $DTO);
 
