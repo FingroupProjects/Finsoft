@@ -24,9 +24,9 @@ class CurrencyController extends Controller
     public function __construct(public CurrencyRepositoryInterface $repository){ }
 
 
-    public function index() :JsonResponse
+    public function index(Request $request) :JsonResponse
     {
-        return $this->paginate(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->paginate(10)));
+        return $this->paginate(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->paginate($request->itemPerPage)));
     }
 
     public function showExchangeRate(Currency $currency)
