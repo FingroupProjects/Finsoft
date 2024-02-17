@@ -8,6 +8,7 @@ use App\DTO\PriceTypeDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
@@ -28,9 +29,9 @@ class PriceTypeController extends Controller
 
     public function __construct(public PriceTypeRepository $repository){ }
 
-    public function index() :JsonResponse
+    public function index(IndexRequest $request) :JsonResponse
     {
-        return $this->success(PriceTypeResource::collection(PriceType::with('currency')->get()));
+        return $this->paginate(PriceTypeResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(PriceType $priceType) :JsonResponse
