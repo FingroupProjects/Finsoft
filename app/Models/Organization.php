@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Organization extends Model
 {
-    protected $guarded = false;
+    use Searchable;
 
-    public function cashRegister()
+
+    protected $fillable = ['name'];
+
+    public function toSearchableArray(): array
     {
-        return $this->belongsTo(CashRegister::class, 'cash_register_id');
+        return [
+            'name' => $this->name
+        ];
     }
+
 }
