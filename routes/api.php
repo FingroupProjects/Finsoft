@@ -47,7 +47,14 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::apiResource('category',CategoryController::class);
     Route::apiResource('unit',UnitController::class);
     Route::apiResource('good',GoodController::class);
-    Route::apiResource('providerDocument',ProviderDocumentController::class);
+
+    Route::group(['prefix' => 'providerDocument'], function () {
+        Route::get('/purchaseDocuments', [ProviderDocumentController::class, 'purchaseDocuments']);
+        Route::post('/purchase', [ProviderDocumentController::class, 'purchase']);
+
+        Route::get('/returnToProviderDocuments', [ProviderDocumentController::class, 'returnToProviderDocuments']);
+        Route::post('/returnToProvider', [ProviderDocumentController::class, 'returnToProvider']);
+    });
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
