@@ -7,17 +7,35 @@ use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
 use \Illuminate\Support\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface {
 
-    private $model = Currency::class;
+    use ValidFields, FilterTrait;
+
+    public $model = Currency::class;
     const ON_PAGE = 10;
+
+    public function index(array $data) :LengthAwarePaginator
+    {
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search']);
+
+        if (!is_null($filteredParams['direction']) && $this->isValidField($filteredParams['orderBy'])) {
+            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+        }
+
+        return $query->paginate($filteredParams['itemsPerPage']);
+    }
+
 
     public function store(CurrencyDTO $dto) :Currency
     {
-       return Currency::create([
+       return $this->model::create([
             'name' => $dto->name,
             'digital_code' => $dto->digital_code,
             'symbol_code' => $dto->symbol_code
@@ -68,8 +86,5 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
         return $currency->exchangeRates()->get();
     }
 
-    public function search(string $search): LengthAwarePaginator
-    {
-       return $this->model::where('name', 'like', "%$search%")->orWhere('symbol_code', 'like', "%$search")->paginate(self::ON_PAGE);
-    }
+
 }

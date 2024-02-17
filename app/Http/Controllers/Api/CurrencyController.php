@@ -7,6 +7,7 @@ use App\DTO\ExchangeRateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
 use App\Models\Currency;
@@ -21,12 +22,14 @@ class CurrencyController extends Controller
 {
     use ApiResponse;
 
+
     public function __construct(public CurrencyRepositoryInterface $repository){ }
 
 
-    public function index(Request $request) :JsonResponse
+    public function index(IndexRequest $request) :JsonResponse
     {
-        return $this->paginate(CurrencyResource::collection(Currency::orderBy('created_at', 'desc')->paginate($request->itemPerPage)));
+
+        return $this->paginate(CurrencyResource::collection($this->repository->index($request->validated())));
     }
 
     public function showExchangeRate(Currency $currency)
@@ -69,8 +72,5 @@ class CurrencyController extends Controller
         return $this->success($this->repository->delete($currency));
     }
 
-    public function search(Request $request) :JsonResponse
-    {
-        return $this->paginate(CurrencyResource::collection($this->repository->search($request->search)));
-    }
+
 }
