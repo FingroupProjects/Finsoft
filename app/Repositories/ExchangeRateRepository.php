@@ -29,7 +29,7 @@ class ExchangeRateRepository implements ExchangeRateInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = ExchangeRate::search($filteredParams['search']);
+        $query = $this->model::search($filteredParams['search'])->where('currency_id', $currency->id);
 
         if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);

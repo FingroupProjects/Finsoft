@@ -9,13 +9,35 @@ use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\PriceTypeRepository as PriceTypeRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PriceTypeRepository implements PriceTypeRepositoryInterface {
 
+    const ON_PAGE = 10;
+    use ValidFields, FilterTrait;
+
+    public $model = PriceType::class;
+
+    public function index(array $data): LengthAwarePaginator
+    {
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search'])->query(function ($query) {
+            $query->with(['currency']);
+        });
+
+        if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+        }
+
+        return $query->paginate($filteredParams['itemsPerPage']);
+    }
 
     public function store(PriceTypeDTO $DTO)
     {
-        PriceType::create([
+        $this->model::create([
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id
         ]);
@@ -30,4 +52,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface {
 
         return $priceType->load('currency');
     }
+
+
+
 }

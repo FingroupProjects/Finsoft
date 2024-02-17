@@ -15,7 +15,7 @@ class IndexRequest extends FormRequest
         return [
             'search' => 'string|nullable|max:20',
             'itemsPerPage' => 'integer|min:10|nullable',
-            'orderBy' => 'in:' . $fillableFields,
+            'orderBy' => 'in:id,' . $fillableFields,
             'sort' => 'in:asc,desc'
         ];
     }
