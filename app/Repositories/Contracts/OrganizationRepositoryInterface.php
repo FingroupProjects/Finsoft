@@ -3,13 +3,13 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\OrganizationDTO;
+use App\Http\Requests\Api\IndexRequest;
 use App\Models\Organization;
+use Cassandra\Index;
 use Illuminate\Support\Collection;
 
-interface OrganizationRepositoryInterface
+interface OrganizationRepositoryInterface extends IndexInterface
 {
-    public function index() :Collection;
-
     public function store(OrganizationDTO $DTO);
 
     public function update(Organization $organization, OrganizationDTO $DTO) :Organization;
