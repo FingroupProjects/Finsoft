@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function (){
 
 
+
     Route::apiResource('currency', CurrencyController::class);
 
     Route::apiResource('organizationBill', OrganizationBillController::class);

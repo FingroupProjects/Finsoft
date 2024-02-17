@@ -8,11 +8,12 @@ use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+
 
 class CashRegisterRepository implements CashRegisterRepositoryInterface
 {
     use ValidFields, FilterTrait;
+
     const ON_PAGE = 10;
 
     public $model = CashRegister::class;
@@ -21,10 +22,12 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::with(['currency', 'organization'])->search($filterParams['search']);
+        $query = CashRegister::search($filterParams['search'])->query(function ($query) {
+            $query->with(['currency', 'organization']);
+        });
 
         if (!is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
-            $query->orderBy($filterParams['orderBy'], $filterParams['sort']);
+            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
         }
 
         return $query->paginate($filterParams['itemsPerPage']);

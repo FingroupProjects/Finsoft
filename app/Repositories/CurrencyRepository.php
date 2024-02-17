@@ -17,6 +17,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
     use ValidFields, FilterTrait;
 
     public $model = Currency::class;
+
     const ON_PAGE = 10;
 
     public function index(array $data) :LengthAwarePaginator
@@ -25,7 +26,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
 
         $query = $this->model::search($filteredParams['search']);
 
-        if (!is_null($filteredParams['direction']) && $this->isValidField($filteredParams['orderBy'])) {
+        if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
 
