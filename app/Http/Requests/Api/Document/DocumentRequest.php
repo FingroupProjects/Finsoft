@@ -25,15 +25,15 @@ class DocumentRequest extends FormRequest
     {
         return [
             'date' => ['required', 'date'],
-            'counterparty_id' => ['required', 'exists:counterparties,id'],
-            'counterparty_agreement_id' => ['required', 'exists:counterparty_agreements,id'],
-            'organization_id' => ['required', 'exists:organizations,id'],
-            'storage_id' => ['required', 'exists:storages,id'],
-            'author_id' => ['required', 'exists:users,id'],
+            'counterparty_id' => ['required', Rule::exists('counterparties', 'id')],
+            'counterparty_agreement_id' => ['required', Rule::exists('counterparty_agreements', 'id')],
+            'organization_id' => ['required', Rule::exists('organizations', 'id')],
+            'storage_id' => ['required', Rule::exists('storages', 'id')],
+            'author_id' => ['required', Rule::exists('users', 'id')],
             'goods' => ['nullable', 'array'],
-            'goods.*.good_id' => ['required', 'exists:goods,id'],
+            'goods.*.good_id' => ['required', Rule::exists('goods', 'id')],
             'goods.*.amount' => ['required', 'min:1'],
-            'goods.*.price' => ['required', 'float'],
+            'goods.*.price' => ['required', 'numeric'],
         ];
     }
 

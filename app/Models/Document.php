@@ -17,7 +17,7 @@ class Document extends Model
 
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Counterparty::class, 'organization_id');
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function storage(): BelongsTo

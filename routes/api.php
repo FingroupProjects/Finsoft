@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
-use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\ProviderDocumentController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\GoodController;
 use App\Http\Controllers\Api\OrganizationBillController;
@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::apiResource('category',CategoryController::class);
     Route::apiResource('unit',UnitController::class);
     Route::apiResource('good',GoodController::class);
-    Route::apiResource('document',DocumentController::class);
+    Route::apiResource('providerDocument',ProviderDocumentController::class);
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
