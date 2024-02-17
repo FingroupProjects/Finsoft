@@ -41,7 +41,7 @@ class CurrencyController extends Controller
 
     public function addExchangeRate(Currency $currency, ExchangeRequest $request) :JsonResponse
     {
-        return $this->created(ExchangeRateResource::collection($this->repository->addExchangeRate($currency, ExchangeRateDTO::fromRequest($request))));
+        return $this->created($this->repository->addExchangeRate($currency, ExchangeRateDTO::fromRequest($request)));
     }
 
     public function removeExchangeRate(ExchangeRate $exchangeRate) :JsonResponse
