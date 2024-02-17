@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\ProviderDocumentController;
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\ExchangeRateController;
 use App\Http\Controllers\Api\GoodController;
 use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
@@ -27,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::group(['middleware' => 'auth:sanctum'], function (){
-
+//
+//Route::group(['middleware' => 'auth:sanctum'], function (){
+//
 
 
     Route::apiResource('currency', CurrencyController::class);
@@ -51,7 +52,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
-        Route::get('/{currency}', [CurrencyController::class, 'showExchangeRate']);
+        Route::get('/{currency}', [ExchangeRateController::class, 'index']);
         Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
         Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
     });
@@ -59,6 +60,6 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-});
+//});
 
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

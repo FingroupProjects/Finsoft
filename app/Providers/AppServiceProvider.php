@@ -14,6 +14,7 @@ use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Repositories\Contracts\ExchangeRateInterface;
 use App\Repositories\Contracts\GoodRepositoryInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
@@ -28,6 +29,7 @@ use App\Repositories\CurrencyRepository;
 
 use App\Repositories\DocumentRepository;
 use App\Repositories\EmployeeRepository;
+use App\Repositories\ExchangeRateRepository;
 use App\Repositories\GoodRepository;
 use App\Repositories\OrganizationBillRepository;
 use App\Repositories\OrganizationRepository;
@@ -60,7 +62,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UnitRepositoryInterface::class, UnitRepository::class);
         $this->app->singleton(GoodRepositoryInterface::class, GoodRepository::class);
         $this->app->singleton(DocumentRepositoryInterface::class, DocumentRepository::class);
+        $this->app->singleton(ExchangeRateInterface::class, ExchangeRateRepository::class);
     }
+
 
     /**
      * Bootstrap any application services.
