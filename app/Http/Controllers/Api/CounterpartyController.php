@@ -11,6 +11,7 @@ use App\Http\Requests\Api\CounterpartyRequest;
 use App\Http\Requests\Api\CounterpartyUpdateRequest;
 use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
 use App\Http\Resources\CounterpartyResource;
 use App\Http\Resources\CurrencyResource;
@@ -34,9 +35,9 @@ class CounterpartyController extends Controller
 
     public function __construct(public CounterpartyRepositoryInterface $repository){ }
 
-    public function index() :JsonResponse
+    public function index(IndexRequest $request) :JsonResponse
     {
-        return $this->paginate(CounterpartyResource::collection($this->repository->index()));
+        return $this->paginate(CounterpartyResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(Counterparty $counterparty)

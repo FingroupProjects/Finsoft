@@ -31,13 +31,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function (){
 
 
-    Route::prefix('search')->group(function () {
-        Route::get('/currency', [CurrencyController::class, 'search']);
-        Route::get('/organizationBill', [OrganizationBillController::class, 'search']);
-        Route::get('/counterparty', [CounterpartyController::class, 'search']);
-    });
-
-
     Route::apiResource('currency', CurrencyController::class);
 
     Route::apiResource('organizationBill', OrganizationBillController::class);

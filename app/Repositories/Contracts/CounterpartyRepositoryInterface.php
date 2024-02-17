@@ -10,9 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use SebastianBergmann\LinesOfCode\Counter;
 
-interface CounterpartyRepositoryInterface extends SearchInterface {
-
-    public function index() ;
+interface CounterpartyRepositoryInterface extends IndexInterface {
 
     public function store(CounterpartyDTO $DTO);
 

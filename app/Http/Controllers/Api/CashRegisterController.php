@@ -6,6 +6,7 @@ use App\DTO\CashRegisterDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CashRegister\CashRegisterRequest;
 use App\Http\Requests\Api\CashRegister\CashRegisterUpdateRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Resources\CashRegisterResource;
 use App\Models\CashRegister;
 use App\Repositories\CashRegisterRepository;
@@ -17,9 +18,11 @@ class CashRegisterController extends Controller
 {
     use ApiResponse;
 
-    public function index(CashRegisterRepositoryInterface $repository)
+    public function __construct(public CashRegisterRepositoryInterface $repository)    {    }
+
+    public function index(IndexRequest $request)
     {
-        return $this->success(CashRegisterResource::collection($repository->index()));
+        return $this->success(CashRegisterResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(CashRegister $cashRegister)
@@ -27,13 +30,13 @@ class CashRegisterController extends Controller
        return $this->success(CashRegisterResource::make($cashRegister->load(['currency', 'organization'])));
     }
 
-    public function store(CashRegisterRepositoryInterface $repository ,CashRegisterRequest $request)
+    public function store(CashRegisterRequest $request)
     {
-        return $this->created(CashRegisterResource::make($repository->store(CashRegisterDTO::fromRequest($request))));
+        return $this->created(CashRegisterResource::make($this->repository->store(CashRegisterDTO::fromRequest($request))));
     }
 
-    public function update(CashRegister $cashRegister, CashRegisterUpdateRequest $request, CashRegisterRepositoryInterface $repository)
+    public function update(CashRegister $cashRegister, CashRegisterUpdateRequest $request)
     {
-        return $this->success(CashRegisterResource::make($repository->update($cashRegister, CashRegisterDTO::fromRequest($request))));
+        return $this->success(CashRegisterResource::make($this->repository->update($cashRegister, CashRegisterDTO::fromRequest($request))));
     }
 }

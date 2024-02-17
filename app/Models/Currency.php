@@ -10,10 +10,22 @@ use Laravel\Scout\Searchable;
 
 class Currency extends Model
 {
+    use Searchable;
     protected $fillable = ['name', 'digital_code', 'symbol_code'];
 
     public function exchangeRates() :HasMany
     {
        return $this->hasMany(ExchangeRate::class, 'currency_id');
     }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'symbol_code' => $this->symbol_code,
+            'digital_code' => $this->digital_code,
+        ];
+    }
+
+
 }

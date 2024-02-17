@@ -8,6 +8,8 @@ use App\Models\Counterparty;
 use App\Models\User;
 use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -15,19 +17,28 @@ use Illuminate\Support\Facades\Auth;
 
 class CounterpartyRepository implements CounterpartyRepositoryInterface
 {
-
-    private $model = Counterparty::class;
+    public $model = Counterparty::class;
     private const ON_PAGE =10;
 
-    public function index()
+    use ValidFields, FilterTrait;
+
+    public function index(array $data) :LengthAwarePaginator
     {
-        return $this->model::orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filterParams['search']);
+
+        if (!is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
+            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
+        }
+
+        return $query->paginate($filterParams['itemsPerPage']);
     }
 
     public function store(CounterpartyDTO $DTO)
     {
 
-       $model = Counterparty::create([
+       $model = $this->model::create([
            'name' => $DTO->name,
            'address' => $DTO->address,
            'phone' => $DTO->phone,
@@ -57,4 +68,5 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
     {
         return $this->model::where('name', 'like', "%$search%")->orWhere('phone', 'like', "$$search%")->orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
     }
+
 }

@@ -4,12 +4,13 @@ namespace App\Repositories\Contracts;
 
 use App\DTO\CurrencyDTO;
 use App\DTO\ExchangeRateDTO;
+use App\Http\Requests\CurrencyIndexRequest;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use Illuminate\Support\Collection;
 
 
-interface CurrencyRepositoryInterface extends SearchInterface {
+interface CurrencyRepositoryInterface extends IndexInterface {
 
     public function store(CurrencyDTO $dto) :Currency;
 
