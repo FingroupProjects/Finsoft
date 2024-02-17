@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use App\DTO\CurrencyDTO;
 use App\DTO\ExchangeRateDTO;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\CurrencyIndexRequest;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
@@ -25,4 +26,5 @@ interface CurrencyRepositoryInterface extends IndexInterface {
     public function getCurrencyExchangeRateByCurrencyRate(Currency $currency) :Collection;
 
     public function delete(Currency $currency);
+
 }

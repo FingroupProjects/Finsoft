@@ -29,11 +29,6 @@ class CurrencyController extends Controller
         return $this->paginate(CurrencyResource::collection($this->repository->index($request->validated())));
     }
 
-    public function showExchangeRate(Currency $currency)
-    {
-        return $this->success(CurrencyResource::make($currency->load('exchangeRates')));
-    }
-
     public function store(CurrencyRequest $request) :JsonResponse
     {
        return $this->created(CurrencyResource::make($this->repository->store(CurrencyDTO::fromRequest($request))));
