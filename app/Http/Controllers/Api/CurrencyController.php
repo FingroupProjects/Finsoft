@@ -22,13 +22,10 @@ class CurrencyController extends Controller
 {
     use ApiResponse;
 
-
     public function __construct(public CurrencyRepositoryInterface $repository){ }
-
 
     public function index(IndexRequest $request) :JsonResponse
     {
-
         return $this->paginate(CurrencyResource::collection($this->repository->index($request->validated())));
     }
 

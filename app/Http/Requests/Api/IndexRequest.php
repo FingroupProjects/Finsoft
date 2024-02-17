@@ -27,7 +27,6 @@ class IndexRequest extends FormRequest
 
     private function getModel()
     {
-
         $repository = $this->route()->getController();
 
         return app($repository->repository->model);
