@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
-use App\Http\Controllers\Api\ProviderDocumentController;
+
 use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
@@ -38,7 +38,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('currency', CurrencyController::class);
 
 
-Route::apiResource('document', DocumentController::class);
 
 Route::group(['prefix' => 'currencyRate'], function () {
     Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
