@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 
 class CounterpartyAgreement extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
-    protected $guarded = false;
+    protected $fillable = ['name','contract_number','date','organization_id','counterparty_id',
+        'contact_person','currency_id','payment_id', 'price_type_id', 'comment'];
+
 
     public function organization() :BelongsTo
     {
@@ -35,5 +38,16 @@ class CounterpartyAgreement extends Model
     public function priceType() :BelongsTo
     {
         return $this->belongsTo(PriceType::class, 'price_type_id');
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'contract_number' => $this->contract_number,
+            'date' => $this->date,
+            'contact_person' => $this->contact_person,
+
+        ];
     }
 }

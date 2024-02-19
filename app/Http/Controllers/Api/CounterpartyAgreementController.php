@@ -6,6 +6,7 @@ use App\DTO\CounterpartyAgreementDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementRequest;
 use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementUpdateRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Resources\CounterpartyAgreementResource;
 use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
@@ -42,8 +43,8 @@ class CounterpartyAgreementController extends Controller
         return $this->success(CounterpartyAgreementResource::make($this->repository->update($counterpartyAgreement, CounterpartyAgreementDTO::fromRequest($request))));
     }
 
-    public function getById(Counterparty $counterparty)
+    public function getById(IndexRequest $request,Counterparty $counterparty)
     {
-        return $this->success(CounterpartyAgreementResource::collection($this->repository->getById($counterparty)));
+        return $this->paginate(CounterpartyAgreementResource::collection($this->repository->getById($counterparty, $request->validated())));
     }
 }

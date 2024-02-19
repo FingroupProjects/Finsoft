@@ -6,13 +6,32 @@ use App\DTO\CounterpartyAgreementDTO;
 use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class CounterpartyAgreementRepository implements CounterpartyAgreementRepositoryInterface
 {
-    public function index(): Collection
+    use ValidFields, FilterTrait;
+
+    public $model = CounterpartyAgreement::class;
+
+    public const ON_PAGE = 10;
+
+    public function index(array $data): LengthAwarePaginator
     {
-        return CounterpartyAgreement::with(['organization', 'counterparty', 'currency', 'payment', 'priceType'])->get();
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search'])->query(function ($query){
+            $query->with(['']);
+        });
+
+        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+        }
+
+        return $query->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(CounterpartyAgreementDTO $DTO)
@@ -55,4 +74,22 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
             ->with('organization', 'counterparty', 'currency', 'payment', 'priceType')
             ->get();
     }
+
+    public function getById(Counterparty $counterparty, array $data): LengthAwarePaginator
+    {
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search'])->query(function ($query) use ($counterparty){
+            $query->where('counterparty_id', $counterparty->id)->with(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
+        });
+
+        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+        }
+
+        return $query->paginate($filteredParams['itemsPerPage']);
+    }
+
+
+
 }
