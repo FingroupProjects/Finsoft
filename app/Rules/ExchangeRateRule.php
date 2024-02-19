@@ -3,18 +3,22 @@
 namespace App\Rules;
 
 use App\Models\ExchangeRate;
+use Carbon\Carbon;
 use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class ExchangeRateRule implements ValidationRule
+class ExchangeRateRule implements Rule
 {
     public function passes($attribute, $value) : bool
     {
-        $date = ExchangeRate::latest();
+        $date = ExchangeRate::latest()->first();
+        $date = Carbon::parse($date->date);
+
+        return !$date->isSameDay($value);
     }
 
     public function message() : string
     {
-        return 'Этот товар уже продан или не существует!';
+        return 'Сегодня уже был записан курс валюты';
     }
 }

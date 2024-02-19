@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Rules\ExchangeRateRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExchangeRequest extends FormRequest
@@ -25,6 +26,7 @@ class ExchangeRequest extends FormRequest
             'date' => [
                 'date',
                 'required',
+                new ExchangeRateRule
             ],
             'value' => [
                 'numeric',
