@@ -49,7 +49,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
         return $counterpartyAgreement->load(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
     }
 
-    public function getById(Counterparty $counterparty) :Collection
+    public function getAgreementByCounterpartyId(Counterparty $counterparty) :Collection
     {
         return CounterpartyAgreement::where('counterparty_id', $counterparty->id)
             ->with('organization', 'counterparty', 'currency', 'payment', 'priceType')
