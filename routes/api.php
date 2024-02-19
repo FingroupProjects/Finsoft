@@ -90,7 +90,7 @@ Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class,
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
     Route::group(['prefix' => 'cpAgreement'], function () {
-        Route::get('/getById/{counterparty}', [CounterpartyAgreementController::class, 'getById']);
+        Route::get('/getAgreementByCounterpartyId/{counterparty}', [CounterpartyAgreementController::class, 'getAgreementByCounterpartyId']);
     });
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);

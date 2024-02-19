@@ -23,9 +23,9 @@ class CounterpartyAgreementController extends Controller
     {
     }
 
-    public function index() :JsonResponse
+    public function index(IndexRequest $request) :JsonResponse
     {
-        return $this->success(CounterpartyAgreementResource::collection($this->repository->index()));
+        return $this->paginate(CounterpartyAgreementResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(CounterpartyAgreement $counterpartyAgreement) :JsonResponse
@@ -43,8 +43,8 @@ class CounterpartyAgreementController extends Controller
         return $this->success(CounterpartyAgreementResource::make($this->repository->update($counterpartyAgreement, CounterpartyAgreementDTO::fromRequest($request))));
     }
 
-    public function getById(IndexRequest $request,Counterparty $counterparty)
+    public function getAgreementByCounterpartyId(IndexRequest $request,Counterparty $counterparty): JsonResponse
     {
-        return $this->paginate(CounterpartyAgreementResource::collection($this->repository->getById($counterparty, $request->validated())));
+        return $this->paginate(CounterpartyAgreementResource::collection($this->repository->getAgreementByCounterpartyId($counterparty, $request->validated())));
     }
 }

@@ -24,7 +24,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
         $filteredParams = $this->processSearchData($data);
 
         $query = $this->model::search($filteredParams['search'])->query(function ($query){
-            $query->with(['']);
+            $query->with(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
         });
 
         if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
@@ -68,14 +68,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
         return $counterpartyAgreement->load(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
     }
 
-    public function getAgreementByCounterpartyId(Counterparty $counterparty) :Collection
-    {
-        return CounterpartyAgreement::where('counterparty_id', $counterparty->id)
-            ->with('organization', 'counterparty', 'currency', 'payment', 'priceType')
-            ->get();
-    }
-
-    public function getById(Counterparty $counterparty, array $data): LengthAwarePaginator
+    public function getAgreementByCounterpartyId(Counterparty $counterparty, array $data): LengthAwarePaginator
     {
         $filteredParams = $this->processSearchData($data);
 
