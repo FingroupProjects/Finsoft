@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\CounterpartyAgreementDTO;
+use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
 use Illuminate\Support\Collection;
 
@@ -13,4 +14,6 @@ interface CounterpartyAgreementRepositoryInterface
     public function store(CounterpartyAgreementDTO $DTO);
 
     public function update(CounterpartyAgreement $counterparty, CounterpartyAgreementDTO $DTO) :CounterpartyAgreement;
+
+    public function getById(Counterparty $counterparty) :Collection;
 }

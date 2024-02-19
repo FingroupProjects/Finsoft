@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ClientDocumentController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
@@ -57,6 +58,14 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::post('/returnToProvider', [ProviderDocumentController::class, 'returnToProvider']);
     });
 
+    Route::group(['prefix' => 'clientDocument'], function () {
+        Route::get('/saleDocuments', [ClientDocumentController::class, 'saleDocuments']);
+        Route::post('/sale', [ClientDocumentController::class, 'sale']);
+
+        Route::get('/returnFromClientDocuments', [ClientDocumentController::class, 'returnFromClientDocuments']);
+        Route::post('/returnFromClient', [ClientDocumentController::class, 'returnFromClient']);
+    });
+
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
         Route::get('/{currency}', [ExchangeRateController::class, 'index']);
@@ -64,6 +73,10 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
     });
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
+
+    Route::group(['prefix' => 'cpAgreement'], function () {
+        Route::get('/getById/{counterparty}', [CounterpartyAgreementController::class, 'getById']);
+    });
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 

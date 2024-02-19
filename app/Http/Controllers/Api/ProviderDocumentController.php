@@ -8,7 +8,6 @@ use App\Http\Requests\Api\Document\DocumentRequest;
 use App\Http\Resources\DocumentResource;
 use App\Models\Status;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
-use App\Repositories\DocumentRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
@@ -16,7 +15,7 @@ class ProviderDocumentController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public DocumentRepository $repository) { }
+    public function __construct(public DocumentRepositoryInterface $repository) { }
 
     public function purchaseDocuments(): JsonResponse
     {
@@ -36,5 +35,10 @@ class ProviderDocumentController extends Controller
     public function returnToProvider(DocumentRequest $request): JsonResponse
     {
         return $this->created($this->repository->store(DocumentDTO::fromRequest($request), Status::RETURN_TO_PROVIDER));
+    }
+
+    public function merge(string $doc_number)
+    {
+        return $this->success($this->repository);
     }
 }

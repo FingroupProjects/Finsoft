@@ -68,4 +68,9 @@ class DocumentRepository implements DocumentRepositoryInterface {
             ];
         }, $goods);
     }
+
+    public function merge(string $doc_number)
+    {
+
+    }
 }
