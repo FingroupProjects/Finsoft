@@ -11,10 +11,6 @@ class CashRegisterDTO
     {
     }
 
-    public function sinf()
-    {
-    }
-
     public static function fromRequest(Request $request) :self
     {
         return new static(
