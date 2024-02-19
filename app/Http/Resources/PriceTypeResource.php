@@ -17,7 +17,7 @@ class PriceTypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'currency' => CurrencyResource::make($this->whenLoaded('currency'))
+            'currency' => CurrencyResource::make($this->whenLoaded('currency')),
         ];
     }
 }

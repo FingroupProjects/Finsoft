@@ -7,8 +7,8 @@ use App\DTO\GoodUpdateDTO;
 use App\Models\Good;
 use Illuminate\Support\Collection;
 
-interface GoodRepositoryInterface {
-
+interface GoodRepositoryInterface
+{
     public function index() :Collection;
 
     public function store(GoodDTO $DTO);

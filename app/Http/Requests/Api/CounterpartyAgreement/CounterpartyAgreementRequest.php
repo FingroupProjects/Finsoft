@@ -37,6 +37,4 @@ class CounterpartyAgreementRequest extends FormRequest
 
         ];
     }
-
-
 }

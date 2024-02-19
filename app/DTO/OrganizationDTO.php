@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class OrganizationDTO
 {
-    public function __construct(public string $name) { }
+    public function __construct(public string $name)
+    {
+    }
 
-    public static function fromRequest(OrganizationRequest $request) :OrganizationDTO
+    public static function fromRequest(OrganizationRequest $request) :self
     {
         return new static(
             $request->get('name'),

@@ -13,9 +13,10 @@ use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class PriceTypeRepository implements PriceTypeRepositoryInterface {
-
+class PriceTypeRepository implements PriceTypeRepositoryInterface
+{
     const ON_PAGE = 10;
+
     use ValidFields, FilterTrait;
 
     public $model = PriceType::class;
@@ -28,7 +29,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface {
             $query->with(['currency']);
         });
 
-        if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
 
@@ -39,7 +40,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface {
     {
         $this->model::create([
             'name' => $DTO->name,
-            'currency_id' => $DTO->currency_id
+            'currency_id' => $DTO->currency_id,
         ]);
     }
 
@@ -47,12 +48,9 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface {
     {
         $priceType->update([
             'name' => $DTO->name,
-            'currency_id' => $DTO->currency_id
+            'currency_id' => $DTO->currency_id,
         ]);
 
         return $priceType->load('currency');
     }
-
-
-
 }

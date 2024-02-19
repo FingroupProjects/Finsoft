@@ -6,8 +6,8 @@ use App\DTO\CashRegisterDTO;
 use App\Models\CashRegister;
 use Illuminate\Support\Collection;
 
-interface CashRegisterRepositoryInterface extends IndexInterface {
-
+interface CashRegisterRepositoryInterface extends IndexInterface
+{
     public function store(CashRegisterDTO $DTO);
 
     public function update(CashRegister $cashRegister, CashRegisterDTO $DTO) :CashRegister;

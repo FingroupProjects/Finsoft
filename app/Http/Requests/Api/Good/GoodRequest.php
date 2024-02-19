@@ -38,16 +38,11 @@ class GoodRequest extends FormRequest
         ];
     }
 
-
-
-
-
-
     protected function failedValidation(Validator $validator)
     {
         $response = response()->json([
             'status' => false,
-            'errors' => $validator->errors()
+            'errors' => $validator->errors(),
         ], 422);
 
         throw new HttpResponseException($response);

@@ -7,9 +7,11 @@ use App\Http\Requests\Api\User\UserRequest;
 class UserDTO
 {
     public function __construct(public string $name, public string $surname, public string $lastname, public int $organization_id,
-                public string $login, public string $password, public string $phone, public string $email) { }
+                public string $login, public string $password, public string $phone, public string $email)
+    {
+    }
 
-    public static function fromRequest(UserRequest $request): UserDTO
+    public static function fromRequest(UserRequest $request): self
     {
         return new static(
             $request->get('name'),

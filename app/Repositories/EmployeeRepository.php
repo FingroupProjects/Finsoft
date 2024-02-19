@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class EmployeeRepository implements EmployeeRepositoryInterface
 {
-
     public function index(): Collection
     {
         return Employee::get();
@@ -21,21 +20,21 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function store(EmployeeDTO $DTO)
     {
-
         $image = $DTO->image ? Storage::disk('public')->put('employeePhoto', $DTO->image) : null;
 
         return Employee::create([
-           'name' => $DTO->name,
-           'surname' => $DTO->surname,
-           'lastname' => $DTO->lastname,
-           'image' => $image
-       ]);
-
+            'name' => $DTO->name,
+            'surname' => $DTO->surname,
+            'lastname' => $DTO->lastname,
+            'image' => $image,
+        ]);
     }
 
     public function update(Employee $employee, EmployeeDTO $DTO): Employee
     {
-        if ($DTO->image != null) $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
+        if ($DTO->image != null) {
+            $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
+        }
 
         $employee->update([
             'name' => $DTO->name,

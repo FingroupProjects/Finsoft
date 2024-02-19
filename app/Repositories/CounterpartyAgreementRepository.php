@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 
 class CounterpartyAgreementRepository implements CounterpartyAgreementRepositoryInterface
 {
-
     public function index(): Collection
     {
         return CounterpartyAgreement::with(['organization', 'counterparty', 'currency', 'payment', 'priceType'])->get();

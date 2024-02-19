@@ -16,18 +16,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Role::create([
-            'name' => 'admin'
+            'name' => 'admin',
         ]);
 
         Role::create([
-            'name' => 'user'
+            'name' => 'user',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'login' => 'admin',
-            'password' => Hash::make('password')
+            'login' => 'admin',=
+            'password' => Hash::make('password'),
         ])->assignRole('admin');
 
         $this->call([

@@ -6,9 +6,8 @@ use App\DTO\PositionDTO;
 use App\Models\Position;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 
-class PositionRepository implements PositionRepositoryInterface {
-
-
+class PositionRepository implements PositionRepositoryInterface
+{
     public function store(PositionDTO $DTO)
     {
         return Position::create([

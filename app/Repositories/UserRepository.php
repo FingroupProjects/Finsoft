@@ -27,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
             'login' => $DTO->login,
             'password' => $DTO->password,
             'phone' => $DTO->phone,
-            'email' => $DTO->email
+            'email' => $DTO->email,
         ])->assignRole('user');
     }
 
@@ -41,7 +41,7 @@ class UserRepository implements UserRepositoryInterface
             'login' => $DTO->login,
             'password' => $DTO->password,
             'phone' => $DTO->phone,
-            'email' => $DTO->email
+            'email' => $DTO->email,
         ]);
 
         return $user->load('organization');

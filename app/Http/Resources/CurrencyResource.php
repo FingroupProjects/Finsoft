@@ -19,7 +19,7 @@ class CurrencyResource extends JsonResource
             'name' => $this->name,
             'digital_code' => $this->digital_code,
             'symbol_code' => $this->symbol_code,
-            'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates'))
+            'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
         ];
     }
 }

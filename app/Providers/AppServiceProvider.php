@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-
 use App\Repositories\AuthRepository;
 use App\Repositories\CashRegisterRepository;
 use App\Repositories\CategoryRepository;
@@ -26,7 +25,6 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\CounterpartyAgreementRepository;
 use App\Repositories\CounterpartyRepository;
 use App\Repositories\CurrencyRepository;
-
 use App\Repositories\DocumentRepository;
 use App\Repositories\EmployeeRepository;
 use App\Repositories\ExchangeRateRepository;
@@ -64,7 +62,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(DocumentRepositoryInterface::class, DocumentRepository::class);
         $this->app->singleton(ExchangeRateInterface::class, ExchangeRateRepository::class);
     }
-
 
     /**
      * Bootstrap any application services.

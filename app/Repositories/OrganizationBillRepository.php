@@ -14,7 +14,6 @@ use Illuminate\Support\Collection;
 
 class OrganizationBillRepository implements OrganizationBillRepositoryInterface
 {
-
     public function index(): Collection
     {
         return OrganizationBill::with(['currency', 'organization'])->get();
@@ -27,7 +26,6 @@ class OrganizationBillRepository implements OrganizationBillRepositoryInterface
 
     public function update(OrganizationBill $bill, OrganizationBillDTO $dto): OrganizationBill
     {
-
         $bill->update(get_object_vars($dto));
 
         return $bill->load(['currency', 'organization']);

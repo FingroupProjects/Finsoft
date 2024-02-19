@@ -17,7 +17,9 @@ class CounterpartyAgreementController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public CounterpartyAgreementRepositoryInterface $repository){ }
+    public function __construct(public CounterpartyAgreementRepositoryInterface $repository)
+    {
+    }
 
     public function index() :JsonResponse
     {
@@ -31,12 +33,11 @@ class CounterpartyAgreementController extends Controller
 
     public function store(CounterpartyAgreementRequest $request) :JsonResponse
     {
-       return $this->created($this->repository->store(CounterpartyAgreementDTO::fromRequest($request)));
+        return $this->created($this->repository->store(CounterpartyAgreementDTO::fromRequest($request)));
     }
 
     public function update(CounterpartyAgreement $counterpartyAgreement, CounterpartyAgreementUpdateRequest $request) :JsonResponse
     {
         return $this->success(CounterpartyAgreementResource::make($this->repository->update($counterpartyAgreement, CounterpartyAgreementDTO::fromRequest($request))));
     }
-
 }

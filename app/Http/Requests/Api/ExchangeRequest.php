@@ -24,13 +24,13 @@ class ExchangeRequest extends FormRequest
         return [
             'date' => [
                 'date',
-                'required'
+                'required',
             ],
             'value' => [
                 'numeric',
                 'required',
                 'between:0.0001,9999999.9999',
-            ]
+            ],
         ];
     }
 }

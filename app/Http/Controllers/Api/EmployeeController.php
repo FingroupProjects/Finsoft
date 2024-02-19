@@ -35,7 +35,7 @@ class EmployeeController extends Controller
 
     public function update(Employee $employee, EmployeeRequest $request, EmployeeRepositoryInterface $repository)
     {
-        return $this->success(EmployeeResource::make($repository->update($employee ,EmployeeDTO::fromRequest($request))));
+        return $this->success(EmployeeResource::make($repository->update($employee, EmployeeDTO::fromRequest($request))));
     }
 
     public function destroy(Employee $employee)

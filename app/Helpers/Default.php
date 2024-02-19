@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -19,6 +18,7 @@ function requestOrder()
             'value' => 'asc',
         ];
     }
+
     return $result;
 }
 
@@ -33,17 +33,18 @@ function uploadFile($file, $path, $old = null): ?string
     deleteFile($old);
     if (is_file($file)) {
         $extension = $file->extension();
-        $model = str_replace('.', '', microtime(true)) . '.' . $extension;
+        $model = str_replace('.', '', microtime(true)).'.'.$extension;
         $file->storeAs("public/$path", $model);
-        $result = "/storage/$path/" . $model;
+        $result = "/storage/$path/".$model;
     }
+
     return $result;
 }
 
 function deleteFile($path): void
 {
-    if ($path != null && file_exists(public_path() . $path)) {
-        unlink(public_path() . $path);
+    if ($path != null && file_exists(public_path().$path)) {
+        unlink(public_path().$path);
     }
 }
 
@@ -59,10 +60,11 @@ function nudePhone($phone)
 function buildPhone($phone): string
 {
     $phone = nudePhone($phone);
-    return '+7 ' . '(' . substr($phone, 0, 3) . ') '
-        . substr($phone, 3, 3) . '-'
-        . substr($phone, 6, 2) . '-'
-        . substr($phone, 8, 2);
+
+    return '+7 '.'('.substr($phone, 0, 3).') '
+        .substr($phone, 3, 3).'-'
+        .substr($phone, 6, 2).'-'
+        .substr($phone, 8, 2);
 }
 
 function getKey()
@@ -70,6 +72,7 @@ function getKey()
     $key = explode('.', request()->route()->getName());
     array_pop($key);
     $key = implode('.', $key);
+
     return $key;
 }
 
@@ -117,6 +120,7 @@ function paginatedResponse($collection): array
         'current_page' => $resource->currentPage(),
         'total_pages' => $resource->lastPage(),
     ];
+
     return ['data' => $collection, 'pagination' => $pagination];
 }
 
@@ -136,6 +140,7 @@ function paginatedResponseChat($collection): array
         'current_page' => $resource->currentPage(),
         'total_pages' => $resource->lastPage(),
     ];
+
     return ['data' => $collection, 'pagination' => $pagination];
 }
 
@@ -145,48 +150,52 @@ function paginatedResponseChat($collection): array
 function sendVoice($phone, $text)
 {
     $client = new GreenSMS(['user' => config('sms.user'), 'pass' => config('sms.pass')]);
+
     return $client->voice->send(['to' => nudePhone($phone), 'txt' => $text]);
 }
 
-function linkify($value, $protocols = array('http', 'mail'), array $attributes = array())
+function linkify($value, $protocols = ['http', 'mail'], array $attributes = [])
 {
     // Link attributes
     $attr = '';
     foreach ($attributes as $key => $val) {
-        $attr .= ' ' . $key . '="' . htmlentities($val) . '"';
+        $attr .= ' '.$key.'="'.htmlentities($val).'"';
     }
 
-    $links = array();
+    $links = [];
 
     // Extract existing links and tags
     $value = preg_replace_callback('~(<a .*?>.*?</a>|<.*?>)~i', function ($match) use (&$links) {
-        return '<' . array_push($links, $match[1]) . '>';
+        return '<'.array_push($links, $match[1]).'>';
     }, $value);
 
     // Extract text links for each protocol
-    foreach ((array)$protocols as $protocol) {
+    foreach ((array) $protocols as $protocol) {
         switch ($protocol) {
             case 'http':
             case 'https':
                 $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) {
-                    if ($match[1]) $protocol = $match[1];
+                    if ($match[1]) {
+                        $protocol = $match[1];
+                    }
                     $link = $match[2] ?: $match[3];
-                    return '<' . array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"$protocol://$link\">$link</a></u>") . '>';
+
+                    return '<'.array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"$protocol://$link\">$link</a></u>").'>';
                 }, $value);
                 break;
             case 'mail':
                 $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) {
-                    return '<' . array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"mailto:{$match[1]}\">{$match[1]}</a></u>") . '>';
+                    return '<'.array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"mailto:{$match[1]}\">{$match[1]}</a></u>").'>';
                 }, $value);
                 break;
             case 'twitter':
                 $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) {
-                    return '<' . array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1] . "\">{$match[0]}</a></u>") . '>';
+                    return '<'.array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"https://twitter.com/".($match[0][0] == '@' ? '' : 'search/%23').$match[1]."\">{$match[0]}</a></u>").'>';
                 }, $value);
                 break;
             default:
-                $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) {
-                    return '<' . array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"$protocol://{$match[1]}\">{$match[1]}</a></u>") . '>';
+                $value = preg_replace_callback('~'.preg_quote($protocol, '~').'://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) {
+                    return '<'.array_push($links, "<u><a target='blank' onclick='return confirm(`Вы уверены?`)' $attr href=\"$protocol://{$match[1]}\">{$match[1]}</a></u>").'>';
                 }, $value);
                 break;
         }

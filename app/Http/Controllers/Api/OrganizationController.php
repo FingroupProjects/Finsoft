@@ -19,6 +19,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class OrganizationController extends Controller
 {
     use ApiResponse;
+
     public function __construct(public OrganizationRepositoryInterface $repository)
     {
     }
