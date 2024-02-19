@@ -22,7 +22,9 @@ class CurrencyController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public CurrencyRepositoryInterface $repository){ }
+    public function __construct(public CurrencyRepositoryInterface $repository)
+    {
+    }
 
     public function index(IndexRequest $request) :JsonResponse
     {
@@ -31,12 +33,12 @@ class CurrencyController extends Controller
 
     public function store(CurrencyRequest $request) :JsonResponse
     {
-       return $this->created(CurrencyResource::make($this->repository->store(CurrencyDTO::fromRequest($request))));
+        return $this->created(CurrencyResource::make($this->repository->store(CurrencyDTO::fromRequest($request))));
     }
 
     public function update(Currency $currency, CurrencyRequest $request) :JsonResponse
     {
-        return $this->success(CurrencyResource::make($this->repository->update($currency,  CurrencyDTO::fromRequest($request))));
+        return $this->success(CurrencyResource::make($this->repository->update($currency, CurrencyDTO::fromRequest($request))));
     }
 
     public function addExchangeRate(Currency $currency, ExchangeRequest $request) :JsonResponse
@@ -63,6 +65,4 @@ class CurrencyController extends Controller
     {
         return $this->success($this->repository->delete($currency));
     }
-
-
 }

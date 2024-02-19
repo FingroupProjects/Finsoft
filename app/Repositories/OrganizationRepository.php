@@ -24,13 +24,12 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
         $query = $this->model::search($filteredParams['search']);
 
-        if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
-
 
     public function store(OrganizationDTO $DTO)
     {
@@ -47,6 +46,4 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
         return $organization;
     }
-
-
 }

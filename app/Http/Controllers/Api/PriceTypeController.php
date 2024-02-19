@@ -27,7 +27,9 @@ class PriceTypeController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public PriceTypeRepository $repository){ }
+    public function __construct(public PriceTypeRepository $repository)
+    {
+    }
 
     public function index(IndexRequest $request) :JsonResponse
     {
@@ -41,12 +43,12 @@ class PriceTypeController extends Controller
 
     public function store(PriceTypeRequest $request) :JsonResponse
     {
-       return $this->created($this->repository->store(PriceTypeDTO::fromRequest($request)));
+        return $this->created($this->repository->store(PriceTypeDTO::fromRequest($request)));
     }
 
     public function update(PriceType $priceType, PriceTypeRequest $request) :JsonResponse
     {
-        return $this->success(PriceTypeResource::make($this->repository->update($priceType,  PriceTypeDTO::fromRequest($request))));
+        return $this->success(PriceTypeResource::make($this->repository->update($priceType, PriceTypeDTO::fromRequest($request))));
     }
 
     public function destroy(PriceType $priceType) :JsonResponse

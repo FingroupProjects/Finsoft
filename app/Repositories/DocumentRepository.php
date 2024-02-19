@@ -12,11 +12,11 @@ use App\Models\Good;
 use App\Models\GoodDocument;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
-use \Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class DocumentRepository implements DocumentRepositoryInterface {
-
+class DocumentRepository implements DocumentRepositoryInterface
+{
     public function index(): Collection
     {
         return Document::all();
@@ -32,7 +32,7 @@ class DocumentRepository implements DocumentRepositoryInterface {
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
                 'storage_id' => $dto->storage_id,
-                'author_id' => $dto->author_id
+                'author_id' => $dto->author_id,
             ]);
 
             GoodDocument::insert($this->goodDocuments($dto->goods, $document));
@@ -46,10 +46,11 @@ class DocumentRepository implements DocumentRepositoryInterface {
        //
     }
 
-    public function uniqueNumber() : string {
+    public function uniqueNumber() : string
+    {
         $lastRecord = Document::query()->orderBy('doc_number', 'desc')->first();
 
-        if (!$lastRecord) {
+        if (! $lastRecord) {
             $lastNumber = 1;
         } else {
             $lastNumber = (int) $lastRecord->doc_number + 1;
@@ -67,7 +68,7 @@ class DocumentRepository implements DocumentRepositoryInterface {
                 'good_id' => $item['good_id'],
                 'amount' => $item['amount'],
                 'price' => $item['price'],
-                'document_id' => $document->id
+                'document_id' => $document->id,
             ];
         }, $goods);
     }

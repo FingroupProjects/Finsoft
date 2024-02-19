@@ -10,8 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use SebastianBergmann\LinesOfCode\Counter;
 
-interface CounterpartyRepositoryInterface extends IndexInterface {
-
+interface CounterpartyRepositoryInterface extends IndexInterface
+{
     public function store(CounterpartyDTO $DTO);
 
     public function update(Counterparty $counterparty, CounterpartyDTO $DTO) :Counterparty;

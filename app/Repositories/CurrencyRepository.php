@@ -10,10 +10,10 @@ use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
-use \Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 
-class CurrencyRepository implements CurrencyRepositoryInterface {
-
+class CurrencyRepository implements CurrencyRepositoryInterface
+{
     use ValidFields, FilterTrait;
 
     public $model = Currency::class;
@@ -26,44 +26,42 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
 
         $query = $this->model::search($filteredParams['search']);
 
-        if (!is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
+        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
 
-
     public function store(CurrencyDTO $dto) :Currency
     {
-       return $this->model::create([
+        return $this->model::create([
             'name' => $dto->name,
             'digital_code' => $dto->digital_code,
-            'symbol_code' => $dto->symbol_code
+            'symbol_code' => $dto->symbol_code,
         ]);
     }
 
     public function update(Currency $currency, CurrencyDTO $dto) :Currency
     {
-       $currency->update([
+        $currency->update([
             'name' => $dto->name,
             'digital_code' => $dto->digital_code,
-            'symbol_code' => $dto->symbol_code
+            'symbol_code' => $dto->symbol_code,
         ]);
 
-       return $currency;
+        return $currency;
     }
 
     public function delete(Currency $currency)
     {
-
     }
 
     public function addExchangeRate(Currency $currency, ExchangeRateDTO $dto)
     {
         $currency->exchangeRates()->create([
             'date' => $dto->date,
-            'value' => $dto->value
+            'value' => $dto->value,
         ]);
     }
 
@@ -76,7 +74,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
     {
         $exchangeRate->update([
             'date' => $dto->date,
-            'value' => $dto->value
+            'value' => $dto->value,
         ]);
 
         return $exchangeRate;
@@ -86,6 +84,4 @@ class CurrencyRepository implements CurrencyRepositoryInterface {
     {
         return $currency->exchangeRates()->get();
     }
-
-
 }

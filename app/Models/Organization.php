@@ -10,14 +10,12 @@ class Organization extends Model
 {
     use Searchable;
 
-
     protected $fillable = ['name'];
 
     public function toSearchableArray(): array
     {
         return [
-            'name' => $this->name
+            'name' => $this->name,
         ];
     }
-
 }

@@ -32,34 +32,33 @@ use Illuminate\Support\Facades\Route;
 //Route::group(['middleware' => 'auth:sanctum'], function (){
 //
 
+Route::apiResource('currency', CurrencyController::class);
 
-    Route::apiResource('currency', CurrencyController::class);
+Route::apiResource('organizationBill', OrganizationBillController::class);
+Route::apiResource('counterparty', CounterpartyController::class);
+Route::apiResource('priceType', PriceTypeController::class);
+Route::apiResource('cpAgreement', CounterpartyAgreementController::class);
+Route::apiResource('position', PositionController::class);
+Route::apiResource('cashRegister', CashRegisterController::class);
+Route::apiResource('organization', OrganizationController::class);
+Route::apiResource('employee', EmployeeController::class);
+Route::apiResource('user', UserController::class);
+Route::apiResource('storage', StorageController::class);
+Route::apiResource('category', CategoryController::class);
+Route::apiResource('unit', UnitController::class);
+Route::apiResource('good', GoodController::class);
+Route::apiResource('document', DocumentController::class);
 
-    Route::apiResource('organizationBill', OrganizationBillController::class);
-    Route::apiResource('counterparty', CounterpartyController::class);
-    Route::apiResource('priceType', PriceTypeController::class);
-    Route::apiResource('cpAgreement', CounterpartyAgreementController::class);
-    Route::apiResource('position', PositionController::class);
-    Route::apiResource('cashRegister',CashRegisterController::class);
-    Route::apiResource('organization',OrganizationController::class);
-    Route::apiResource('employee',EmployeeController::class);
-    Route::apiResource('user',UserController::class);
-    Route::apiResource('storage',StorageController::class);
-    Route::apiResource('category',CategoryController::class);
-    Route::apiResource('unit',UnitController::class);
-    Route::apiResource('good',GoodController::class);
-    Route::apiResource('document',DocumentController::class);
+Route::group(['prefix' => 'currencyRate'], function () {
+    Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
+    Route::get('/{currency}', [ExchangeRateController::class, 'index']);
+    Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
+    Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
+});
+Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
-    Route::group(['prefix' => 'currencyRate'], function () {
-        Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
-        Route::get('/{currency}', [ExchangeRateController::class, 'index']);
-        Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
-        Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
-    });
-    Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
-
-    Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+Route::get('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 //});
 
-    Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);

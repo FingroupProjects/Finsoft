@@ -24,22 +24,22 @@ class OrganizationBillRequest extends FormRequest
         return [
             'name' => [
                 'string',
-                'required'
+                'required',
             ],
             'organization_id' => [
                 'exists:organizations,id',
                 'required',
-                'numeric'
+                'numeric',
             ],
             'currency_id' => [
                 'exists:currencies,id',
                 'required',
-                'numeric'
+                'numeric',
             ],
             'bill_number' => [
                 'string',
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

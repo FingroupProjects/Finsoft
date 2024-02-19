@@ -21,5 +21,4 @@ class CashRegisterResource extends JsonResource
             'organization' => CurrencyResource::make($this->whenLoaded('organization')),
         ];
     }
-
 }

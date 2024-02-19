@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class UnitDTO
 {
-    public function __construct(public string $name) { }
+    public function __construct(public string $name)
+    {
+    }
 
-    public static function fromRequest(UnitRequest $request) :UnitDTO
+    public static function fromRequest(UnitRequest $request) :self
     {
         return new static(
             $request->get('name'),

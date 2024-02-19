@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Storage;
 
 class GoodRepository implements GoodRepositoryInterface
 {
-
     public function index(): Collection
     {
         return Good::get();
@@ -30,12 +29,11 @@ class GoodRepository implements GoodRepositoryInterface
                 'category_id' => $DTO->category_id,
                 'unit_id' => $DTO->unit_id,
                 'barcode' => $DTO->barcode,
-                'storage_id' => $DTO->storage_id
+                'storage_id' => $DTO->storage_id,
             ]);
 
             GoodImages::insert($this->goodImages($good, $DTO->images));
         });
-
     }
 
     public function update(Good $good, GoodUpdateDTO $DTO): Good
@@ -47,7 +45,7 @@ class GoodRepository implements GoodRepositoryInterface
             'category_id' => $DTO->category_id,
             'unit_id' => $DTO->unit_id,
             'barcode' => $DTO->barcode,
-            'storage_id' => $DTO->storage_id
+            'storage_id' => $DTO->storage_id,
         ]);
 
         return $good;
@@ -55,8 +53,7 @@ class GoodRepository implements GoodRepositoryInterface
 
     public function goodImages($good, $images)
     {
-        foreach ($images as $image)
-        {
+        foreach ($images as $image) {
             $img = Storage::disk('public')->put('goodImages', $image->img);
 
             $imgs[] = [
@@ -64,7 +61,7 @@ class GoodRepository implements GoodRepositoryInterface
                 'image' => $img,
                 'is_main' => $image->is_main,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ];
         }
 

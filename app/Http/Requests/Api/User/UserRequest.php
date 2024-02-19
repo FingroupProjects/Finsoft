@@ -31,8 +31,7 @@ class UserRequest extends FormRequest
             'login' => ['required', 'unique:users,login'],
             'password' => ['required'],
             'phone' => ['unique:users,phone'],
-            'email' => ['nullable', 'email', 'unique:users,email']
+            'email' => ['nullable', 'email', 'unique:users,email'],
         ];
     }
-
 }

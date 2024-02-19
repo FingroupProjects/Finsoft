@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class CounterpartyRepository implements CounterpartyRepositoryInterface
 {
     public $model = Counterparty::class;
-    private const ON_PAGE =10;
+
+    private const ON_PAGE = 10;
 
     use ValidFields, FilterTrait;
 
@@ -28,7 +29,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-        if (!is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
+        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
             $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
         }
 
@@ -37,16 +38,14 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
     public function store(CounterpartyDTO $DTO)
     {
+        $model = $this->model::create([
+            'name' => $DTO->name,
+            'address' => $DTO->address,
+            'phone' => $DTO->phone,
+            'email' => $DTO->email,
+        ]);
 
-       $model = $this->model::create([
-           'name' => $DTO->name,
-           'address' => $DTO->address,
-           'phone' => $DTO->phone,
-           'email' => $DTO->email
-       ]);
-
-       $model->roles()->attach($DTO->roles);
-
+        $model->roles()->attach($DTO->roles);
     }
 
     public function update(Counterparty $counterparty, CounterpartyDTO $DTO): Counterparty
@@ -55,18 +54,16 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
             'name' => $DTO->name,
             'address' => $DTO->address,
             'phone' => $DTO->phone,
-            'email' => $DTO->email
+            'email' => $DTO->email,
         ]);
         $counterparty->roles()->detach();
         $counterparty->roles()->attach($DTO->roles);
 
         return $counterparty;
-
     }
 
     public function search(string $search): LengthAwarePaginator
     {
         return $this->model::where('name', 'like', "%$search%")->orWhere('phone', 'like', "$$search%")->orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
     }
-
 }

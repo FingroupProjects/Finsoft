@@ -6,8 +6,7 @@ use App\DTO\LoginDTO;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
-interface AuthRepositoryInterface {
-
+interface AuthRepositoryInterface
+{
     public function checkLogin(LoginDTO $dto) :User|null;
-
 }

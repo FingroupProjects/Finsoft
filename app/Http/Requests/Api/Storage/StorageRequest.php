@@ -23,7 +23,7 @@ class StorageRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'employee_id' => ['required', 'exists:employees,id']
+            'employee_id' => ['required', 'exists:employees,id'],
         ];
     }
 }

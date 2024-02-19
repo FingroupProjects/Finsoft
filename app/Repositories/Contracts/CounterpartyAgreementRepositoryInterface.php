@@ -6,8 +6,8 @@ use App\DTO\CounterpartyAgreementDTO;
 use App\Models\CounterpartyAgreement;
 use Illuminate\Support\Collection;
 
-interface CounterpartyAgreementRepositoryInterface {
-
+interface CounterpartyAgreementRepositoryInterface
+{
     public function index() :Collection;
 
     public function store(CounterpartyAgreementDTO $DTO);

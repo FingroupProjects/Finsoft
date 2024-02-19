@@ -14,8 +14,8 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-
     use ApiResponse;
+
     public function __construct(public AuthRepository $repository)
     {
     }
@@ -24,19 +24,18 @@ class AuthController extends Controller
     {
         $user = $this->repository->checkLogin(LoginDTO::fromRequest($request));
 
-        if (!$user) {
+        if (! $user) {
             throw ValidationException::withMessages(['message' => __('auth.failed')]);
         }
 
         return response()->json([
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
-            'user' => UserResource::make($user)
+            'token' => $user->createToken('API TOKEN')->plainTextToken,
+            'user' => UserResource::make($user),
         ]);
     }
 
     public function logout(): JsonResponse
     {
-       return $this->deleted(auth()->user()->tokens()->delete());
+        return $this->deleted(auth()->user()->tokens()->delete());
     }
-
 }
