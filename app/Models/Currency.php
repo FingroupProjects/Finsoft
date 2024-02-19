@@ -16,7 +16,7 @@ class Currency extends Model
 
     public function exchangeRates() :HasMany
     {
-       return $this->hasMany(ExchangeRate::class, 'currency_id');
+        return $this->hasMany(ExchangeRate::class, 'currency_id');
     }
 
     public function toSearchableArray(): array
@@ -27,6 +27,4 @@ class Currency extends Model
             'digital_code' => $this->digital_code,
         ];
     }
-
-
 }

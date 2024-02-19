@@ -13,12 +13,13 @@ use App\Repositories\CashRegisterRepository;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\ApiResponse;
 
-
 class CashRegisterController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public CashRegisterRepositoryInterface $repository)    {    }
+    public function __construct(public CashRegisterRepositoryInterface $repository)
+    {
+    }
 
     public function index(IndexRequest $request)
     {
@@ -27,7 +28,7 @@ class CashRegisterController extends Controller
 
     public function show(CashRegister $cashRegister)
     {
-       return $this->success(CashRegisterResource::make($cashRegister->load(['currency', 'organization'])));
+        return $this->success(CashRegisterResource::make($cashRegister->load(['currency', 'organization'])));
     }
 
     public function store(CashRegisterRequest $request)

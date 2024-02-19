@@ -9,12 +9,11 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 
-interface OrganizationBillRepositoryInterface {
-
+interface OrganizationBillRepositoryInterface
+{
     public function index() :Collection;
 
     public function store(OrganizationBillDTO $dto);
 
     public function update(OrganizationBill $bill, OrganizationBillDTO $dto) :OrganizationBill;
-
 }

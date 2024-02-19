@@ -21,9 +21,7 @@ class PriceType extends Model
     public function toSearchableArray(): array
     {
         return [
-            'name' => $this->name
+            'name' => $this->name,
         ];
     }
-
 }
-

@@ -26,13 +26,13 @@ class PriceTypeRequest extends FormRequest
                 'string',
                 'required',
                 'min:3',
-                'max:25'
+                'max:25',
             ],
             'currency_id' => [
                 'numeric',
                 'required',
-                'exists:currencies,id'
-            ]
+                'exists:currencies,id',
+            ],
         ];
     }
 }

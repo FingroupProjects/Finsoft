@@ -25,5 +25,4 @@ class DocumentResource extends JsonResource
             'author' => UserResource::make($this->whenLoaded('author')),
         ];
     }
-
 }

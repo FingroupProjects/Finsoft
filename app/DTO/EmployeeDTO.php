@@ -5,12 +5,14 @@ namespace App\DTO;
 use App\Http\Requests\Api\Employee\EmployeeRequest;
 use Illuminate\Http\UploadedFile;
 
-class EmployeeDTO {
+class EmployeeDTO
+{
+    public function __construct(public string $name, public string $surname, public string $lastname, public ?UploadedFile $image)
+    {
+    }
 
-    public function __construct(public string $name, public string $surname, public string $lastname, public ?UploadedFile $image){ }
-
-    public static function fromRequest(EmployeeRequest $request) :EmployeeDTO {
-
+    public static function fromRequest(EmployeeRequest $request) :self
+    {
         return new static(
             $request->get('name'),
             $request->get('surname'),

@@ -23,14 +23,12 @@ class ExchangeRateController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public ExchangeRateInterface $repository){ }
+    public function __construct(public ExchangeRateInterface $repository)
+    {
+    }
 
     public function index(IndexRequest $request, Currency $currency) :JsonResponse
     {
         return $this->paginate(ExchangeRateResource::collection($this->repository->index($currency, $request->validated())));
     }
-
-
-
-
 }

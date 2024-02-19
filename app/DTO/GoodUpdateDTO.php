@@ -4,13 +4,15 @@ namespace App\DTO;
 
 use App\Http\Requests\Api\Good\GoodUpdateRequest;
 
-class GoodUpdateDTO {
+class GoodUpdateDTO
+{
+    public function __construct(public int $id, public string $name, public string $vendor_code, public string $description,
+                                public int $category_id, public int $unit_id, public string $barcode, public int $storage_id)
+    {
+    }
 
-    public function __construct(public int $id,public string $name, public string $vendor_code, public string $description,
-                                public int $category_id, public int $unit_id, public string $barcode, public int $storage_id){ }
-
-    public static function fromRequest(GoodUpdateRequest $request) :GoodUpdateDTO {
-
+    public static function fromRequest(GoodUpdateRequest $request) :self
+    {
         return new static(
             $request->get('id'),
             $request->get('name'),

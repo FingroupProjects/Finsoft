@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
-trait ValidFields {
-
+trait ValidFields
+{
     public function isValidField(string $field) :bool
     {
         if ($field === 'id') {

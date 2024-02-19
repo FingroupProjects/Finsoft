@@ -33,7 +33,9 @@ class CounterpartyController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public CounterpartyRepositoryInterface $repository){ }
+    public function __construct(public CounterpartyRepositoryInterface $repository)
+    {
+    }
 
     public function index(IndexRequest $request) :JsonResponse
     {
@@ -47,12 +49,12 @@ class CounterpartyController extends Controller
 
     public function store(CounterpartyRequest $request) :JsonResponse
     {
-       return $this->created($this->repository->store(CounterpartyDTO::fromRequest($request)));
+        return $this->created($this->repository->store(CounterpartyDTO::fromRequest($request)));
     }
 
     public function update(Counterparty $counterparty, CounterpartyUpdateRequest $request) :JsonResponse
     {
-        return $this->success(CounterpartyResource::make($this->repository->update($counterparty,  CounterpartyDTO::fromRequest($request))));
+        return $this->success(CounterpartyResource::make($this->repository->update($counterparty, CounterpartyDTO::fromRequest($request))));
     }
 
     public function search(Request $request) :JsonResponse

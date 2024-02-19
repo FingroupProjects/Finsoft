@@ -8,8 +8,8 @@ use App\Models\CashRegister;
 use App\Models\Storage;
 use Illuminate\Support\Collection;
 
-interface StorageRepositoryInterface {
-
+interface StorageRepositoryInterface
+{
     public function index() :Collection;
 
     public function store(StorageDTO $DTO);

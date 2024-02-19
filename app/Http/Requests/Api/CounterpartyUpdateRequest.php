@@ -27,19 +27,19 @@ class CounterpartyUpdateRequest extends FormRequest
                 'string',
                 'required',
                 'min:3',
-                'max:25'
+                'max:25',
             ],
             'address' => [
                 'string',
                 'required',
-                'min:3'
+                'min:3',
             ],
             'phone' => [
                 'required',
                 'min:9'],
             'email' => [
                 'email',
-                'required'
+                'required',
             ],
             'roles' => ['required', 'array', 'exists:roles,id'],
         ];

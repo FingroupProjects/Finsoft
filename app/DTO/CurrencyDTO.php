@@ -2,17 +2,17 @@
 
 namespace App\DTO;
 
-
 use App\Http\Requests\Api\CurrencyRequest;
 use Illuminate\Auth\Events\Login;
 
+class CurrencyDTO
+{
+    public function __construct(public string $name, public int $digital_code, public string $symbol_code)
+    {
+    }
 
-class CurrencyDTO {
-
-    public function __construct(public string $name, public int $digital_code, public string $symbol_code){ }
-
-
-    public static function fromRequest(CurrencyRequest $request) :CurrencyDTO {
+    public static function fromRequest(CurrencyRequest $request) :self
+    {
         return new static(
             $request->get('name'),
             $request->get('digital_code'),

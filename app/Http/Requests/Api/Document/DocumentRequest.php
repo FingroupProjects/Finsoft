@@ -36,5 +36,4 @@ class DocumentRequest extends FormRequest
             'goods.*.price' => ['required', 'numeric'],
         ];
     }
-
 }

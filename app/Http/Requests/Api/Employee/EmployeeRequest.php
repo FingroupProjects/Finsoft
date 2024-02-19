@@ -26,7 +26,7 @@ class EmployeeRequest extends FormRequest
             'name' => ['required', 'string'],
             'surname' => ['required', 'string'],
             'lastname' => [''],
-            'image' => ['nullable' ,'file']
+            'image' => ['nullable', 'file'],
         ];
     }
 }

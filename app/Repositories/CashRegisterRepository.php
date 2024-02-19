@@ -8,7 +8,7 @@ use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use function PHPUnit\Framework\isFalse;
 
 class CashRegisterRepository implements CashRegisterRepositoryInterface
 {
@@ -26,7 +26,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             $query->with(['currency', 'organization']);
         });
 
-        if (!is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
+        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
             $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
         }
 
@@ -35,12 +35,11 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
     public function store(CashRegisterDTO $DTO)
     {
-        CashRegister::create([
-           'name' => $DTO->name,
-           'currency_id' => $DTO->currency_id,
-           'organization_id' => $DTO->organization_id
-       ]);
-
+        $this->model::create([
+            'name' => $DTO->name,
+            'currency_id' => $DTO->currency_id,
+            'organization_id' => $DTO->organization_id,
+        ]);
     }
 
     public function update(CashRegister $cashRegister, CashRegisterDTO $DTO): CashRegister
@@ -48,7 +47,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
         $cashRegister->update([
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id,
-            'organization_id' => $DTO->organization_id
+            'organization_id' => $DTO->organization_id,
         ]);
 
         return $cashRegister->load(['currency', 'organization']);

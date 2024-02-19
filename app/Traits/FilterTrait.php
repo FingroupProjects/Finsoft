@@ -2,16 +2,15 @@
 
 namespace App\Traits;
 
-trait FilterTrait {
-
+trait FilterTrait
+{
     protected function processSearchData(array $data): array
     {
         return [
             'search' => $data['search'] ?? '',
             'orderBy' => $data['orderBy'] ?? null,
             'direction' => $data['sort'] ?? 'asc',
-            'itemsPerPage' => $data['itemsPerPage'] ?? self::ON_PAGE
+            'itemsPerPage' => $data['itemsPerPage'] ?? self::ON_PAGE,
         ];
     }
 }
-

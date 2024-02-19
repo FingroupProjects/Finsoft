@@ -14,10 +14,10 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-         Role::insert([
-             ['name' => 'Клиент'],
-             ['name' => 'Поставщик'],
-             ['name' => 'Прочие']
-         ]);
+        Role::insert([
+            ['name' => 'Клиент'],
+            ['name' => 'Поставщик'],
+            ['name' => 'Прочие'],
+        ]);
     }
 }

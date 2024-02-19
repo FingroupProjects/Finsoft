@@ -10,18 +10,19 @@ use Laravel\Scout\Searchable;
 class ExchangeRate extends Model
 {
     use Searchable;
+
     protected $fillable = ['date', 'currency_id', 'value'];
 
     public function currency() :BelongsTo
     {
-       return $this->belongsTo(Currency::class, 'currency_id');
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
     public function toSearchableArray(): array
     {
         return [
             'value' => $this->value,
-            'date' => $this->date
+            'date' => $this->date,
         ];
     }
 }

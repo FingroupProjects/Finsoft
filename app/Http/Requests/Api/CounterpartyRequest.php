@@ -27,22 +27,22 @@ class CounterpartyRequest extends FormRequest
                 'string',
                 'required',
                 'min:3',
-                'max:25'
+                'max:25',
             ],
             'address' => [
                 'string',
                 'required',
-                'min:3'
+                'min:3',
             ],
             'phone' => [
                 'required',
                 'unique:counterparties,phone',
-                'min:13'
+                'min:13',
             ],
             'email' =>[
                 'email',
                 'required',
-                'unique:counterparties,email'
+                'unique:counterparties,email',
             ],
             'roles' => ['required', 'array', Rule::exists('user_roles', 'id')],
         ];

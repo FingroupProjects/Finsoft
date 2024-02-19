@@ -22,12 +22,13 @@ use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
-
 class OrganizationBillController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public OrganizationBillRepositoryInterface $repository){ }
+    public function __construct(public OrganizationBillRepositoryInterface $repository)
+    {
+    }
 
     public function index() :JsonResponse
     {
@@ -41,12 +42,12 @@ class OrganizationBillController extends Controller
 
     public function store(OrganizationBillRequest $request) :JsonResponse
     {
-       return $this->created($this->repository->store(OrganizationBillDTO::fromRequest($request)));
+        return $this->created($this->repository->store(OrganizationBillDTO::fromRequest($request)));
     }
 
     public function update(OrganizationBill $organizationBill, OrganizationBillRequest $request) :JsonResponse
     {
-        return $this->success(OrganizationBillResource::make($this->repository->update($organizationBill,  OrganizationBillDTO::fromRequest($request))));
+        return $this->success(OrganizationBillResource::make($this->repository->update($organizationBill, OrganizationBillDTO::fromRequest($request))));
     }
 
     public function destroy(OrganizationBill $organizationBill) :JsonResponse

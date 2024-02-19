@@ -26,7 +26,7 @@ class Counterparty extends Model
             'name' => $this->name,
             'phone' => $this->phone,
             'address' => $this->address,
-            'email' => $this->email
+            'email' => $this->email,
         ];
     }
 }

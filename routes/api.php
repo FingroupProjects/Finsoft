@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
-use App\Http\Controllers\Api\ProviderDocumentController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExchangeRateController;
 use App\Http\Controllers\Api\GoodController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\ProviderDocumentController;
 use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-//
-//Route::group(['middleware' => 'auth:sanctum'], function (){
-//
+
+Route::group(['middleware' => 'auth:sanctum'], function (){
+
 
 
     Route::apiResource('currency', CurrencyController::class);
@@ -67,6 +67,6 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-//});
+});
 
     Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

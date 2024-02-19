@@ -26,18 +26,18 @@ class CurrencyRequest extends FormRequest
                 'string',
                 'required',
                 'min:3',
-                'max:25'
+                'max:25',
             ],
             'digital_code' => [
                 'numeric',
                 'required',
-                'digits_between:2,3'
+                'digits_between:2,3',
             ],
             'symbol_code' => [
                 'string',
                 'required',
-                'max:3'
-            ]
+                'max:3',
+            ],
         ];
     }
 }

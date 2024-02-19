@@ -5,9 +5,8 @@ namespace App\Repositories;
 use App\DTO\DocumentDTO;
 use App\Models\PreliminaryDocument;
 use App\Models\PreliminaryGoodDocument;
-use App\Models\Status;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
-use \Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class DocumentRepository implements DocumentRepositoryInterface {
@@ -45,10 +44,11 @@ class DocumentRepository implements DocumentRepositoryInterface {
        //
     }
 
-    public function uniqueNumber() : string {
+    public function uniqueNumber() : string
+    {
         $lastRecord = PreliminaryDocument::query()->orderBy('doc_number', 'desc')->first();
 
-        if (!$lastRecord) {
+        if (! $lastRecord) {
             $lastNumber = 1;
         } else {
             $lastNumber = (int) $lastRecord->doc_number + 1;
