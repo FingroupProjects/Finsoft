@@ -3,14 +3,14 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\DocumentDTO;
-use App\Models\Document;
+use App\Models\PreliminaryDocument;
 use Illuminate\Support\Collection;
 
 interface DocumentRepositoryInterface
 {
-    public function index() :Collection;
+    public function index(int $status) :Collection;
 
-    public function store(DocumentDTO $DTO);
+    public function store(DocumentDTO $DTO, int $status);
 
-    public function update(Document $document, DocumentDTO $DTO) :Document;
+    public function update(PreliminaryDocument $document, DocumentDTO $DTO) :PreliminaryDocument;
 }

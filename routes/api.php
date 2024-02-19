@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CounterpartyAgreementController;
 use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
-use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ExchangeRateController;
 use App\Http\Controllers\Api\GoodController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\Api\OrganizationBillController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\ProviderDocumentController;
 use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
@@ -48,7 +48,14 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::apiResource('category',CategoryController::class);
     Route::apiResource('unit',UnitController::class);
     Route::apiResource('good',GoodController::class);
-    Route::apiResource('document',DocumentController::class);
+
+    Route::group(['prefix' => 'providerDocument'], function () {
+        Route::get('/purchaseDocuments', [ProviderDocumentController::class, 'purchaseDocuments']);
+        Route::post('/purchase', [ProviderDocumentController::class, 'purchase']);
+
+        Route::get('/returnToProviderDocuments', [ProviderDocumentController::class, 'returnToProviderDocuments']);
+        Route::post('/returnToProvider', [ProviderDocumentController::class, 'returnToProvider']);
+    });
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);

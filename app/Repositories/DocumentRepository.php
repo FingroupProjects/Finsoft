@@ -2,30 +2,26 @@
 
 namespace App\Repositories;
 
-use App\DTO\CurrencyDTO;
 use App\DTO\DocumentDTO;
-use App\DTO\ExchangeRateDTO;
-use App\Models\Currency;
-use App\Models\Document;
-use App\Models\ExchangeRate;
-use App\Models\Good;
-use App\Models\GoodDocument;
-use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Models\PreliminaryDocument;
+use App\Models\PreliminaryGoodDocument;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class DocumentRepository implements DocumentRepositoryInterface
-{
-    public function index(): Collection
+class DocumentRepository implements DocumentRepositoryInterface {
+
+    public function index(int $status): Collection
     {
-        return Document::all();
+        return PreliminaryDocument::with('counterparty', 'organization', 'storage', 'author', 'counterparty_agreement')
+            ->where('status_id', $status)
+            ->get();
     }
 
-    public function store(DocumentDTO $dto): Document
+    public function store(DocumentDTO $dto, int $status): PreliminaryDocument
     {
-        return DB::transaction(function () use ($dto) {
-            $document = Document::create([
+        return DB::transaction(function () use ($status, $dto) {
+            $document = PreliminaryDocument::create([
                 'doc_number' => $this->uniqueNumber(),
                 'date' => $dto->date,
                 'counterparty_id' => $dto->counterparty_id,
@@ -33,22 +29,24 @@ class DocumentRepository implements DocumentRepositoryInterface
                 'organization_id' => $dto->organization_id,
                 'storage_id' => $dto->storage_id,
                 'author_id' => $dto->author_id,
+                'status_id' => $status
             ]);
 
-            GoodDocument::insert($this->goodDocuments($dto->goods, $document));
+            PreliminaryGoodDocument::insert($this->goodDocuments($dto->goods, $document));
 
             return $document;
         });
     }
 
-    public function update(Document $document, DocumentDTO $dto) :Document
+
+    public function update(PreliminaryDocument $document, DocumentDTO $dto) :PreliminaryDocument
     {
        //
     }
 
     public function uniqueNumber() : string
     {
-        $lastRecord = Document::query()->orderBy('doc_number', 'desc')->first();
+        $lastRecord = PreliminaryDocument::query()->orderBy('doc_number', 'desc')->first();
 
         if (! $lastRecord) {
             $lastNumber = 1;
@@ -56,19 +54,17 @@ class DocumentRepository implements DocumentRepositoryInterface
             $lastNumber = (int) $lastRecord->doc_number + 1;
         }
 
-        $formattedNumber = str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
-
-        return $formattedNumber;
+        return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
     }
 
-    private function goodDocuments(array $goods, Document $document): array
+    private function goodDocuments(array $goods, PreliminaryDocument $document): array
     {
         return array_map(function ($item) use ($document) {
             return [
                 'good_id' => $item['good_id'],
                 'amount' => $item['amount'],
                 'price' => $item['price'],
-                'document_id' => $document->id,
+                'preliminary_document_id' => $document->id
             ];
         }, $goods);
     }
