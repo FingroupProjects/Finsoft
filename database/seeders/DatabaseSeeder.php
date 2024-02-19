@@ -26,13 +26,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'login' => 'admin',=
+            'login' => 'admin',
             'password' => Hash::make('password'),
         ])->assignRole('admin');
 
         $this->call([
             RoleSeeder::class,
-            StatusSeeder::class
+            StatusSeeder::class,
         ]);
     }
 }
