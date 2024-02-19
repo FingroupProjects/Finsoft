@@ -14,5 +14,5 @@ interface CounterpartyAgreementRepositoryInterface extends IndexInterface
 
     public function update(CounterpartyAgreement $counterparty, CounterpartyAgreementDTO $DTO) :CounterpartyAgreement;
 
-    public function getById(Counterparty $counterparty, array $data) :LengthAwarePaginator;
+    public function getAgreementByCounterpartyId(Counterparty $counterparty, array $data) :LengthAwarePaginator;
 }
