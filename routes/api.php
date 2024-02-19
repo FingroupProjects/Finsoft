@@ -95,6 +95,4 @@ Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class,
 
     Route::get('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-//});
-
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
