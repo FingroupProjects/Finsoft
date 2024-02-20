@@ -14,8 +14,6 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 {
     use ValidFields, FilterTrait;
 
-    const ON_PAGE = 10;
-
     public $model = CashRegister::class;
 
     public function index(array $data): LengthAwarePaginator
