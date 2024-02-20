@@ -14,6 +14,8 @@ class CashRegister extends Model
 
     protected $fillable = [
         'name',
+        'currency_id',
+        'organization_id'
     ];
 
     public function currency() :BelongsTo
