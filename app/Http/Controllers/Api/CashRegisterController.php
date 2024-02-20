@@ -23,7 +23,7 @@ class CashRegisterController extends Controller
 
     public function index(IndexRequest $request)
     {
-        return $this->success(CashRegisterResource::collection($this->repository->index($request->validated())));
+        return $this->paginate(CashRegisterResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(CashRegister $cashRegister)
