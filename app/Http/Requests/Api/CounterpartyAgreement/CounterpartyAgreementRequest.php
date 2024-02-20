@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\CounterpartyAgreement;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class CounterpartyAgreementRequest extends FormRequest
@@ -34,7 +33,6 @@ class CounterpartyAgreementRequest extends FormRequest
             'payment_id' => ['required', Rule::exists('currencies', 'id')],
             'comment' => [''],
             'price_type_id' => ['required', Rule::exists('price_types', 'id')],
-
         ];
     }
 }
