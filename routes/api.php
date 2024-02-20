@@ -71,6 +71,8 @@ Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class,
 
         Route::get('/returnToProviderDocuments', [ProviderDocumentController::class, 'returnToProviderDocuments']);
         Route::post('/returnToProvider', [ProviderDocumentController::class, 'returnToProvider']);
+
+        Route::get('merge/{doc_number}', [ProviderDocumentController::class, 'merge']);
     });
 
     Route::group(['prefix' => 'clientDocument'], function () {

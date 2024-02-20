@@ -13,4 +13,6 @@ interface DocumentRepositoryInterface
     public function store(DocumentDTO $DTO, int $status);
 
     public function update(PreliminaryDocument $document, DocumentDTO $DTO) :PreliminaryDocument;
+
+    public function merge(string $doc_number);
 }
