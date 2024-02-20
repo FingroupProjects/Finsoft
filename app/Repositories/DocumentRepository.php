@@ -3,9 +3,13 @@
 namespace App\Repositories;
 
 use App\DTO\DocumentDTO;
+use App\Models\Document;
+use App\Models\GoodDocument;
 use App\Models\PreliminaryDocument;
 use App\Models\PreliminaryGoodDocument;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -64,13 +68,50 @@ class DocumentRepository implements DocumentRepositoryInterface {
                 'good_id' => $item['good_id'],
                 'amount' => $item['amount'],
                 'price' => $item['price'],
-                'preliminary_document_id' => $document->id
+                'preliminary_document_id' => $document->id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ];
         }, $goods);
     }
 
     public function merge(string $doc_number)
     {
+        try {
+            $doc = PreliminaryDocument::where('doc_number', $doc_number)
+                ->first()
+                ->makeHidden(['send', 'created_at', 'updated_at'])
+                ->toArray();
 
+            $goods = PreliminaryGoodDocument::where('preliminary_document_id', $doc['id'])
+                ->get()
+                ->toArray();
+
+            DB::transaction(function () use ($doc, $goods) {
+                PreliminaryDocument::where('doc_number', $doc['doc_number'])->update(['send' => true]);
+                Document::create($doc);
+                GoodDocument::insert($this->prepareGoodsForMerge($goods));
+            });
+
+        } catch (Exception $e) {
+
+            return $e->getMessage();
+
+        }
     }
+
+    public function prepareGoodsForMerge(array $goods)
+    {
+        return array_map(function ($good) {
+            return [
+                'good_id' => $good['good_id'],
+                'amount' => $good['amount'],
+                'price' => $good['price'],
+                'document_id' => $good['preliminary_document_id'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+        }, $goods);
+    }
+
 }

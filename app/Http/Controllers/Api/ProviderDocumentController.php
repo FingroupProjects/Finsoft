@@ -39,6 +39,6 @@ class ProviderDocumentController extends Controller
 
     public function merge(string $doc_number)
     {
-        return $this->success($this->repository);
+        return $this->success($this->repository->merge($doc_number));
     }
 }
