@@ -10,7 +10,7 @@ trait FilterTrait
             'search' => $data['search'] ?? '',
             'orderBy' => $data['orderBy'] ?? null,
             'direction' => $data['sort'] ?? 'asc',
-            'itemsPerPage' => $data['itemsPerPage'] ?? self::ON_PAGE,
+            'itemsPerPage' => $data['itemsPerPage'] == -1 ? $this->model::count() : $data['itemsPerPage'],
         ];
     }
 }
