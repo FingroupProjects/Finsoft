@@ -29,7 +29,7 @@ class StorageController extends Controller
 
     public function index(IndexRequest $indexRequest)
     {
-        return $this->success(StorageResource::collection($this->repository->index($indexRequest->validated())));
+        return $this->paginate(StorageResource::collection($this->repository->index($indexRequest->validated())));
     }
 
     public function show(Storage $storage) :JsonResponse
