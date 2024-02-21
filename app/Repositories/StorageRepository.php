@@ -8,14 +8,32 @@ use App\Models\CashRegister;
 use App\Models\Storage;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class StorageRepository implements StorageRepositoryInterface
 {
-    public function index(): Collection
+    use ValidFields, FilterTrait;
+
+    public $model = Storage::class;
+
+    public function index(array $data): LengthAwarePaginator
     {
-        return Storage::get();
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filterParams['search'])->query(function ($q){
+            $q->with('employee');
+        });
+
+        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
+            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
+        }
+
+        return $query->paginate($filterParams['itemsPerPage']);
     }
+
 
     public function store(StorageDTO $DTO)
     {
