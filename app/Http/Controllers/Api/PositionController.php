@@ -23,7 +23,7 @@ class PositionController extends Controller
 
     public function index(IndexRequest $request): JsonResponse
     {
-        return $this->success(PositionResource::collection($this->repository->index($request->validated())));
+        return $this->paginate(PositionResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(Position $position) :JsonResponse
