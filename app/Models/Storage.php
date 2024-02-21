@@ -22,7 +22,7 @@ class Storage extends Model
     {
         return [
             'name' => $this->name,
-            'employee' => $this->employee()->name
+            'employee' => $this->employee()->first()->name
         ];
     }
 }
