@@ -24,7 +24,9 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search']);
+        $query = $this->model::search($filterParams['search'])->query(function ($query) {
+            $query->with(['position']);
+        });
 
         if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
             $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
@@ -42,6 +44,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             'surname' => $DTO->surname,
             'lastname' => $DTO->lastname,
             'image' => $image,
+            'position_id' => $DTO->position_id
         ]);
     }
 
