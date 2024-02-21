@@ -8,14 +8,29 @@ use App\Models\CashRegister;
 use App\Models\Employee;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\ValidFields;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeRepository implements EmployeeRepositoryInterface
 {
-    public function index(): Collection
+    use ValidFields, FilterTrait;
+
+    public $model = Employee::class;
+
+    public function index(array $data): LengthAwarePaginator
     {
-        return Employee::get();
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filterParams['search']);
+
+        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
+            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
+        }
+
+        return $query->paginate($filterParams['itemsPerPage']);
     }
 
     public function store(EmployeeDTO $DTO)

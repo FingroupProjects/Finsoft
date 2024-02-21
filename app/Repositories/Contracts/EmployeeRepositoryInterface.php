@@ -8,9 +8,8 @@ use App\Models\CashRegister;
 use App\Models\Employee;
 use Illuminate\Support\Collection;
 
-interface EmployeeRepositoryInterface
+interface EmployeeRepositoryInterface extends IndexInterface
 {
-    public function index() :Collection;
 
     public function store(EmployeeDTO $DTO);
 

@@ -5,7 +5,7 @@ namespace App\Repositories\Contracts;
 use App\DTO\PositionDTO;
 use App\Models\Position;
 
-interface PositionRepositoryInterface
+interface PositionRepositoryInterface extends IndexInterface
 {
     public function store(PositionDTO $DTO);
 
