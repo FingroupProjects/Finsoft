@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\PositionDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Position\PositionRequest;
 use App\Http\Resources\PositionResource;
 use App\Models\Position;
+use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\PositionRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -15,9 +17,13 @@ class PositionController extends Controller
 {
     use ApiResponse;
 
-    public function index(): JsonResponse
+    public function __construct(public PositionRepositoryInterface $repository)
     {
-        return $this->success(PositionResource::collection(Position::get()));
+    }
+
+    public function index(IndexRequest $request): JsonResponse
+    {
+        return $this->success(PositionResource::collection($this->repository->in));
     }
 
     public function show(Position $position) :JsonResponse

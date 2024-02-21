@@ -47,7 +47,6 @@ Route::group(['prefix' => 'currencyRate'], function () {
     Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
 });
 Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
-
     Route::apiResource('organizationBill', OrganizationBillController::class);
     Route::apiResource('counterparty', CounterpartyController::class);
     Route::apiResource('priceType', PriceTypeController::class);
