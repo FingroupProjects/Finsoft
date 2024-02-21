@@ -39,7 +39,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('currency', CurrencyController::class);
 
 
-
 Route::group(['prefix' => 'currencyRate'], function () {
     Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
     Route::get('/{currency}', [ExchangeRateController::class, 'index']);
@@ -82,12 +81,7 @@ Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class,
         Route::post('/returnFromClient', [ClientDocumentController::class, 'returnFromClient']);
     });
 
-    Route::group(['prefix' => 'currencyRate'], function () {
-        Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
-        Route::get('/{currency}', [ExchangeRateController::class, 'index']);
-        Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
-        Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
-    });
+
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
     Route::group(['prefix' => 'cpAgreement'], function () {
