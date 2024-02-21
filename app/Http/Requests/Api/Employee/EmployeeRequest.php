@@ -27,6 +27,7 @@ class EmployeeRequest extends FormRequest
             'surname' => ['required', 'string'],
             'lastname' => [''],
             'image' => ['nullable', 'file'],
+            'position_id' => ['required', Rule::exists('positions', 'id')]
         ];
     }
 }
