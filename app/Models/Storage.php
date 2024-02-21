@@ -21,8 +21,7 @@ class Storage extends Model
     public function toSearchableArray() :array
     {
         return [
-            'name' => $this->name,
-            'employee' => $this->employee()->first()->name
+            'name' => $this->name
         ];
     }
 }
