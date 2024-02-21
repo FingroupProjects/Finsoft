@@ -27,4 +27,10 @@ class CashRegister extends Model
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name
+        ];
+    }
 }

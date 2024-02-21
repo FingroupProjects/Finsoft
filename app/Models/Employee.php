@@ -4,10 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Employee extends Model
 {
-    use HasFactory;
+    use Searchable;
 
-    protected $guarded = false;
+    protected $fillable = ['name', 'lastname', 'surname', 'image'];
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'lastname' => $this->lastname,
+            'surname' => $this->surname
+        ];
+    }
 }
