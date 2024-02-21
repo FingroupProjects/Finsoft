@@ -25,7 +25,7 @@ class EmployeeController extends Controller
 
     public function index(IndexRequest $request)
     {
-        return $this->success(EmployeeResource::collection($this->repository->index($request->validated())));
+        return $this->paginate(EmployeeResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(Employee $employee) :JsonResponse
