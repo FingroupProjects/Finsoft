@@ -21,8 +21,6 @@ class ExchangeRateRepository implements ExchangeRateInterface
 {
     use FilterTrait, ValidFields;
 
-    const ON_PAGE = 10;
-
     public $model = ExchangeRate::class;
 
     public function index(Currency $currency, array $data): LengthAwarePaginator
