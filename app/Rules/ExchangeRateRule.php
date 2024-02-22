@@ -12,6 +12,9 @@ class ExchangeRateRule implements Rule
     public function passes($attribute, $value) : bool
     {
         $date = ExchangeRate::latest()->first();
+
+        if (!$date) return true;
+
         $date = Carbon::parse($date->date);
 
         return !$date->isSameDay($value);
