@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('good_id')->constrained();
             $table->integer('amount');
             $table->decimal('price', 10, 2);
-            $table->foreignId('document_id')->constrained();
+            $table->foreignUuid('document_id')->constrained();
             $table->timestamps();
         });
     }

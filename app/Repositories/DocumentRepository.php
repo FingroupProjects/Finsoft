@@ -5,27 +5,25 @@ namespace App\Repositories;
 use App\DTO\DocumentDTO;
 use App\Models\Document;
 use App\Models\GoodDocument;
-use App\Models\PreliminaryDocument;
-use App\Models\PreliminaryGoodDocument;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class DocumentRepository implements DocumentRepositoryInterface {
+class DocumentRepository implements DocumentRepositoryInterface
+{
 
     public function index(int $status): Collection
     {
-        return PreliminaryDocument::with('counterparty', 'organization', 'storage', 'author', 'counterparty_agreement')
+        return Document::with('counterparty', 'organization', 'storage', 'author', 'counterparty_agreement')
             ->where('status_id', $status)
             ->get();
     }
 
-    public function store(DocumentDTO $dto, int $status): PreliminaryDocument
+    public function store(DocumentDTO $dto, int $status): Document
     {
         return DB::transaction(function () use ($status, $dto) {
-            $document = PreliminaryDocument::create([
+            $document = Document::create([
                 'doc_number' => $this->uniqueNumber(),
                 'date' => $dto->date,
                 'counterparty_id' => $dto->counterparty_id,
@@ -36,21 +34,21 @@ class DocumentRepository implements DocumentRepositoryInterface {
                 'status_id' => $status
             ]);
 
-            PreliminaryGoodDocument::insert($this->goodDocuments($dto->goods, $document));
+            GoodDocument::insert($this->goodDocuments($dto->goods, $document));
 
             return $document;
         });
     }
 
 
-    public function update(PreliminaryDocument $document, DocumentDTO $dto) :PreliminaryDocument
+    public function update(Document $document, DocumentDTO $dto) :Document
     {
        //
     }
 
     public function uniqueNumber() : string
     {
-        $lastRecord = PreliminaryDocument::query()->orderBy('doc_number', 'desc')->first();
+        $lastRecord = Document::query()->orderBy('doc_number', 'desc')->first();
 
         if (! $lastRecord) {
             $lastNumber = 1;
@@ -61,7 +59,7 @@ class DocumentRepository implements DocumentRepositoryInterface {
         return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
     }
 
-    private function goodDocuments(array $goods, PreliminaryDocument $document): array
+    private function goodDocuments(array $goods, Document $document): array
     {
         return array_map(function ($item) use ($document) {
             return [
@@ -77,41 +75,41 @@ class DocumentRepository implements DocumentRepositoryInterface {
 
     public function merge(string $doc_number)
     {
-        try {
-            $doc = PreliminaryDocument::where('doc_number', $doc_number)
-                ->first()
-                ->makeHidden(['send', 'created_at', 'updated_at'])
-                ->toArray();
-
-            $goods = PreliminaryGoodDocument::where('preliminary_document_id', $doc['id'])
-                ->get()
-                ->toArray();
-
-            DB::transaction(function () use ($doc, $goods) {
-                PreliminaryDocument::where('doc_number', $doc['doc_number'])->update(['send' => true]);
-                Document::create($doc);
-                GoodDocument::insert($this->prepareGoodsForMerge($goods));
-            });
-
-        } catch (Exception $e) {
-
-            return $e->getMessage();
-
-        }
+//        try {
+//            $doc = PreliminaryDocument::where('doc_number', $doc_number)
+//                ->first()
+//                ->makeHidden(['send', 'created_at', 'updated_at'])
+//                ->toArray();
+//
+//            $goods = PreliminaryGoodDocument::where('preliminary_document_id', $doc['id'])
+//                ->get()
+//                ->toArray();
+//
+//            DB::transaction(function () use ($doc, $goods) {
+//                PreliminaryDocument::where('doc_number', $doc['doc_number'])->update(['send' => true]);
+//                Document::create($doc);
+//                GoodDocument::insert($this->prepareGoodsForMerge($goods));
+//            });
+//
+//        } catch (Exception $e) {
+//
+//            return $e->getMessage();
+//
+//        }
     }
 
-    public function prepareGoodsForMerge(array $goods)
-    {
-        return array_map(function ($good) {
-            return [
-                'good_id' => $good['good_id'],
-                'amount' => $good['amount'],
-                'price' => $good['price'],
-                'document_id' => $good['preliminary_document_id'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ];
-        }, $goods);
-    }
+//    public function prepareGoodsForMerge(array $goods)
+//    {
+//        return array_map(function ($good) {
+//            return [
+//                'good_id' => $good['good_id'],
+//                'amount' => $good['amount'],
+//                'price' => $good['price'],
+//                'document_id' => $good['preliminary_document_id'],
+//                'created_at' => Carbon::now(),
+//                'updated_at' => Carbon::now()
+//            ];
+//        }, $goods);
+//    }
 
 }
