@@ -12,6 +12,7 @@ use App\Repositories\Contracts\PriceTypeRepository as PriceTypeRepositoryInterfa
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 class PriceTypeRepository implements PriceTypeRepositoryInterface
 {
@@ -29,9 +30,23 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
             $query->with(['currency']);
         });
 
-        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
-            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+
+        if (!is_null($filteredParams['orderBy'])) {
+            if (Str::contains($filteredParams['orderBy'], '.')) {
+                list($relation, $field) = explode('.', $filteredParams['orderBy']);
+
+                $query->query(function ($q) use ($relation, $field, $filteredParams) {
+                    $q->with([$relation => function ($query) use ($field, $filteredParams) {
+
+                        $query->orderBy($field, $filteredParams['direction']);
+                    }]);
+                });
+            } else {
+
+                $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+            }
         }
+
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
