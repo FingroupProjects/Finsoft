@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('doc_number')->unique();
             $table->date('date');
             $table->foreignId('counterparty_id')->constrained();
@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->foreignId('organization_id')->constrained();
             $table->foreignId('storage_id')->constrained();
             $table->foreignId('author_id')->constrained('users');
+            $table->boolean('active') ->default(false);
             $table->timestamps();
         });
     }
