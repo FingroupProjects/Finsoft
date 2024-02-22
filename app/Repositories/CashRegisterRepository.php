@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\CashRegisterDTO;
+use App\DTO\DocumentDTO;
 use App\Models\CashRegister;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\FilterTrait;
@@ -19,7 +20,6 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     public function index(array $data): LengthAwarePaginator
     {
         $filterParams = $this->processSearchData($data);
-
         $query = CashRegister::search($filterParams['search'])->query(function ($query) {
             $query->with(['currency', 'organization']);
         });
