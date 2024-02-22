@@ -30,7 +30,6 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
             $query->with(['currency']);
         });
 
-
         if (!is_null($filteredParams['orderBy'])) {
             if (Str::contains($filteredParams['orderBy'], '.')) {
                 list($relation, $field) = explode('.', $filteredParams['orderBy']);
