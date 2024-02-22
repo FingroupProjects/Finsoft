@@ -10,12 +10,12 @@ class IndexRequest extends FormRequest
     {
         $model = $this->getModel();
 
-        $fillableFields = implode(',', $model->getFillable());
+        $fillableFields = implode(',', $model->getRelations());
 
         return [
             'search' => 'string|nullable|max:20',
             'itemsPerPage' => 'integer|nullable',
-            'orderBy' => 'in:id,'.$fillableFields,
+            'orderBy' => '',
             'sort' => 'in:asc,desc',
         ];
     }
