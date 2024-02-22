@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->foreignId('payment_id')->constrained('currencies');
             $table->text('comment');
             $table->foreignId('price_type_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

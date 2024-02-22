@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->integer('amount');
             $table->decimal('price', 10, 2);
             $table->foreignUuid('document_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
