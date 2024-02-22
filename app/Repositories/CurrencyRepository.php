@@ -26,10 +26,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
         $query = $this->model::search($filteredParams['search']);
 
-        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
-            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
-        }
+        $query = $this->sort($filteredParams, $query);
 
+        $query->query(function ($query) {
+            return $query->with(['organization', 'currency']);
+        });
         return $query->paginate($filteredParams['itemsPerPage']);
     }
 

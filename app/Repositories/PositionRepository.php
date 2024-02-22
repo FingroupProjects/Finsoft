@@ -37,9 +37,11 @@ class PositionRepository implements PositionRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
-            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
-        }
+        $query = $this->sort($filteredParams, $query);
+
+        $query->query(function ($query) {
+            return $query->with(['organization', 'currency']);
+        });
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

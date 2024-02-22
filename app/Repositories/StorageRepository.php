@@ -23,13 +23,13 @@ class StorageRepository implements StorageRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search'])->query(function ($q){
-            $q->with('employee');
-        });
+        $query = $this->model::search($filterParams['search']);
 
-        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
-            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
-        }
+       $query = $this->sort($filteredParams, $query);
+
+        $query->query(function ($query) {
+            return $query->with(['employee']);
+        });
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

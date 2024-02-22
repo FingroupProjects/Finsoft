@@ -26,28 +26,12 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::with(['currency']);
+        $query = $this->model::search($filteredParams['search'])->query(function ($query) {
+            $query->with('currency');
+        });
 
 
-        if (!is_null($filteredParams['orderBy'])) {
-            if (Str::contains($filteredParams['orderBy'], '.')) {
-                list($relation, $field) = explode('.', $filteredParams['orderBy']);
-
-                    $relatedModel = new $this->model;
-                    $relatedModel = $relatedModel->$relation()->getRelated();
-                    $relatedTable = $relatedModel->getTable();
-
-                    $this_model = new $this->model;
-                    $this_table = $this_model->getTable();
-
-                    $query->leftJoin($relatedTable, "{$relatedTable}.id", '=', "$this_table.{$relation}_id")
-                       ->orderBy("{$relatedTable}.{$field}", $filteredParams['direction'])
-                       ->select("{$this_table}.*");
-
-            } else {
-                $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
-            }
-        }
+        $this->sort($filteredParams, $query);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }

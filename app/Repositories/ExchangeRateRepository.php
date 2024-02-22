@@ -29,9 +29,8 @@ class ExchangeRateRepository implements ExchangeRateInterface
 
         $query = $this->model::search($filteredParams['search'])->where('currency_id', $currency->id);
 
-        if (! is_null($filteredParams['orderBy']) && $this->isValidField($filteredParams['orderBy'])) {
-            $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
-        }
+        $query = $this->sort($filteredParams, $query);
+
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
