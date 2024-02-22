@@ -28,9 +28,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             $query->with(['position']);
         });
 
-        if (! is_null($filterParams['orderBy']) && $this->isValidField($filterParams['orderBy'])) {
-            $query->orderBy($filterParams['orderBy'], $filterParams['direction']);
-        }
+        $query = $this->sort($filteredParams, $query);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
