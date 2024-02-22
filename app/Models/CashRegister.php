@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\View\Compilers\Concerns\CompilesStyles;
 use Laravel\Scout\Searchable;
 
 class CashRegister extends Model
 {
-    use Searchable, CompilesStyles;
+    use Searchable, CompilesStyles, SoftDeletes;
 
     protected $fillable = [
         'name',

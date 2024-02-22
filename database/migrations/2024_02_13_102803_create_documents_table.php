@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->foreignId('storage_id')->constrained();
             $table->foreignId('author_id')->constrained('users');
             $table->boolean('active') ->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
