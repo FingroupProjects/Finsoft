@@ -20,7 +20,7 @@ class IndexRequest extends FormRequest
         return [
             'search' => 'string|nullable|max:20',
             'itemsPerPage' => 'integer|nullable',
-            'orderBy' => 'in:id' . implode(',', $fillableFields),
+            'orderBy' => 'in:id,' . implode(',', $fillableFields),
             'sort' => 'in:asc,desc',
         ];
     }
