@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->date('date');
             $table->foreignId('currency_id')->constrained();
             $table->decimal('value', 12, 4);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

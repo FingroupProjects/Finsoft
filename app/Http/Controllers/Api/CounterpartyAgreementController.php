@@ -28,9 +28,9 @@ class CounterpartyAgreementController extends Controller
         return $this->paginate(CounterpartyAgreementResource::collection($this->repository->index($request->validated())));
     }
 
-    public function show(CounterpartyAgreement $counterpartyAgreement) :JsonResponse
+    public function show(CounterpartyAgreement $cpAgreement) :JsonResponse
     {
-        return $this->success(CounterpartyAgreementResource::make($counterpartyAgreement));
+        return $this->success(CounterpartyAgreementResource::make($cpAgreement->load('organization', 'counterparty', 'currency', 'payment', 'priceType')));
     }
 
     public function store(CounterpartyAgreementRequest $request) :JsonResponse

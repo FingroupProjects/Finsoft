@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class CounterpartyAgreementResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'contract_number' => $this->contract_number,
-            'date' => $this->date,
+            'date' => Carbon::parse($this->date),
             'organization_id'=> OrganizationResource::make($this->whenLoaded('organization')),
             'counterparty_id' => CounterpartyResource::make($this->whenLoaded('counterparty')),
             'contact_person' => $this->contact_person,
