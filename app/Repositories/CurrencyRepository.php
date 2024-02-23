@@ -19,17 +19,19 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
     public $model = Currency::class;
 
-    const ON_PAGE = 10;
-
     public function index(array $data) :LengthAwarePaginator
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search']);
+        $query = $this->model::search($filteredParams['search'])->query(function ($query) {
+            $query->withTrashed();
+        });
+
+
 
         $query = $this->sort($filteredParams, $query, []);
 
-        return $query->withTrashed()->paginate($filteredParams['itemsPerPage']);
+        return $query->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(CurrencyDTO $dto) :Currency

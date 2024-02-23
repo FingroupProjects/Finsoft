@@ -6,18 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use JeroenG\Explorer\Application\Explored;
 use Laravel\Scout\Searchable;
 
 class Currency extends Model
 {
-    use Searchable;
+    use Searchable, SoftDeletes;
+
+    protected $withTrashed = true;
 
     protected $fillable = ['name', 'digital_code', 'symbol_code'];
 
     public function exchangeRates() :HasMany
     {
         return $this->hasMany(ExchangeRate::class, 'currency_id');
+    }
+    public static function bootSoftDeletes()
+    {
+
     }
 
     public function toSearchableArray(): array
