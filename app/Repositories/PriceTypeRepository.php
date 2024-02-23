@@ -31,7 +31,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         $query1 = $this->sort($filteredParams, $query, ['currency']);
 
 
-        return $query1->paginate($filteredParams['itemsPerPage']);
+        return $query1->withTrashed()->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(PriceTypeDTO $DTO)

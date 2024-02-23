@@ -29,7 +29,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
         $query = $this->sort($filteredParams, $query, []);
 
-        return $query->paginate($filteredParams['itemsPerPage']);
+        return $query->withTrashed()->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(CurrencyDTO $dto) :Currency
