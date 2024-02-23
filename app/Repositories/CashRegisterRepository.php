@@ -24,7 +24,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
         $query = CashRegister::search($filterParams['search']);
 
-        $query = $this->sort($filteredParams, $query, ['organization', 'currency']);
+        $query = $this->sort($filterParams, $query, ['organization', 'currency']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

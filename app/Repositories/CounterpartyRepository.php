@@ -29,7 +29,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-        $query1 = $this->sort($filterParams, $query, []);
+        $query = $this->sort($filterParams, $query, []);
 
 
         return $query->paginate($filterParams['itemsPerPage']);

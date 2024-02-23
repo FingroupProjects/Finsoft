@@ -24,11 +24,9 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search'])->query(function ($query) {
-            $query->with(['position']);
-        });
+        $query = $this->model::search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query);
+        $query = $this->sort($filterParams, $query, ['position']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
