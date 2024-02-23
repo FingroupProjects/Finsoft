@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrganizationBill extends Model
 {
-    use SoftDeletes;
+
+    use SoftDeletes, Searchable;
+
 
     protected $fillable = ['name', 'currency_id', 'bill_number', 'organization_id'];
 
