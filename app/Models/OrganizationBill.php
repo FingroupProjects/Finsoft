@@ -24,4 +24,9 @@ class OrganizationBill extends Model
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public static function bootSoftDeletes()
+    {
+
+    }
 }

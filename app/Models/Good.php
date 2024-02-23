@@ -11,4 +11,9 @@ class Good extends Model
     use SoftDeletes;
 
     protected $guarded = false;
+
+    public static function bootSoftDeletes()
+    {
+
+    }
 }

@@ -18,5 +18,10 @@ class Category extends Model
         ];
     }
 
+
+    public static function bootSoftDeletes()
+    {
+
+    }
     protected $guarded = false;
 }

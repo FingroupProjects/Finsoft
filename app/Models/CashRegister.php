@@ -19,6 +19,11 @@ class CashRegister extends Model
         'organization_id'
     ];
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     public function currency() :BelongsTo
     {
         return $this->belongsTo(Currency::class, 'currency_id');

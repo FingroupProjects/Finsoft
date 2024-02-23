@@ -24,6 +24,8 @@ class ExchangeRate extends Model
 
     }
 
+
+
     public function toSearchableArray(): array
     {
         return [

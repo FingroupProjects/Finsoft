@@ -16,7 +16,6 @@ class IndexRequest extends FormRequest
         $model = $this->getModel();
         $fillableFields = $this->getFillableWithRelationships($model);
 
-
         return [
             'search' => 'string|nullable|max:20',
             'itemsPerPage' => 'integer|nullable',
@@ -52,10 +51,7 @@ class IndexRequest extends FormRequest
             }
         }
 
-        $fillableFields = array_merge($fillableFields, $relationships);
-
-
-        return $fillableFields;
+        return array_merge($fillableFields, $relationships);
 
     }
 

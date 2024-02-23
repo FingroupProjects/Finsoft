@@ -21,6 +21,11 @@ class CounterpartyAgreement extends Model
         return $this->belongsTo(Organization::class, 'organization_id');
     }
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     public function counterparty() :BelongsTo
     {
         return $this->belongsTo(Counterparty::class, 'counterparty_id');
