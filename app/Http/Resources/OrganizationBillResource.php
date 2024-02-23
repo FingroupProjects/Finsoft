@@ -20,6 +20,8 @@ class OrganizationBillResource extends JsonResource
             'currency' => CurrencyResource::make($this->whenLoaded('currency')),
             'organization' => OrganizationResource::make($this->whenLoaded('organizationдух')),
             'bill_number' => $this->bill_number,
+            'deleted_at' => $this->deleted_at
+
         ];
     }
 }

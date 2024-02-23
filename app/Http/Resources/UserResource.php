@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'email'=> $this->email ?? '',
             'organization' => OrganizationResource::make($this->whenLoaded('organization')),
             'phone' => $this->phone ?? '',
+            'deleted_at' => $this->deleted_at
         ];
     }
 }

@@ -20,7 +20,7 @@ class CurrencyResource extends JsonResource
             'digital_code' => $this->digital_code,
             'symbol_code' => $this->symbol_code,
             'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
-            'deleted_at' => $this->deleted_at
+            'deleted_at' => $this->deleted_at,
         ];
     }
 }

@@ -27,6 +27,7 @@ class CounterpartyAgreementResource extends JsonResource
             'payment_id' => CurrencyResource::make($this->whenLoaded('payment')),
             'comment' => $this->comment,
             'price_type_id' => PriceTypeResource::make($this->whenLoaded('priceType')),
+            'deleted_at' => $this->deleted_at
         ];
     }
 }
