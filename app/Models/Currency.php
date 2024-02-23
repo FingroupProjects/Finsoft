@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 
 class Currency extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable;
 
     protected $fillable = ['name', 'digital_code', 'symbol_code'];
 
