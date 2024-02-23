@@ -23,9 +23,7 @@ class ExchangeRateRule implements Rule
 
         if (!$date) return true;
 
-        $date = Carbon::parse($date->date);
-
-        return !$date->isSameDay($value);
+        return !$date->isSameDay(Carbon::today());
     }
 
     public function message() : string
