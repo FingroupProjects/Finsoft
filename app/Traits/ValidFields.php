@@ -37,7 +37,9 @@ trait ValidFields
                 });
 
             } else {
-               return $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
+               return $query->query(function ($query) use ($relations){
+                   return $query->with($relations);
+               })->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
             }
         }
         return $query->query(function ($query) use ($relations) {
