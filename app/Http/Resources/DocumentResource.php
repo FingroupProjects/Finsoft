@@ -23,6 +23,8 @@ class DocumentResource extends JsonResource
             'organization' => OrganizationResource::make($this->whenLoaded('organization')),
             'storage' => StorageResource::make($this->whenLoaded('storage')),
             'author' => UserResource::make($this->whenLoaded('author')),
+            'deleted_at' => $this->deleted_at
+
         ];
     }
 }

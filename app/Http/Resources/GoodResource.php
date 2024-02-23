@@ -23,6 +23,8 @@ class GoodResource extends JsonResource
             'unit_id' => $this->unit_id,
             'barcode' => $this->barcode,
             'storage_id' => StorageResource::make($this->whenLoaded('storage')),
+            'deleted_at' => $this->deleted_at
+
         ];
     }
 }

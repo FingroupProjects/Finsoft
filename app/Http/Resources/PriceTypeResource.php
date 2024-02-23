@@ -18,6 +18,8 @@ class PriceTypeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'currency' => CurrencyResource::make($this->whenLoaded('currency')),
+            'deleted_at' => $this->deleted_at
+
         ];
     }
 }
