@@ -40,6 +40,7 @@ trait ValidFields
                return $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
             }
         }
+        return $query;
     }
 
 }
