@@ -19,6 +19,11 @@ class ExchangeRate extends Model
         return $this->belongsTo(Currency::class, 'currency_id');
     }
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     public function toSearchableArray(): array
     {
         return [

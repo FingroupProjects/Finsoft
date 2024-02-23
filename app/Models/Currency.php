@@ -14,8 +14,6 @@ class Currency extends Model
 {
     use Searchable, SoftDeletes;
 
-    protected $withTrashed = true;
-
     protected $fillable = ['name', 'digital_code', 'symbol_code'];
 
     public function exchangeRates() :HasMany

@@ -6,12 +6,20 @@ use App\Models\ExchangeRate;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Http\Request;
 
 class ExchangeRateRule implements Rule
 {
     public function passes($attribute, $value) : bool
     {
-        $date = ExchangeRate::latest()->first();
+
+        $currency = app('request')->route('currency');
+
+        if (!$currency) {
+            return false;
+        }
+
+        $date = ExchangeRate::where('currency_id', $currency->id)->latest()->first();
 
         if (!$date) return true;
 
