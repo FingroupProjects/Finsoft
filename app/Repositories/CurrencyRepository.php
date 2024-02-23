@@ -28,10 +28,6 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
         $query = $this->sort($filteredParams, $query);
 
-        $query->query(function ($query) {
-            return $query->with(['organization', 'currency']);
-        });
-
         return $query->paginate($filteredParams['itemsPerPage']);
     }
 
