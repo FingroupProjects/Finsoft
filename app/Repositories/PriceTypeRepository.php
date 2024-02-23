@@ -31,7 +31,11 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         });
 
 
-        $this->sort($filteredParams, $query);
+        $query = $this->sort($filteredParams, $query);
+
+        $query->query(function ($query) {
+            return $query->with('currency');
+        });
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
