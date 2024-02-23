@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodDocument extends Model
 {
-    use HasFactory, SoftDeletes;
+
+    use SoftDeletes;
+
 
     protected $guarded = false;
 }

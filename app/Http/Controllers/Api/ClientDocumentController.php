@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Document\DocumentRequest;
 use App\Http\Resources\DocumentResource;
 use App\Models\Status;
-use App\Repositories\DocumentRepository;
+use App\Repositories\Contracts\DocumentRepositoryInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
@@ -15,7 +15,7 @@ class ClientDocumentController extends Controller
 {
     use ApiResponse;
 
-    public function __construct(public DocumentRepository $repository) { }
+    public function __construct(public DocumentRepositoryInterface $repository) { }
 
     public function saleDocuments(): JsonResponse
     {

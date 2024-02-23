@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('good_id')->constrained();
             $table->string('image');
             $table->boolean('is_main')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

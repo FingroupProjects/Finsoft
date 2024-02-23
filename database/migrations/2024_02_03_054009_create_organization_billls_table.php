@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignId('currency_id')->constrained();
             $table->foreignId('organization_id')->constrained();
             $table->string('bill_number');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

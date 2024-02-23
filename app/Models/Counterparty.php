@@ -12,9 +12,9 @@ use Laravel\Scout\Searchable;
 
 class Counterparty extends Model
 {
-    protected $fillable = ['name', 'phone', 'address', 'email'];
-
     use Searchable, SoftDeletes;
+
+    protected $fillable = ['name', 'phone', 'address', 'email'];
 
     public function roles(): BelongsToMany
     {

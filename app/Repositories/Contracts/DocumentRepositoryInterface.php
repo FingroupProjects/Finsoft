@@ -3,7 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\DocumentDTO;
-use App\Models\PreliminaryDocument;
+use App\Models\Document;
 use Illuminate\Support\Collection;
 
 interface DocumentRepositoryInterface
@@ -12,7 +12,7 @@ interface DocumentRepositoryInterface
 
     public function store(DocumentDTO $DTO, int $status);
 
-    public function update(PreliminaryDocument $document, DocumentDTO $DTO) :PreliminaryDocument;
+    public function update(Document $document, DocumentDTO $DTO) :Document;
 
     public function merge(string $doc_number);
 }
