@@ -19,11 +19,12 @@ class ExchangeRateRule implements Rule
             return false;
         }
 
-        $date = ExchangeRate::where('currency_id', $currency->id)->latest()->first();
+        $latestRate = ExchangeRate::where('currency_id', $currency->id)
+            ->whereDate('created_at', Carbon::today())
+            ->first();
 
-        if (!$date) return true;
+        return !$latestRate;
 
-        return !$date->isSameDay(Carbon::today());
     }
 
     public function message() : string
