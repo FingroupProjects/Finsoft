@@ -10,6 +10,7 @@ use App\Models\PriceType;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -66,7 +67,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     public function addExchangeRate(Currency $currency, ExchangeRateDTO $dto)
     {
         $currency->exchangeRates()->create([
-            'date' => $dto->date,
+            'date' => Carbon::parse($dto->date),
             'value' => $dto->value,
         ]);
     }
