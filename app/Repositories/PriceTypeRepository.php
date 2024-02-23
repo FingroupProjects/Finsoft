@@ -26,18 +26,12 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search'])->query(function ($query) {
-            $query->with('currency');
-        });
+        $query = $this->model::search($filteredParams['search']);
+
+        $query1 = $this->sort($filteredParams, $query, ['currency']);
 
 
-        $query = $this->sort($filteredParams, $query);
-
-        $query->query(function ($query) {
-            return $query->with('currency');
-        });
-
-        return $query->paginate($filteredParams['itemsPerPage']);
+        return $query1->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(PriceTypeDTO $DTO)

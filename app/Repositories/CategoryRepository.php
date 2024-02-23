@@ -21,12 +21,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         $filterParams = $this->processSearchData($data);
 
         $query = $this->model::search($filterParams['search']);
-        
-        $query1 = $this->sort($filteredParams, $query);
 
-        $query1->query(function ($query) {
-            return $query->with(['organization', 'currency']);
-        });
+        $query = $this->sort($filteredParams, $query, ['']);
+
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

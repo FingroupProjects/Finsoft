@@ -25,7 +25,7 @@ class StorageRepository implements StorageRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-       $query = $this->sort($filteredParams, $query);
+       $query = $this->sort($filteredParams, $query, []);
 
         $query->query(function ($query) {
             return $query->with(['employee']);

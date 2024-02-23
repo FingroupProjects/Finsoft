@@ -24,11 +24,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
         $query = $this->model::search($filteredParams['search']);
 
-        $query = $this->sort($filteredParams, $query);
-
-        $query->query(function ($query) {
-            return $query->with(['organization', 'currency']);
-        });
+        $query = $this->sort($filteredParams, $query, []);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }

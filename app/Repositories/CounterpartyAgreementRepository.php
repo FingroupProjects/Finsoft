@@ -25,11 +25,8 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
 
         $query = $this->model::search($filteredParams['search']);
 
-        $query1 = $this->sort($filteredParams, $query);
+        $query = $this->sort($filteredParams, $query, ['organization', 'counterparty', 'currency', 'payment', 'priceType']);
 
-        $query1->query(function ($query) {
-           return $query->with(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
-        });
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
