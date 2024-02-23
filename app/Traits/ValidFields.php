@@ -43,7 +43,7 @@ trait ValidFields
             }
         }
         return $query->query(function ($query) use ($relations) {
-            $query->with($relations);
+            $query->with($relations)->orderBy('deleted_at');
         });
     }
 
