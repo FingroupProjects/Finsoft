@@ -7,6 +7,7 @@ use App\DTO\ExchangeRateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
+use App\Http\Requests\Api\ExchangeUpdateRequest;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
@@ -55,7 +56,7 @@ class CurrencyController extends Controller
         return $this->success($exchangeRate->delete());
     }
 
-    public function updateExchange(ExchangeRate $exchangeRate, ExchangeRequest $request) :JsonResponse
+    public function updateExchange(ExchangeRate $exchangeRate, ExchangeUpdateRequest $request) :JsonResponse
     {
         return $this->success(ExchangeRateResource::make($this->repository->updateExchangeRate($exchangeRate, ExchangeRateDTO::fromRequest($request))));
     }
