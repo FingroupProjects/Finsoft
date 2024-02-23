@@ -65,10 +65,11 @@ class CurrencyController extends Controller
         return $this->success(ExchangeRateResource::make($this->repository->getCurrencyExchangeRateByCurrencyRate($currency)));
     }
 
-    public function delete(Currency $currency) :JsonResponse
+    public function destroy(Currency $currency) :JsonResponse
     {
         return $this->success($this->repository->delete($currency));
     }
+
 
 
 }

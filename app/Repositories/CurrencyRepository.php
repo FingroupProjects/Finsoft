@@ -6,6 +6,7 @@ use App\DTO\CurrencyDTO;
 use App\DTO\ExchangeRateDTO;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
+use App\Models\PriceType;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
@@ -53,6 +54,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
     public function delete(Currency $currency)
     {
+        $currency->exchangeRates()->delete();
+
+        PriceType::where('currency_id', $currency->id)->delete();
+
+        $currency->delete();
     }
 
     public function addExchangeRate(Currency $currency, ExchangeRateDTO $dto)
