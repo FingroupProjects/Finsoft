@@ -25,4 +25,9 @@ class Storage extends Model
             'name' => $this->name
         ];
     }
+    public static function bootSoftDeletes()
+    {
+
+    }
+
 }

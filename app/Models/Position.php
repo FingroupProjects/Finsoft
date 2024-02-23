@@ -19,4 +19,9 @@ class Position extends Model
             'name' => $this->name
         ];
     }
+
+    public static function bootSoftDeletes()
+    {
+
+    }
 }

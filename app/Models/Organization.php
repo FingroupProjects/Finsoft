@@ -19,4 +19,9 @@ class Organization extends Model
             'name' => $this->name,
         ];
     }
+
+    public static function bootSoftDeletes()
+    {
+
+    }
 }

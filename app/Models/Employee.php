@@ -24,6 +24,11 @@ class Employee extends Model
         ];
     }
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'position_id');

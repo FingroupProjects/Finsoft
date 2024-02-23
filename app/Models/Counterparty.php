@@ -16,6 +16,11 @@ class Counterparty extends Model
 
     protected $fillable = ['name', 'phone', 'address', 'email'];
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'counterparty_roles', 'counterparty_id', 'role_id');

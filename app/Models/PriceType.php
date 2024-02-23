@@ -12,6 +12,11 @@ class PriceType extends Model
 {
     use Searchable, SoftDeletes;
 
+    public static function bootSoftDeletes()
+    {
+
+    }
+
     protected $fillable = ['name', 'currency_id'];
 
     public function currency(): BelongsTo
