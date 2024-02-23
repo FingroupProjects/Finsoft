@@ -16,7 +16,7 @@ trait ValidFields
         return in_array($field, $model->getFillable());
     }
 
-    public function sort(array $filteredParams, $query)
+    public function sort(array $filteredParams, $query, array $relations)
     {
         if (!is_null($filteredParams['orderBy'])) {
             if (Str::contains($filteredParams['orderBy'], '.')) {
@@ -30,8 +30,8 @@ trait ValidFields
                 $this_model = new $this->model;
                 $this_table = $this_model->getTable();
 
-                return $query->query(function ($query) use ($relation, $relatedTable, $this_table, $filteredParams, $field) {
-                    return $query->join($relatedTable, "$this_table.{$relation}_id", '=', "{$relatedTable}.id")
+                return $query->query(function ($query) use ($relation, $relatedTable, $this_table, $filteredParams, $field, $relations) {
+                    $query->with($relations)->join($relatedTable, "$this_table.{$relation}_id", '=', "{$relatedTable}.id")
                         ->orderBy("{$relatedTable}.{$field}", $filteredParams['direction'])
                         ->select("{$this_table}.*");
                 });
@@ -40,7 +40,7 @@ trait ValidFields
                return $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
             }
         }
-        return $query;
+        return $query->with($relations);
     }
 
 }
