@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\CashRegisterDTO;
+use App\DTO\DocumentDTO;
 use App\Models\CashRegister;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\FilterTrait;
@@ -20,10 +21,10 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
+
         $query = CashRegister::search($filterParams['search']);
 
         $query = $this->sort($filteredParams, $query, ['organization', 'currency']);
-
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

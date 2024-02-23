@@ -60,8 +60,6 @@ Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class,
     Route::apiResource('unit',UnitController::class);
     Route::apiResource('good',GoodController::class);
 
-    Route::apiResource('providerDocument',ProviderDocumentController::class);
-
 
     Route::group(['prefix' => 'providerDocument'], function () {
         Route::get('/purchaseDocuments', [ProviderDocumentController::class, 'purchaseDocuments']);

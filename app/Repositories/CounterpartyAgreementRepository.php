@@ -8,6 +8,7 @@ use App\Models\CounterpartyAgreement;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\ValidFields;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -36,7 +37,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
         CounterpartyAgreement::create([
             'name' => $DTO->name,
             'contract_number' => $DTO->contract_number,
-            'date' => $DTO->date,
+            'date' => Carbon::parse($DTO->date),
             'organization_id' => $DTO->organization_id,
             'counterparty_id' => $DTO->counterparty_id,
             'contact_person' => $DTO->contact_person,
