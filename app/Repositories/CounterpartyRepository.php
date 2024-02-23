@@ -28,8 +28,8 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
         $filterParams = $this->processSearchData($data);
 
         $query = $this->model::search($filterParams['search']);
-        
-        $query1 = $this->sort($filteredParams, $query);
+
+        $query1 = $this->sort($filterParams, $query);
 
         $query1->query(function ($query) {
             return $query->with(['organization', 'currency']);
