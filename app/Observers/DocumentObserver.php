@@ -7,6 +7,7 @@ use App\Models\ChangeHistory;
 use App\Models\Document;
 use App\Models\DocumentHistory;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Comment\Doc;
 
 class DocumentObserver
 {
@@ -22,19 +23,20 @@ class DocumentObserver
 
     public function updated(Document $model): void
     {
-        if ($model->getDirty() == 'status') {
+
+        if ($model->getDirty() == 'active') {
             DocumentHistory::create([
                 'status' => DocumentHistoryStatuses::APPROVED,
                 'user_id' => Auth::user()->id,
                 'document_id' => $model->id,
             ]);
-
         } else {
             $documentHistory = DocumentHistory::create([
                 'status' => DocumentHistoryStatuses::UPDATED,
                 'user_id' => Auth::user()->id,
                 'document_id' => $model->id,
             ]);
+
 
 
             $this->track($model, $documentHistory);
@@ -71,34 +73,36 @@ class DocumentObserver
         ]);
     }
 
-    private function track(Document $document, DocumentHistory $history, callable $func = null) :void
-    {
-        $func = $func ?: [$this, 'getHistoryBody'];
-
-        $this->getUpdated($document)
-            ->map(function ($value, $field) use ($func) {
-                return call_user_func_array($func, [$value, $field]);
-            })
-            ->each(function ($fields) use ($document, $history) {
-                ChangeHistory::create([
-                        'document_id' => $history->id->toString()
-                    ] + $fields);
-            });
-    }
-
-    private function getHistoryBody($value, $field)
+    private function getHistoryDetails(Document $document, $value, $field)
     {
         return [
-            'body' => "Обновлено {$field} на ${value}",
+            'key' => $field,
+            'previous_value' => $document->getOriginal($field),
+            'new_value' => $value,
         ];
+    }
+
+    private function track(Document $document, DocumentHistory $history): void
+    {
+        $value = $this->getUpdated($document)
+            ->map(function ($value, $field) use ($document) {
+               return $this->getHistoryDetails($document, $value, $field);
+            });
+
+        ChangeHistory::create([
+            'document_history_id' => $history->id,
+            'body' => json_encode($value)
+        ]);
+
+
     }
 
     private function getUpdated($model)
     {
         return collect($model->getDirty())->filter(function ($value, $key) {
             return !in_array($key, ['created_at', 'updated_at']);
-        })->mapWithKeys(function ($value, $key) {
-            return [str_replace('_', ' ', $key) => $value];
         });
+
     }
+
 }

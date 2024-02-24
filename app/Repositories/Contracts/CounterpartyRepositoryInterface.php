@@ -15,4 +15,6 @@ interface CounterpartyRepositoryInterface extends IndexInterface
     public function store(CounterpartyDTO $DTO);
 
     public function update(Counterparty $counterparty, CounterpartyDTO $DTO) :Counterparty;
+
+    public function delete(Counterparty $counterparty);
 }
