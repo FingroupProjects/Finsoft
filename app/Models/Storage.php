@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
@@ -14,9 +15,9 @@ class Storage extends Model
 
     protected $guarded = false;
 
-    public function employee() :BelongsTo
+    public function employeeStorage() :hasOne
     {
-        return $this->belongsTo(Employee::class);
+        return $this->hasOne(EmployeeStorage::class);
     }
 
     public function toSearchableArray() :array
