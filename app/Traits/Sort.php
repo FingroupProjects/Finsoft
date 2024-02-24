@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 trait Sort
 {
 
-    public function sort(array $filteredParams, $query, array $relations)
+    public function sort(array $filteredParams, $query, array $relations = [])
     {
         if (!is_null($filteredParams['orderBy'])) {
             if (Str::contains($filteredParams['orderBy'], '.')) {
