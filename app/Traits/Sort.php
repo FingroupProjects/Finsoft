@@ -9,7 +9,7 @@ trait Sort
 
     public function sort(array $filteredParams, $query, array $relations)
     {
-        if (array_key_exists('orderBy', $filteredParams)) {
+        if (!is_null($filteredParams['orderBy'])) {
             if (Str::contains($filteredParams['orderBy'], '.')) {
                 list($relation, $field) = explode('.', $filteredParams['orderBy']);
 
@@ -32,6 +32,7 @@ trait Sort
         return $query->query(function ($query) use ($relations) {
             $query->with($relations)->orderBy('deleted_at');
         });
+
     }
 
 }
