@@ -75,12 +75,15 @@ class DocumentObserver
 
     private function getHistoryDetails(Document $document, $value, $field)
     {
+        $previousValue = $field !== 'date' ? $document->getOriginal($field . '_id') : $document->getOriginal($field);
+
         return [
             'key' => $field,
-            'previous_value' => $document->getOriginal($field),
+            'previous_value' => $previousValue,
             'new_value' => $value,
         ];
     }
+
 
     private function track(Document $document, DocumentHistory $history): void
     {
