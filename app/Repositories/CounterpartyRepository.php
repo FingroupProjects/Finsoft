@@ -27,6 +27,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
+
         $query = $this->model::search($filterParams['search']);
 
         $query = $this->sort($filterParams, $query, []);

@@ -94,13 +94,14 @@ class DocumentObserver
             'body' => json_encode($value)
         ]);
 
-
     }
 
     private function getUpdated($model)
     {
         return collect($model->getDirty())->filter(function ($value, $key) {
             return !in_array($key, ['created_at', 'updated_at']);
+        })->mapWithKeys(function ($value, $key) {
+            return [str_replace('_id', '', $key) => $value];
         });
 
     }
