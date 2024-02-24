@@ -9,14 +9,14 @@ use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = Currency::class;
 

@@ -12,11 +12,11 @@ class Status extends Model
 
     protected $guarded = false;
 
-    const PURCHASE = 1;
+    const PROVIDER_PURCHASE = 1;
 
-    const RETURN_TO_PROVIDER = 2;
+    const PROVIDER_RETURN = 2;
 
-    const SALE_TO_CLIENT = 3;
+    const CLIENT_PURCHASE = 3;
 
-    const RETURN_FROM_CLIENT = 4;
+    const CLIENT_RETURN = 4;
 }

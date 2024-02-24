@@ -6,19 +6,29 @@ use App\DTO\DocumentDTO;
 use App\Models\Document;
 use App\Models\GoodDocument;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\Sort;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class DocumentRepository implements DocumentRepositoryInterface
 {
+    use FilterTrait, Sort;
 
-    public function index(int $status): Collection
+    public $model = Document::class;
+
+    public function index(int $status, array $data): LengthAwarePaginator
     {
-        return Document::with('counterparty', 'organization', 'storage', 'author', 'counterparty_agreement')
-            ->where('status_id', $status)
-            ->get();
+        $query = $this->model::search($data['search'])->where('status_id', $status);
+
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->sort($filteredParams, $query, ['counterparty', 'organization', 'storage', 'author', 'counterparty_agreement']);
+
+        return $query->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(DocumentDTO $dto, int $status): Document
@@ -26,7 +36,7 @@ class DocumentRepository implements DocumentRepositoryInterface
         return DB::transaction(function () use ($status, $dto) {
             $document = Document::create([
                 'doc_number' => $this->uniqueNumber(),
-                'date' => $dto->date,
+                'date' => Carbon::parse($dto->date),
                 'counterparty_id' => $dto->counterparty_id,
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
@@ -35,15 +45,32 @@ class DocumentRepository implements DocumentRepositoryInterface
                 'status_id' => $status
             ]);
 
-            GoodDocument::insert($this->goodDocuments($dto->goods, $document));
+            if (!is_null($dto->goods))
+            {
+                GoodDocument::insert($this->insertGoodDocuments($dto->goods, $document));
+            }
 
-            return $document;
         });
     }
 
     public function update(Document $document, DocumentDTO $dto) :Document
     {
-       //
+        return DB::transaction(function () use ($dto) {
+            $document = Document::create([
+                'date' => Carbon::parse($dto->date),
+                'counterparty_id' => $dto->counterparty_id,
+                'counterparty_agreement_id' => $dto->counterparty_agreement_id,
+                'organization_id' => $dto->organization_id,
+                'storage_id' => $dto->storage_id,
+                'author_id' => $dto->author_id
+            ]);
+
+            if (!is_null($dto->goods))
+            {
+                GoodDocument::insertOrUpdate($this->insertGoodDocuments($dto->goods, $document));
+            }
+
+        });
     }
 
     public function uniqueNumber() : string
@@ -59,31 +86,23 @@ class DocumentRepository implements DocumentRepositoryInterface
         return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
     }
 
-    private function goodDocuments(array $goods, Document $document): array
+    private function insertGoodDocuments(array $goods, Document $document): array
     {
         return array_map(function ($item) use ($document) {
             return [
                 'good_id' => $item['good_id'],
                 'amount' => $item['amount'],
                 'price' => $item['price'],
-                'document_id' => $document->id->toString(),
+                'document_id' => $document->id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];
         }, $goods);
     }
 
-    public function merge(string $doc_number)
+    public function approve(Document $document)
     {
-        try {
-
-            Document::where('doc_number', $doc_number)->update(['active' => true]);
-
-        } catch (Exception $e) {
-
-            return $e->getMessage();
-
-        }
+        $document->update(['active' => true]);
     }
 
 }

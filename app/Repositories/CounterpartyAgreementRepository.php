@@ -7,14 +7,14 @@ use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class CounterpartyAgreementRepository implements CounterpartyAgreementRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = CounterpartyAgreement::class;
 

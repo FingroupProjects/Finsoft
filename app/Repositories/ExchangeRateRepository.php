@@ -12,14 +12,14 @@ use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\Contracts\ExchangeRateInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class ExchangeRateRepository implements ExchangeRateInterface
 {
-    use FilterTrait, ValidFields;
+    use FilterTrait, Sort;
 
     public $model = ExchangeRate::class;
 
