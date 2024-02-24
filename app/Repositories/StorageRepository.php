@@ -5,13 +5,16 @@ namespace App\Repositories;
 use App\DTO\CashRegisterDTO;
 use App\DTO\StorageDTO;
 use App\Models\CashRegister;
+use App\Models\EmployeeStorage;
 use App\Models\Storage;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
+use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class StorageRepository implements StorageRepositoryInterface
 {
@@ -33,18 +36,45 @@ class StorageRepository implements StorageRepositoryInterface
 
     public function store(StorageDTO $DTO)
     {
-        return Storage::create([
-            'name' => $DTO->name,
-            'employee_id' => $DTO->employee_id,
-        ]);
+        try {
+            DB::transaction(function () use ($DTO) {
+                $storage = Storage::create([
+                    'name' => $DTO->name,
+                ]);
+
+                EmployeeStorage::create([
+                    'storage_id' => $storage->id,
+                    'employee_id' => $DTO->employee_id,
+                    'organization_id' => $DTO->organization_id,
+                    'from' => $DTO->from,
+                    'to' => $DTO->to
+                ]);
+            });
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function update(Storage $storage, StorageDTO $DTO): Storage
     {
-        $storage->update([
-            'name' => $DTO->name,
-            'employee_id' => $DTO->employee_id,
-        ]);
+        try {
+            DB::transaction(function () use ($storage, $DTO) {
+                $storage->update([
+                    'name' => $DTO->name,
+                    'employee_id' => $DTO->employee_id,
+                ]);
+
+                EmployeeStorage::create([
+                    'storage_id' => $storage->id,
+                    'employee_id' => $DTO->employee_id,
+                    'organization_id' => $DTO->organization_id,
+                    'from' => $DTO->from,
+                    'to' => $DTO->to
+                ]);
+            });
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
 
         return $storage;
     }

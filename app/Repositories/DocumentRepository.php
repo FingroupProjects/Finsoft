@@ -9,9 +9,7 @@ use App\Repositories\Contracts\DocumentRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class DocumentRepository implements DocumentRepositoryInterface
