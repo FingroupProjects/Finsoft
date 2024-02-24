@@ -57,8 +57,8 @@ class CounterpartyController extends Controller
         return $this->success(CounterpartyResource::make($this->repository->update($counterparty, CounterpartyDTO::fromRequest($request))));
     }
 
-    public function search(Request $request) :JsonResponse
+    public function destroy(Counterparty $counterparty)
     {
-        return $this->paginate(CounterpartyResource::collection($this->repository->search($request->search)));
+        return $this->deleted($this->repository->delete($counterparty));
     }
 }
