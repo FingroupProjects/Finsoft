@@ -10,7 +10,7 @@ use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\PriceTypeRepository as PriceTypeRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 
@@ -18,7 +18,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
 {
     const ON_PAGE = 10;
 
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = PriceType::class;
 
@@ -31,7 +31,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         $query1 = $this->sort($filteredParams, $query, ['currency']);
 
 
-        return $query1->withTrashed()->paginate($filteredParams['itemsPerPage']);
+        return $query1->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(PriceTypeDTO $DTO)

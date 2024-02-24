@@ -8,9 +8,8 @@ use Illuminate\Support\Str;
 
 class SortRepository
 {
-    public function sort(Model $model, array $filteredParams, $query, array $relations): Builder
+    public static function sort(Model $model, array $filteredParams, $query, array $relations): Builder
     {
-
         if (!is_null($filteredParams['orderBy'])) {
             if (Str::contains($filteredParams['orderBy'], '.')) {
                 list($relation, $field) = explode('.', $filteredParams['orderBy']);

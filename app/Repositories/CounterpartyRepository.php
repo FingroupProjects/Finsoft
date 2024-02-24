@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -21,7 +21,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
     private const ON_PAGE = 10;
 
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public function index(array $data) :LengthAwarePaginator
     {

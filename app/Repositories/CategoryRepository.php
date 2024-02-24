@@ -6,13 +6,13 @@ use App\DTO\CategoryDTO;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = Category::class;
 

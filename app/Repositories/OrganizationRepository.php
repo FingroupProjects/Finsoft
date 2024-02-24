@@ -6,7 +6,7 @@ use App\DTO\OrganizationDTO;
 use App\Models\Organization;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -16,7 +16,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
     public $model = Organization::class;
 
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public function index(array $data): LengthAwarePaginator
     {

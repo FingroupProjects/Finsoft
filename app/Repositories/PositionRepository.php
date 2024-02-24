@@ -6,12 +6,12 @@ use App\DTO\PositionDTO;
 use App\Models\Position;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PositionRepository implements PositionRepositoryInterface
 {
-    use FilterTrait, ValidFields;
+    use FilterTrait, Sort;
 
     public $model = Position::class;
 

@@ -9,14 +9,14 @@ use App\Models\Employee;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeRepository implements EmployeeRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = Employee::class;
 

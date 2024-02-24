@@ -8,5 +8,4 @@ interface IndexInterface
 {
     public function index(array $data) : LengthAwarePaginator;
 
-    public function isValidField(string $field) :bool;
 }

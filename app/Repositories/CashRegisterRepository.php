@@ -7,13 +7,13 @@ use App\DTO\DocumentDTO;
 use App\Models\CashRegister;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use function PHPUnit\Framework\isFalse;
 
 class CashRegisterRepository implements CashRegisterRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = CashRegister::class;
 

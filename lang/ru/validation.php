@@ -36,7 +36,7 @@ return [
     "digits"           => "Длина цифрового поля :attribute должна быть :digits.",
     "digits_between"   => "Длина цифрового поля :attribute должна быть между :min и :max.",
     "email"            => "Поле :attribute имеет ошибочный формат.",
-    "exists"           => "Выбранное значение для :attribute уже существует.",
+    "exists"           => "Выбранное значение для :attribute не существует.",
     "image"            => "Поле :attribute должно быть изображением.",
     "in"               => "Выбранное значение для :attribute ошибочно.",
     "integer"          => "Поле :attribute должно быть целым числом.",

@@ -9,13 +9,13 @@ use App\Models\Storage;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Traits\FilterTrait;
-use App\Traits\ValidFields;
+use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class StorageRepository implements StorageRepositoryInterface
 {
-    use ValidFields, FilterTrait;
+    use Sort, FilterTrait;
 
     public $model = Storage::class;
 
