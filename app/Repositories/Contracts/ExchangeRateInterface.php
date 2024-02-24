@@ -9,5 +9,4 @@ interface ExchangeRateInterface
 {
     public function index(Currency $currency, array $data): LengthAwarePaginator;
 
-    public function isValidField(string $field) :bool;
 }

@@ -74,10 +74,9 @@ Route::apiResource('currency', CurrencyController::class);
 
             Route::get('/return', [ProviderDocumentController::class, 'return']);
             Route::post('/returnList', [ProviderDocumentController::class, 'returnList']);
-
         });
 
-        Route::group(['prefix' => 'client'], function () {
+        Route::group(['prefix' => '/client'], function () {
             Route::get('/purchasedList', [ClientDocumentController::class, 'index']);
             Route::post('/purchase', [ClientDocumentController::class, 'purchase']);
 
@@ -86,6 +85,8 @@ Route::apiResource('currency', CurrencyController::class);
         });
 
         Route::patch('/update/{document}', [DocumentController::class, 'update']);
+
+        Route::get('/changeHistory/{document}', [DocumentController::class, 'changeHistory']);
 
         Route::get('approve/{document}', [DocumentController::class, 'approve']);
     });

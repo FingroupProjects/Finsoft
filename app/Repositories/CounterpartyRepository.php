@@ -27,6 +27,7 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
+
         $query = $this->model::search($filterParams['search']);
 
         $query = $this->sort($filterParams, $query, []);
@@ -61,8 +62,12 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
         return $counterparty;
     }
 
-    public function search(string $search): LengthAwarePaginator
+
+
+    public function delete(Counterparty $counterparty)
     {
-        return $this->model::where('name', 'like', "%$search%")->orWhere('phone', 'like', "$$search%")->orderBy('created_at', 'desc')->paginate(self::ON_PAGE);
+
+
+        $counterparty->delete();
     }
 }

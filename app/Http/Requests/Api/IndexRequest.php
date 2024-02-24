@@ -19,7 +19,7 @@ class IndexRequest extends FormRequest
         return [
             'search' => 'string|nullable|max:20',
             'itemsPerPage' => 'integer|nullable',
-            'orderBy' => 'in:id,deleted_at,' . implode(',', $fillableFields),
+            'orderBy' => 'nullable|in:id,deleted_at,' . implode(',', $fillableFields),
             'sort' => 'in:asc,desc',
         ];
     }

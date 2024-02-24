@@ -11,6 +11,7 @@ use App\Traits\Sort;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Comment\Doc;
 
 class DocumentRepository implements DocumentRepositoryInterface
 {
@@ -29,12 +30,12 @@ class DocumentRepository implements DocumentRepositoryInterface
         return $query->paginate($filteredParams['itemsPerPage']);
     }
 
-    public function store(DocumentDTO $dto, int $status): Document
+    public function store(DocumentDTO $dto, int $status)
     {
         return DB::transaction(function () use ($status, $dto) {
             $document = Document::create([
                 'doc_number' => $this->uniqueNumber(),
-                'date' => Carbon::parse($dto->date),
+                'date' => $dto->date,
                 'counterparty_id' => $dto->counterparty_id,
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
@@ -53,9 +54,9 @@ class DocumentRepository implements DocumentRepositoryInterface
 
     public function update(Document $document, DocumentDTO $dto) :Document
     {
-        return DB::transaction(function () use ($dto) {
-            $document = Document::create([
-                'date' => Carbon::parse($dto->date),
+        return DB::transaction(function () use ($dto, $document) {
+            $document->update([
+                'date' => $dto->date,
                 'counterparty_id' => $dto->counterparty_id,
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
@@ -67,6 +68,8 @@ class DocumentRepository implements DocumentRepositoryInterface
             {
                 GoodDocument::insertOrUpdate($this->insertGoodDocuments($dto->goods, $document));
             }
+
+            return $document;
 
         });
     }
@@ -103,4 +106,8 @@ class DocumentRepository implements DocumentRepositoryInterface
         $document->update(['active' => true]);
     }
 
+    public function changeHistory(Document $document) :Document
+    {
+        return $document->load(['history.changes', 'history.user']);
+    }
 }

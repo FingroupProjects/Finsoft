@@ -12,7 +12,7 @@ class DocumentDTO
     {
     }
 
-    public static function fromRequest(Request $request)
+    public static function fromRequest(Request $request) :self
     {
         return new static(
             $request->get('date'),
