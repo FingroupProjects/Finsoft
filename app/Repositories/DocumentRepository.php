@@ -107,7 +107,16 @@ class DocumentRepository implements DocumentRepositoryInterface
 
     public function approve(Document $document)
     {
-        $document->update(['active' => true]);
+        $document->update(
+            ['active' => true]
+        );
+    }
+
+    public function unApprove(Document $document)
+    {
+        $document->update(
+            ['active' => false]
+        );
     }
 
     public function changeHistory(Document $document) :Document

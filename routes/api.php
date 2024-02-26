@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::get('/changeHistory/{document}', [DocumentController::class, 'changeHistory']);
 
         Route::get('approve/{document}', [DocumentController::class, 'approve']);
+        Route::get('unApprove/{document}', [DocumentController::class, 'unApprove']);
     });
 
 

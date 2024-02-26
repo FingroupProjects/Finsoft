@@ -14,6 +14,8 @@ enum DocumentHistoryStatuses :string
 
     case RESTORED = 'Восстановлен';
 
+    case UNAPPROVED = 'Отменено проведение';
+
     case FORCE_DELETED = 'Очищен';
 
 

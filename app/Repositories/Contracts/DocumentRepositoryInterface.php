@@ -18,6 +18,7 @@ interface DocumentRepositoryInterface
 
     public function changeHistory(Document $document);
 
-
     public function approve(Document $document);
+
+    public function unApprove(Document $document);
 }
