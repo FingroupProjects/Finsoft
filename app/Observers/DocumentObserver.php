@@ -48,9 +48,11 @@ class DocumentObserver
 
     public function deleted(Document $model): void
     {
+        $user_id = \auth()->user()->id ?? User::factory()->create()->id;
+
         DocumentHistory::create([
             'status' => DocumentHistoryStatuses::DELETED,
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'document_id' => $model->id,
         ]);
     }
@@ -58,9 +60,11 @@ class DocumentObserver
 
     public function restored(Document $model): void
     {
+        $user_id = \auth()->user()->id ?? User::factory()->create()->id;
+
         DocumentHistory::create([
             'status' => DocumentHistoryStatuses::RESTORED,
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'document_id' => $model->id,
         ]);
     }

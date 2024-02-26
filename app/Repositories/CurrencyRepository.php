@@ -24,10 +24,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search'])->query(function ($query) {
-            $query->withTrashed();
-        });
-
+        $query = $this->model::search($filteredParams['search']);
 
 
         $query = $this->sort($filteredParams, $query, []);
