@@ -21,9 +21,11 @@ class DocumentRepository implements DocumentRepositoryInterface
 
     public function index(int $status, array $data): LengthAwarePaginator
     {
-        $query = $this->model::search($data['search'])->where('status_id', $status);
 
         $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search'])->where('status_id', $status);
+
 
         $query = $this->sort($filteredParams, $query, ['counterparty', 'organization', 'storage', 'author', 'counterparty_agreement']);
 

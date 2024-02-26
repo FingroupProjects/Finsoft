@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 class OrganizationBill extends Model
 {
 
-    use SoftDeletes, Searchable;
+    use SoftDeletes, Searchable, HasFactory;
 
 
     protected $fillable = ['name', 'currency_id', 'bill_number', 'organization_id'];

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class DocumentDTO
 {
-    public function __construct(public string $date, public int $counterparty_id, public int $counterparty_agreement_id, public int $organization_id,
+    public function  __construct(public string $date, public int $counterparty_id, public int $counterparty_agreement_id, public int $organization_id,
                                 public int $storage_id, public int $author_id, public ?array $goods)
     {
     }

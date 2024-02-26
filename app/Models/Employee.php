@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 
 class Employee extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     protected $fillable = ['name', 'lastname', 'surname', 'image', 'position_id'];
 

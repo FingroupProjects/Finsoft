@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class PriceType extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     public static function bootSoftDeletes()
     {

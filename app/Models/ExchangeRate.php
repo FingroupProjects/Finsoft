@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class ExchangeRate extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     protected $fillable = ['date', 'currency_id', 'value'];
 

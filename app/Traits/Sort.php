@@ -21,6 +21,7 @@ trait Sort
                     $query->with($relations)->join($relatedTable, "$thisTable.{$relation}_id", '=', "{$relatedTable}.id")
                         ->orderBy("{$relatedTable}.{$field}", $filteredParams['direction'])
                         ->select("{$thisTable}.*");
+                    dd(1);
                 });
             }
             return $query->query(function ($query) use ($relations) {

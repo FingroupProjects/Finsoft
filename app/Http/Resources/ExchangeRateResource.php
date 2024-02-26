@@ -18,7 +18,6 @@ class ExchangeRateResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => Carbon::parse($this->date),
-            'currency' => $this->currency->symbol_code,
             'value' => $this->value,
             'deleted_at' => $this->deleted_at
 
