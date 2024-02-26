@@ -12,7 +12,7 @@ use Laravel\Scout\Searchable;
 
 class Counterparty extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     protected $fillable = ['name', 'phone', 'address', 'email'];
 

@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class Storage extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     protected $guarded = false;
 

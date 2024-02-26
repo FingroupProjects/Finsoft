@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 
 class Category extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     public function toSearchableArray() :array
     {

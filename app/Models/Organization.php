@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 
 class Organization extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, HasFactory;
 
     protected $fillable = ['name'];
 

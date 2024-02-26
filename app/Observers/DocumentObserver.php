@@ -6,6 +6,7 @@ use App\Enums\DocumentHistoryStatuses;
 use App\Models\ChangeHistory;
 use App\Models\Document;
 use App\Models\DocumentHistory;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Comment\Doc;
 
@@ -13,9 +14,10 @@ class DocumentObserver
 {
     public function created(Document $model): void
     {
+        $user_id = \auth()->user()->id ?? User::factory()->create()->id;
         DocumentHistory::create([
             'status' => DocumentHistoryStatuses::CREATED,
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'document_id' => $model->id,
         ]);
     }
@@ -36,7 +38,6 @@ class DocumentObserver
                 'user_id' => Auth::user()->id,
                 'document_id' => $model->id,
             ]);
-
 
 
             $this->track($model, $documentHistory);
@@ -73,7 +74,7 @@ class DocumentObserver
         ]);
     }
 
-    private function getHistoryDetails(Document $document, $value, $field)
+    private function getHistoryDetails(Document $document, $value, $field): array
     {
         $previousValue = $field !== 'date' ? $document->getOriginal($field . '_id') : $document->getOriginal($field);
 

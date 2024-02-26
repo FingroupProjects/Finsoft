@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 
 class CashRegister extends Model
 {
-    use Searchable, CompilesStyles, SoftDeletes;
+    use Searchable, CompilesStyles, SoftDeletes, HasFactory;
 
     protected $fillable = [
         'name',

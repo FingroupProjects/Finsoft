@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 
 class CounterpartyAgreement extends Model
 {
-    use HasFactory, Searchable, SoftDeletes;
+    use HasFactory, Searchable, SoftDeletes, HasFactory;
 
     protected $fillable = ['name','contract_number','date','organization_id','counterparty_id',
         'contact_person','currency_id','payment_id', 'price_type_id', 'comment'];

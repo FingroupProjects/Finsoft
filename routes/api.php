@@ -38,8 +38,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function (){
 
 
-Route::apiResource('currency', CurrencyController::class);
-
+    Route::apiResource('currency', CurrencyController::class);
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);
@@ -68,9 +67,12 @@ Route::apiResource('currency', CurrencyController::class);
         Route::get('/getAgreementByCounterpartyId/{counterparty}', [CounterpartyAgreementController::class, 'getAgreementByCounterpartyId']);
     });
 
+    Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);
+    Route::post('/settings', [\App\Http\Controllers\SettingsController::class, 'store']);
+
     Route::group(['prefix' => 'document'], function (){
         Route::group(['prefix' => '/provider'], function () {
-            Route::get('/purchasedList', [ProviderDocumentController::class, 'index']);
+            Route::get('/purchaseList', [ProviderDocumentController::class, 'index']);
             Route::post('/purchase', [ProviderDocumentController::class, 'purchase']);
 
             Route::get('/return', [ProviderDocumentController::class, 'return']);
@@ -101,4 +103,4 @@ Route::apiResource('currency', CurrencyController::class);
     Route::get('logout', [AuthController::class, 'logout']);
     });
 
-Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');

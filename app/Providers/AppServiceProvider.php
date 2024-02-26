@@ -35,6 +35,8 @@ use App\Repositories\PositionRepository;
 use App\Repositories\StorageRepository;
 use App\Repositories\UnitRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Contracts\Console\Application;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -68,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Model::preventLazyLoading();
+
     }
 }
