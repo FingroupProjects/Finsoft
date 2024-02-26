@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class StorageResource extends JsonResource
+class EmployeeStorageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +17,10 @@ class StorageResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'data' => EmployeeStorageResource::make($this->employeeStorage),
-            'deleted_at' => $this->deleted_at
-
+            'from' => Carbon::parse($this->from),
+            'to' => Carbon::parse($this->to),
+            'employee' => EmployeeResource::make($this->employee),
+            'organization' => OrganizationResource::make($this->organization)
         ];
     }
 }

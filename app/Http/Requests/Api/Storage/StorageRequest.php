@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Storage;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorageRequest extends FormRequest
 {
@@ -23,7 +24,10 @@ class StorageRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'employee_id' => ['required', 'exists:employees,id'],
+            'employee_id' => ['required', Rule::exists('employees', 'id')],
+            'organization_id' => ['required', Rule::exists('organizations', 'id')],
+            'from' => ['required', 'date'],
+            'to' => ['required', 'date']
         ];
     }
 }

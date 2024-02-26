@@ -37,14 +37,14 @@ class StorageController extends Controller
         return $this->success(StorageResource::make($storage));
     }
 
-    public function store(StorageRepository $repository, StorageRequest $request)
+    public function store(StorageRequest $request)
     {
-        return $this->created(StorageResource::make($repository->store(StorageDTO::fromRequest($request))));
+        return $this->created($this->repository->store(StorageDTO::fromRequest($request)));
     }
 
-    public function update(Storage $storage, StorageRequest $request, StorageRepository $repository)
+    public function update(Storage $storage, StorageRequest $request)
     {
-        return $this->success(UserResource::make($repository->update($storage, StorageDTO::fromRequest($request))));
+        return $this->success(UserResource::make($this->repository->update($storage, StorageDTO::fromRequest($request))));
     }
 
     public function destroy(Storage $storage)

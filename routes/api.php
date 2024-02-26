@@ -34,11 +34,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-//
+
 Route::group(['middleware' => 'auth:sanctum'], function (){
 
 
     Route::apiResource('currency', CurrencyController::class);
+
 
     Route::group(['prefix' => 'currencyRate'], function () {
         Route::post('/add/{currency}', [CurrencyController::class, 'addExchangeRate']);

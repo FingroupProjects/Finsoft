@@ -13,7 +13,6 @@ trait FilterTrait
             'orderBy' => $data['orderBy'] ?? null,
             'direction' => $data['sort'] ?? 'asc',
             'itemsPerPage' => isset($data['itemsPerPage']) ? ($data['itemsPerPage'] == -1 ? $this->model::count() : $data['itemsPerPage']) : 10,
-
         ];
     }
 
