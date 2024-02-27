@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);
     Route::post('/settings', [\App\Http\Controllers\SettingsController::class, 'store']);
 
+
     Route::group(['prefix' => 'document'], function (){
         Route::group(['prefix' => '/provider'], function () {
             Route::get('/purchaseList', [ProviderDocumentController::class, 'index']);
