@@ -25,17 +25,21 @@ class DocumentObserver
 
     public function updated(Document $model): void
     {
+        $user_id = \auth()->user()->id ?? User::factory()->create()->id;
 
-        if ($model->getDirty() == 'active') {
+        if (in_array('active', $model->getDirty())) {
+
             DocumentHistory::create([
-                'status' => DocumentHistoryStatuses::APPROVED,
-                'user_id' => Auth::user()->id,
+                'status' => $model->active ? DocumentHistoryStatuses::APPROVED : DocumentHistoryStatuses::UNAPPROVED,
+                'user_id' => $user_id,
                 'document_id' => $model->id,
             ]);
+
         } else {
+
             $documentHistory = DocumentHistory::create([
                 'status' => DocumentHistoryStatuses::UPDATED,
-                'user_id' => Auth::user()->id,
+                'user_id' => $user_id,
                 'document_id' => $model->id,
             ]);
 

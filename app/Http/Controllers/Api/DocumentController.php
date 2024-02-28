@@ -31,8 +31,13 @@ class DocumentController extends Controller
         return $this->success(DocumentHistoryResource::make($this->repository->changeHistory($document)));
     }
 
-    public function approve()
+    public function approve(Document $document)
     {
+        return $this->success($this->repository->approve($document));
+    }
 
+    public function unApprove(Document $document)
+    {
+        return $this->success($this->repository->unApprove($document));
     }
 }
