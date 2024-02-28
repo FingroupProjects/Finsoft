@@ -117,6 +117,7 @@ class DocumentRepository implements DocumentRepositoryInterface
         $document->update(
             ['active' => false]
         );
+
     }
 
     public function changeHistory(Document $document) :Document

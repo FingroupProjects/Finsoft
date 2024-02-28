@@ -29,14 +29,14 @@ class DocumentObserver
 
         if (in_array('active', $model->getDirty())) {
 
-
-
             DocumentHistory::create([
                 'status' => $model->active ? DocumentHistoryStatuses::APPROVED : DocumentHistoryStatuses::UNAPPROVED,
                 'user_id' => $user_id,
                 'document_id' => $model->id,
             ]);
+
         } else {
+
             $documentHistory = DocumentHistory::create([
                 'status' => DocumentHistoryStatuses::UPDATED,
                 'user_id' => $user_id,

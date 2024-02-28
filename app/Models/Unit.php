@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     protected $guarded = false;
 }

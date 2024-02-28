@@ -37,6 +37,8 @@ use App\Repositories\UnitRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Console\Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\ParallelTesting;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -63,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(GoodRepositoryInterface::class, GoodRepository::class);
         $this->app->singleton(DocumentRepositoryInterface::class, DocumentRepository::class);
         $this->app->singleton(ExchangeRateInterface::class, ExchangeRateRepository::class);
+
+
     }
 
     /**
