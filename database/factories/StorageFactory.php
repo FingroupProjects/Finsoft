@@ -25,8 +25,7 @@ class StorageFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'employee_id' => Employee::factory()
+            'name' => fake()->name()
         ];
     }
 

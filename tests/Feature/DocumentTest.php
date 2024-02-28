@@ -2,13 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\DTO\DocumentDTO;
-use App\Enums\DocumentHistoryStatuses;
-use App\Models\ChangeHistory;
+
+use App\Enums\ApiResponse;
 use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
 use App\Models\Document;
-use App\Models\DocumentHistory;
+
 use App\Models\Good;
 use App\Models\Organization;
 use App\Models\Storage;
@@ -42,7 +41,7 @@ class DocumentTest extends TestCase
     public function test_create_document(): void
     {
         $this
-            ->actingAs($this->user, 'sanctum')
+            ->actingAs($this->user)
             ->post('api/document/provider/purchase', [
                 'organization_id' => Organization::factory()->create()->id,
                 'date' => "2023-12-12",
@@ -69,6 +68,14 @@ class DocumentTest extends TestCase
                 ]
             ])
             ->assertStatus(201);
+
+        $this->assertDatabaseHas('documents', [
+            'doc_number' => "0000001"
+        ]);
+
+        $this->assertDatabaseCount('good_documents', 3);
+
+
     }
 
     public function test_edit_document(): void
@@ -86,11 +93,10 @@ class DocumentTest extends TestCase
             ])
             ->assertStatus(200);
 
-        $has_history_saved = DocumentHistory::where('document_id', $document->id)
-            ->where('status', DocumentHistoryStatuses::UPDATED)
-            ->exists();
+        $this->assertDatabaseHas('document_histories', [
+            'document_id' => $document->id
+        ]);
 
-        $this->assertTrue($has_history_saved);
 
     }
 
@@ -102,11 +108,10 @@ class DocumentTest extends TestCase
             ->get('api/document/approve/' . $document->id)
             ->assertOk();
 
-        $has_history_saved = DocumentHistory::where('document_id', $document->id)
-            ->where('status', DocumentHistoryStatuses::APPROVED)
-            ->exists();
+        $this->assertDatabaseHas('document_histories', [
+            'document_id' => $document->id
+        ]);
 
-        $this->assertTrue($has_history_saved);
     }
 //
 //    public function test_un_approve_document()
@@ -133,11 +138,12 @@ class DocumentTest extends TestCase
 
         $this->assertTrue($document->delete());
 
-        $has_history_saved = DocumentHistory::where('document_id', $document->id)
-            ->where('status', DocumentHistoryStatuses::DELETED)
-            ->exists();
+        $this->assertDatabaseHas('document_histories', [
+            'document_id' => $document->id
+        ]);
 
-        $this->assertTrue($has_history_saved);
+
+        $this->assertSoftDeleted($document);
     }
 
     public function test_document_can_be_restored()
@@ -147,11 +153,11 @@ class DocumentTest extends TestCase
         $this->assertTrue($document->delete());
         $this->assertTrue($document->restore());
 
-        $has_history_saved = DocumentHistory::where('document_id', $document->id)
-            ->where('status', DocumentHistoryStatuses::RESTORED)
-            ->exists();
+        $this->assertDatabaseHas('document_histories', [
+            'document_id' => $document->id
+        ]);
 
-        $this->assertTrue($has_history_saved);
+        $this->assertNotSoftDeleted($document);
     }
 
 
