@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
-class Document extends Model
+class Document extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use SoftDeletes, Searchable, HasFactory;
 

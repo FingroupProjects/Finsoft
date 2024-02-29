@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class ExchangeRate extends Model
+class ExchangeRate extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use Searchable, SoftDeletes, HasFactory;
 

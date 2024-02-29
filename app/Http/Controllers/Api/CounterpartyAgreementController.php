@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementRequest;
 use App\Http\Requests\Api\CounterpartyAgreement\CounterpartyAgreementUpdateRequest;
 use App\Http\Requests\Api\IndexRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CounterpartyAgreementResource;
 use App\Models\Counterparty;
 use App\Models\CounterpartyAgreement;
+use App\Models\Currency;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\CounterpartyAgreementRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -46,5 +49,10 @@ class CounterpartyAgreementController extends Controller
     public function getAgreementByCounterpartyId(IndexRequest $request,Counterparty $counterparty): JsonResponse
     {
         return $this->paginate(CounterpartyAgreementResource::collection($this->repository->getAgreementByCounterpartyId($counterparty, $request->validated())));
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new CounterpartyAgreement(), $request->validated());
     }
 }

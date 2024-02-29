@@ -8,10 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Storage\StorageRequest;
 use App\Http\Requests\Api\User\UserRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\StorageResource;
 use App\Http\Resources\UserResource;
+use App\Models\Currency;
 use App\Models\Storage;
 use App\Models\User;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Repositories\StorageRepository;
 use App\Repositories\UserRepository;
@@ -50,5 +53,10 @@ class StorageController extends Controller
     public function destroy(Storage $storage)
     {
         return $this->deleted($storage->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new Storage(), $request->validated());
     }
 }

@@ -15,6 +15,7 @@ use App\Repositories\Contracts\DocumentRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\Contracts\ExchangeRateInterface;
 use App\Repositories\Contracts\GoodRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
@@ -29,6 +30,7 @@ use App\Repositories\DocumentRepository;
 use App\Repositories\EmployeeRepository;
 use App\Repositories\ExchangeRateRepository;
 use App\Repositories\GoodRepository;
+use App\Repositories\MassDelete;
 use App\Repositories\OrganizationBillRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\PositionRepository;
@@ -65,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(GoodRepositoryInterface::class, GoodRepository::class);
         $this->app->singleton(DocumentRepositoryInterface::class, DocumentRepository::class);
         $this->app->singleton(ExchangeRateInterface::class, ExchangeRateRepository::class);
+        $this->app->singleton(MassDeleteInterface::class, MassDelete::class);
 
 
     }

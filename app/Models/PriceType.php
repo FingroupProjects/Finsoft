@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class PriceType extends Model
+class PriceType extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use Searchable, SoftDeletes, HasFactory;
 

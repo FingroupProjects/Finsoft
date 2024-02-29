@@ -19,7 +19,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
     public $model = CashRegister::class;
 
-    public function index(IndexInterface $index): LengthAwarePaginator
+    public function index(array $data): LengthAwarePaginator
     {
         $filterParams = $this->processSearchData($data);
 

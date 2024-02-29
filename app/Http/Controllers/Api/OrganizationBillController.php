@@ -11,6 +11,7 @@ use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
 use App\Http\Requests\Api\OrganizationBillRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
 use App\Http\Resources\OrganizationBillResource;
@@ -18,6 +19,7 @@ use App\Http\Resources\PriceTypeResource;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Models\OrganizationBill;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -53,5 +55,10 @@ class OrganizationBillController extends Controller
     public function destroy(OrganizationBill $organizationBill) :JsonResponse
     {
         return $this->deleted($organizationBill->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new OrganizationBill(), $request->validated());
     }
 }

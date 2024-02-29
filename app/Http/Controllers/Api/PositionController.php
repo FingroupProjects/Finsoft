@@ -6,8 +6,11 @@ use App\DTO\PositionDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Position\PositionRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\PositionResource;
+use App\Models\Currency;
 use App\Models\Position;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\PositionRepository;
 use App\Traits\ApiResponse;
@@ -44,5 +47,10 @@ class PositionController extends Controller
     public function destroy(Position $position)
     {
         return $this->deleted($position->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new Position(), $request->validated());
     }
 }

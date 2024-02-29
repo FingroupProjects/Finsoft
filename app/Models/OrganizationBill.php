@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class OrganizationBill extends Model
+class OrganizationBill extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
 
     use SoftDeletes, Searchable, HasFactory;

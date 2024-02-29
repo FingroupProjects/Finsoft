@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth:sanctum'], function (){
+Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
     Route::apiResource('currency', CurrencyController::class);
@@ -53,14 +53,14 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::apiResource('priceType', PriceTypeController::class);
     Route::apiResource('cpAgreement', CounterpartyAgreementController::class);
     Route::apiResource('position', PositionController::class);
-    Route::apiResource('cashRegister',CashRegisterController::class);
-    Route::apiResource('organization',OrganizationController::class);
-    Route::apiResource('employee',EmployeeController::class);
-    Route::apiResource('user',UserController::class);
-    Route::apiResource('storage',StorageController::class);
-    Route::apiResource('category',CategoryController::class);
-    Route::apiResource('unit',UnitController::class);
-    Route::apiResource('good',GoodController::class);
+    Route::apiResource('cashRegister', CashRegisterController::class);
+    Route::apiResource('organization', OrganizationController::class);
+    Route::apiResource('employee', EmployeeController::class);
+    Route::apiResource('user', UserController::class);
+    Route::apiResource('storage', StorageController::class);
+    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('unit', UnitController::class);
+    Route::apiResource('good', GoodController::class);
 
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
@@ -72,11 +72,16 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::post('/massDelete', [CounterpartyController::class, 'massDelete']);
     });
 
+    Route::group(['prefix' => 'currency'], function () {
+        Route::get('/restore/{currency}', [CurrencyController::class, 'restore']);
+        Route::post('/massDelete', [CurrencyController::class, 'massDelete']);
+    });
+
     Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);
     Route::post('/settings', [\App\Http\Controllers\SettingsController::class, 'store']);
 
 
-    Route::group(['prefix' => 'document'], function (){
+    Route::group(['prefix' => 'document'], function () {
         Route::group(['prefix' => '/provider'], function () {
             Route::get('/purchaseList', [ProviderDocumentController::class, 'index']);
             Route::post('/purchase', [ProviderDocumentController::class, 'purchase']);
@@ -102,14 +107,7 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     });
 
 
-
-
-
-
-
-
-
     Route::get('logout', [AuthController::class, 'logout']);
-    });
+});
 
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');

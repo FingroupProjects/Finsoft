@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\DTO\UnitDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Unit\UnitRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\UnitResource;
+use App\Models\Currency;
 use App\Models\Unit;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\UnitRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -33,5 +36,10 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         return $this->deleted($unit->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new Unit(), $request->validated());
     }
 }
