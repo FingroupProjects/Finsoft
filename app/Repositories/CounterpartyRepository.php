@@ -5,11 +5,13 @@ namespace App\Repositories;
 use App\DTO\CounterpartyDTO;
 use App\DTO\LoginDTO;
 use App\Models\Counterparty;
+use App\Models\CounterpartyAgreement;
 use App\Models\User;
 use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -69,5 +71,16 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
 
 
         $counterparty->delete();
+    }
+
+    public function massDelete(array $ids)
+    {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        $this->model::whereIn('id', $ids['ids'])->update([
+            'deleted_at' => Carbon::now()
+        ]);
+
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

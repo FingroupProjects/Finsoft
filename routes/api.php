@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::group(['prefix' => 'cpAgreement'], function () {
         Route::get('/getAgreementByCounterpartyId/{counterparty}', [CounterpartyAgreementController::class, 'getAgreementByCounterpartyId']);
     });
+    Route::group(['prefix' => 'counterparty'], function () {
+        Route::get('/restore/{counterparty}', [CounterpartyController::class, 'restore']);
+        Route::post('/massDelete', [CounterpartyController::class, 'massDelete']);
+    });
 
     Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);
     Route::post('/settings', [\App\Http\Controllers\SettingsController::class, 'store']);
@@ -96,6 +100,8 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
         Route::get('approve/{document}', [DocumentController::class, 'approve']);
         Route::get('unApprove/{document}', [DocumentController::class, 'unApprove']);
     });
+
+
 
 
 

@@ -13,6 +13,7 @@ use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CounterpartyResource;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
@@ -61,4 +62,15 @@ class CounterpartyController extends Controller
     {
         return $this->deleted($this->repository->delete($counterparty));
     }
+
+    public function restore(Counterparty $counterparty)
+    {
+        return $this->success($counterparty->restore());
+    }
+
+    public function massDelete(IdRequest $request)
+    {
+        return $this->success($this->repository->massDelete($request->validated()));
+    }
 }
+

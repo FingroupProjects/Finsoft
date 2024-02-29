@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('document_histories', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('table');
             $table->unsignedBigInteger('user_id');
             $table->string('status');
-            $table->foreignUuid('document_id');
+            $table->unsignedBigInteger('document_id');
             $table->timestamps();
         });
     }

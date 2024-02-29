@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\Feature;
 
 use App\Models\Employee;
 use App\Models\Position;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use Tests\TestCase;
 
 class EmployeeTest extends TestCase
@@ -40,7 +39,7 @@ class EmployeeTest extends TestCase
                 'lastname' => 'lastname',
                 'surname' => 'surname',
                 'image' => $file,
-                'position_id' => Position::factory()->create()->id,
+                'position_id' => Position::factory()->create(),
             ]);
 
          $response->assertCreated();
