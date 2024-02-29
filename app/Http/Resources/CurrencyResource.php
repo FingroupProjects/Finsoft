@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,9 +19,7 @@ class CurrencyResource extends JsonResource
             'name' => $this->name,
             'digital_code' => $this->digital_code,
             'symbol_code' => $this->symbol_code,
-            'last_exchange_rate' => ExchangeRateResource::make(
-                $this->whenLoaded(ExchangeRate::latest('date')->first())
-            ),
+            'last_exchange_rate' =>  ExchangeRateResource::make($this->exchangeRates()->latest('date')->first()),
             'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
             'deleted_at' => $this->deleted_at,
         ];
