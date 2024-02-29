@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\View\Compilers\Concerns\CompilesStyles;
 use Laravel\Scout\Searchable;
 
-class CashRegister extends Model
+class CashRegister extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use Searchable, CompilesStyles, SoftDeletes, HasFactory;
 

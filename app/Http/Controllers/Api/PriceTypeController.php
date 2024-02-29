@@ -10,6 +10,7 @@ use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
 use App\Http\Resources\PriceTypeResource;
@@ -17,6 +18,7 @@ use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -54,5 +56,10 @@ class PriceTypeController extends Controller
     public function destroy(PriceType $priceType) :JsonResponse
     {
         return $this->deleted($priceType->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new PriceType(), $request->validated());
     }
 }

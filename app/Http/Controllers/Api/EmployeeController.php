@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Employee\EmployeeRequest;
 use App\Http\Requests\Api\Employee\EmployeeUpdateRequest;
 use App\Http\Requests\Api\IndexRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Models\Employee;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\EmployeeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -46,5 +48,10 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         return $this->deleted($employee->delete());
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new Employee(), $request->validated());
     }
 }

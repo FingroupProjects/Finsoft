@@ -25,7 +25,6 @@ class CurrencyResource extends JsonResource
                     return $exchangeRates->sortByDesc('date')->first();
                 })
             ),
-
             'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
             'deleted_at' => $this->deleted_at,
         ];

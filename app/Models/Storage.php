@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class Storage extends Model
+class Storage extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use Searchable, SoftDeletes, HasFactory;
 

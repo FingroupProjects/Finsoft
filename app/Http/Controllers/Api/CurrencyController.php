@@ -9,11 +9,13 @@ use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
 use App\Http\Requests\Api\ExchangeUpdateRequest;
 use App\Http\Requests\Api\IndexRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +24,6 @@ use Psy\Util\Json;
 class CurrencyController extends Controller
 {
     use ApiResponse;
-
 
     public function __construct(public CurrencyRepositoryInterface $repository){ }
 
@@ -71,6 +72,16 @@ class CurrencyController extends Controller
         return $this->success($this->repository->delete($currency));
     }
 
+    public function restore(Currency $currency)
+    {
+        return $this->success($currency->restore());
+    }
+
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $this->success($delete->massDelete(new Currency(), $request->validated()));
+    }
 
 
 }

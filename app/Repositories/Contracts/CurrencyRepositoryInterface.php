@@ -9,6 +9,7 @@ use App\Http\Requests\CurrencyIndexRequest;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use Illuminate\Support\Collection;
+use Spiral\Tokenizer\InterfacesInterface;
 
 interface CurrencyRepositoryInterface extends IndexInterface
 {

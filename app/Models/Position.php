@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class Position extends Model
+class Position extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use Searchable, SoftDeletes, HasFactory;
 

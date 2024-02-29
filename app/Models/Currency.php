@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Repositories\Contracts\SoftDeleteInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use JeroenG\Explorer\Application\Explored;
 use Laravel\Scout\Searchable;
 
-class Currency extends Model
+
+class Currency extends Model implements SoftDeleteInterface
 {
     use Searchable, SoftDeletes, HasFactory;
 

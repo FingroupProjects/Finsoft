@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class CounterpartyAgreement extends Model
+class CounterpartyAgreement extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use HasFactory, Searchable, SoftDeletes, HasFactory;
 

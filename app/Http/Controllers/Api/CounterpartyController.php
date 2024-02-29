@@ -24,6 +24,7 @@ use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -68,9 +69,9 @@ class CounterpartyController extends Controller
         return $this->success($counterparty->restore());
     }
 
-    public function massDelete(IdRequest $request)
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
     {
-        return $this->success($this->repository->massDelete($request->validated()));
+        return $delete->massDelete(new Counterparty(), $request->validated());
     }
 }
 

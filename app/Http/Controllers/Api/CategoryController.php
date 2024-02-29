@@ -6,10 +6,13 @@ use App\DTO\CategoryDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Category\CategoryRequest;
 use App\Http\Requests\Api\IndexRequest;
+use App\Http\Requests\IdRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Repositories\CategoryRepository;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\MassDeleteInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
@@ -39,5 +42,10 @@ class CategoryController extends Controller
     public function update(Category $category, CategoryRequest $request, CategoryRepository $repository)
     {
         return $this->success(CategoryResource::make($repository->update($category, CategoryDTO::fromRequest($request))));
+    }
+
+    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    {
+        return $delete->massDelete(new Category(), $request->validated());
     }
 }
