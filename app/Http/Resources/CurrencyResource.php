@@ -22,9 +22,10 @@ class CurrencyResource extends JsonResource
             'symbol_code' => $this->symbol_code,
             'last_exchange_rate' => ExchangeRateResource::make(
                 $this->whenLoaded('exchangeRates', function ($exchangeRates) {
-                    return $exchangeRates->latest('date')->first();
+                    return $exchangeRates->sortByDesc('date')->first();
                 })
             ),
+
             'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
             'deleted_at' => $this->deleted_at,
         ];
