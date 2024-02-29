@@ -31,7 +31,6 @@ class ExchangeRateRepository implements ExchangeRateInterface
 
         $query = $this->sort($filteredParams, $query, []);
 
-
         return $query->paginate($filteredParams['itemsPerPage']);
     }
 }

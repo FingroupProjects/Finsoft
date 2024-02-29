@@ -17,4 +17,6 @@ interface CounterpartyRepositoryInterface extends IndexInterface
     public function update(Counterparty $counterparty, CounterpartyDTO $DTO) :Counterparty;
 
     public function delete(Counterparty $counterparty);
+
+    public function massDelete(array $ids);
 }

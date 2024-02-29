@@ -14,7 +14,7 @@ class Counterparty extends Model
 {
     use Searchable, SoftDeletes, HasFactory;
 
-    protected $fillable = ['name', 'phone', 'address', 'email'];
+    protected $fillable = ['name', 'phone', 'address', 'email', 'deleted_at'];
 
     public static function bootSoftDeletes()
     {
