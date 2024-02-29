@@ -28,7 +28,6 @@ class CurrencyController extends Controller
 
     public function index(IndexRequest $request) :JsonResponse
     {
-
         return $this->paginate(CurrencyResource::collection($this->repository->index($request->validated())));
     }
 
