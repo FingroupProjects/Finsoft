@@ -21,8 +21,8 @@ class CurrencyResource extends JsonResource
             'digital_code' => $this->digital_code,
             'symbol_code' => $this->symbol_code,
             'last_exchange_rate' => ExchangeRateResource::make(
-                $this->whenLoaded('exchangeRates', function () {
-                    return ExchangeRate::latest('date')->first();
+                $this->whenLoaded('exchangeRates', function ($exchangeRates) {
+                    return $exchangeRates->first();
                 })
             ),
             'exchangeRates' => ExchangeRateResource::collection($this->whenLoaded('exchangeRates')),
