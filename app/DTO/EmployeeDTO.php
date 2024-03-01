@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 
 class EmployeeDTO
 {
-    public function __construct(public string $name, public string $surname, public string $lastname, public ?UploadedFile $image, public int $position_id)
+    public function __construct(public string $name, public string $surname, public string $lastname, public ?UploadedFile $image)
     {
     }
 
@@ -18,7 +18,6 @@ class EmployeeDTO
             $request->get('surname'),
             $request->get('lastname'),
             $request->file('image'),
-            $request->get('position_id')
         );
     }
 }

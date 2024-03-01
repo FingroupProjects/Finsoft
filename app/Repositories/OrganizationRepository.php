@@ -8,7 +8,6 @@ use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
@@ -24,7 +23,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
         $query = $this->model::search($filteredParams['search']);
 
-        $query = $this->sort($filteredParams, $query, []);
+        $query = $this->sort($filteredParams, $query, ['director', 'chief_accountant']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
@@ -33,6 +32,9 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         return Organization::create([
             'name' => $DTO->name,
+            'INN' => $DTO->INN,
+            'director_id' => $DTO->director_id,
+            'chief_accountant_id' => $DTO->chief_accountant_id,
             'address' => $DTO->address,
             'description' => $DTO->description
         ]);
@@ -42,6 +44,9 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $organization->update([
             'name' => $DTO->name,
+            'INN' => $DTO->INN,
+            'director_id' => $DTO->director_id,
+            'chief_accountant_id' => $DTO->chief_accountant_id,
             'address' => $DTO->address,
             'description' => $DTO->description
         ]);

@@ -17,6 +17,11 @@ class OrganizationResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'INN' => $this->INN,
+            'director' => EmployeeResource::make($this->whenLoaded('director')),
+            'chief_accountant' => EmployeeResource::make($this->whenLoaded('chief_accountant')),
+            'address' => $this->address,
+            'description' => $this->description,
             'deleted_at' => $this->deleted_at
 
         ];
