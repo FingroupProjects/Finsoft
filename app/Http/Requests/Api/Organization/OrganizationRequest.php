@@ -24,6 +24,9 @@ class OrganizationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'INN' => ['required', 'integer'],
+            'director_id' => ['required', Rule::exists('employees', 'id')],
+            'chief_accountant_id' => ['required', Rule::exists('employees', 'id')],
             'address' => ['required', 'string'],
             'description' => ['']
         ];

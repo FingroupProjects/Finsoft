@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->text('address');
-            $table->text('description')->nullable();
+            $table->unsignedBigInteger('INN')->after('name');
+            $table->foreignId('director_id')->after('INN')->constrained('employees');
+            $table->foreignId('chief_accountant_id')->after('director_id')->constrained('employees',);
+            $table->text('address')->after('chief_accountant_id');
+            $table->text('description')->nullable()->after('address');
         });
     }
 
@@ -23,6 +26,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('organizations', function (Blueprint $table) {
+            $table->dropColumn('INN');
+            $table->dropColumn('director_id');
+            $table->dropColumn('chief_accountant_id');
             $table->dropColumn('address');
             $table->dropColumn('description');
         });

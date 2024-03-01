@@ -40,7 +40,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             'surname' => $DTO->surname,
             'lastname' => $DTO->lastname,
             'image' => $image,
-            'position_id' => $DTO->position_id
         ]);
     }
 
