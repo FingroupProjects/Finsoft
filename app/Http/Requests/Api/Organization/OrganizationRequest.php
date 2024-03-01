@@ -24,6 +24,8 @@ class OrganizationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'description' => ['']
         ];
     }
 }

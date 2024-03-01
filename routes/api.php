@@ -70,11 +70,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'counterparty'], function () {
         Route::get('/restore/{counterparty}', [CounterpartyController::class, 'restore']);
         Route::post('/massDelete', [CounterpartyController::class, 'massDelete']);
+        Route::post('/massRestore', [CounterpartyController::class, 'massRestore']);
     });
 
     Route::group(['prefix' => 'currency'], function () {
         Route::get('/restore/{currency}', [CurrencyController::class, 'restore']);
         Route::post('/massDelete', [CurrencyController::class, 'massDelete']);
+    });
+
+    Route::group(['prefix' => 'position'], function () {
+        Route::post('/massDelete', [PositionController::class, 'massDelete']);
+        Route::post('/massRestore', [PositionController::class, 'massRestore']);
     });
 
     Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);

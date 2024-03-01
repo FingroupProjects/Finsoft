@@ -9,4 +9,6 @@ use Illuminate\Http\JsonResponse;
 interface MassDeleteInterface
 {
     public function massDelete(SoftDeleteInterface $model, array $ids);
+
+    public function massRestore(SoftDeleteInterface $model, array $ids);
 }

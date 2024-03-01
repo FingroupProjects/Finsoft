@@ -11,7 +11,7 @@ class Organization extends Model implements \App\Repositories\Contracts\SoftDele
 {
     use Searchable, SoftDeletes, HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'address', 'description'];
 
     public function toSearchableArray(): array
     {
@@ -25,3 +25,5 @@ class Organization extends Model implements \App\Repositories\Contracts\SoftDele
 
     }
 }
+
+
