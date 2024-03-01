@@ -44,4 +44,9 @@ class UnitController extends Controller
 
         return $delete->massDelete(new Unit(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Unit(), $request->validated()));
+    }
 }

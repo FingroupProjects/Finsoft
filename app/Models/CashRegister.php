@@ -11,12 +11,13 @@ use Laravel\Scout\Searchable;
 
 class CashRegister extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
-    use Searchable, CompilesStyles, SoftDeletes, HasFactory;
+    use Searchable, CompilesStyles, SoftDeletes;
 
     protected $fillable = [
         'name',
         'currency_id',
-        'organization_id'
+        'organization_id',
+        'responsible_person_id'
     ];
 
     public static function bootSoftDeletes()
@@ -33,6 +34,12 @@ class CashRegister extends Model implements \App\Repositories\Contracts\SoftDele
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public function responsiblePerson(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class, 'responsible_person_id');
+    }
+
     public function toSearchableArray(): array
     {
         return [

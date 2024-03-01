@@ -63,4 +63,9 @@ class PriceTypeController extends Controller
     {
         return $delete->massDelete(new PriceType(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new PriceType(), $request->validated()));
+    }
 }

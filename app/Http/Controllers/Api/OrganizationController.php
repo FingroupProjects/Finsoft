@@ -57,4 +57,9 @@ class OrganizationController extends Controller
     {
         return $delete->massDelete(new Organization(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Organization(), $request->validated()));
+    }
 }

@@ -60,4 +60,9 @@ class StorageController extends Controller
     {
         return $delete->massDelete(new Storage(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Storage(), $request->validated()));
+    }
 }

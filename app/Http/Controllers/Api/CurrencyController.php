@@ -12,6 +12,7 @@ use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\CurrencyResource;
 use App\Http\Resources\ExchangeRateResource;
+use App\Models\Counterparty;
 use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
@@ -82,6 +83,11 @@ class CurrencyController extends Controller
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $this->success($delete->massDelete(new Currency(), $request->validated()));
+    }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Currency(), $request->validated()));
     }
 
 

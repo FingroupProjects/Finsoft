@@ -8,7 +8,6 @@ use App\Http\Requests\Api\Document\DocumentRequest;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\DocumentResource;
-use App\Models\Currency;
 use App\Models\Document;
 use App\Models\Status;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
@@ -46,5 +45,10 @@ class ClientDocumentController extends Controller
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new Document(), $request->validated());
+    }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Document(), $request->validated()));
     }
 }

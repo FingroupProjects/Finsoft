@@ -40,4 +40,9 @@ class ExchangeRateController extends Controller
     {
         return $delete->massDelete(new ExchangeRate(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new ExchangeRate(), $request->validated()));
+    }
 }

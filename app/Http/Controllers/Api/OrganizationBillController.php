@@ -62,4 +62,9 @@ class OrganizationBillController extends Controller
     {
         return $delete->massDelete(new OrganizationBill(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new OrganizationBill(), $request->validated()));
+    }
 }

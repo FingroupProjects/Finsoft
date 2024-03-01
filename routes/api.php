@@ -46,7 +46,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/{currency}', [ExchangeRateController::class, 'index']);
         Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
         Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
+        Route::post('massDelete', [CurrencyController::class, 'massDelete']);
+        Route::post('massRestore', [CurrencyController::class, 'massRestore']);
     });
+
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
     Route::apiResource('organizationBill', OrganizationBillController::class);
     Route::apiResource('counterparty', CounterpartyController::class);
@@ -64,9 +67,62 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
+    Route::group(['prefix' => 'organizationBill'], function () {
+        Route::post('/massDelete', [OrganizationBillController::class, 'massDelete']);
+        Route::post('/massRestore', [OrganizationBillController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'priceType'], function () {
+        Route::post('/massDelete', [PriceTypeController::class, 'massDelete']);
+        Route::post('/massRestore', [PriceTypeController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'cashRegister'], function () {
+        Route::post('/massDelete', [CashRegisterController::class, 'massDelete']);
+        Route::post('/massRestore', [CashRegisterController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'organization'], function () {
+        Route::post('/massDelete', [OrganizationController::class, 'massDelete']);
+        Route::post('/massRestore', [OrganizationController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'employee'], function () {
+        Route::post('/massDelete', [EmployeeController::class, 'massDelete']);
+        Route::post('/massRestore', [EmployeeController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::post('/massDelete', [UserController::class, 'massDelete']);
+        Route::post('/massRestore', [UserController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'storage'], function () {
+        Route::post('/massDelete', [StorageController::class, 'massDelete']);
+        Route::post('/massRestore', [StorageController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::post('/massDelete', [CategoryController::class, 'massDelete']);
+        Route::post('/massRestore', [CategoryController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'unit'], function () {
+        Route::post('/massDelete', [UnitController::class, 'massDelete']);
+        Route::post('/massRestore', [UnitController::class, 'massRestore']);
+    });
+
+    Route::group(['prefix' => 'good'], function () {
+        Route::post('/massDelete', [GoodController::class, 'massDelete']);
+        Route::post('/massRestore', [GoodController::class, 'massRestore']);
+    });
+
     Route::group(['prefix' => 'cpAgreement'], function () {
         Route::get('/getAgreementByCounterpartyId/{counterparty}', [CounterpartyAgreementController::class, 'getAgreementByCounterpartyId']);
+        Route::post('/massDelete', [CounterpartyAgreementController::class, 'massDelete']);
+        Route::post('/massRestore', [CounterpartyAgreementController::class, 'massRestore']);
     });
+
     Route::group(['prefix' => 'counterparty'], function () {
         Route::get('/restore/{counterparty}', [CounterpartyController::class, 'restore']);
         Route::post('/massDelete', [CounterpartyController::class, 'massDelete']);
