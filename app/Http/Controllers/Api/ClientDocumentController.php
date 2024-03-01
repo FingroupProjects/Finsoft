@@ -13,6 +13,7 @@ use App\Models\Document;
 use App\Models\Status;
 use App\Repositories\Contracts\DocumentRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
@@ -42,7 +43,7 @@ class ClientDocumentController extends Controller
         return $this->created($this->repository->store(DocumentDTO::fromRequest($request), Status::CLIENT_RETURN));
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new Document(), $request->validated());
     }

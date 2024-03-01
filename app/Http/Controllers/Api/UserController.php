@@ -10,6 +10,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Currency;
 use App\Models\User;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
@@ -40,7 +41,7 @@ class UserController extends Controller
         return $this->success(UserResource::make($repository->update($user, UserDTO::fromRequest($request))));
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new User(), $request->validated());
     }

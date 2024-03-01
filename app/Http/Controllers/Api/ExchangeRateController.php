@@ -16,6 +16,7 @@ use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\ExchangeRateInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class ExchangeRateController extends Controller
     }
 
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new ExchangeRate(), $request->validated());
     }

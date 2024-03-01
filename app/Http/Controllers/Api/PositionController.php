@@ -11,6 +11,7 @@ use App\Http\Resources\PositionResource;
 use App\Models\Currency;
 use App\Models\Position;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\PositionRepository;
 use App\Traits\ApiResponse;
@@ -49,9 +50,9 @@ class PositionController extends Controller
         return $this->deleted($position->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $delete->massDelete(new Position(), $request->validated());
+        return $this->success($delete->massDelete(new Position(), $request->validated()));
     }
 
     public function restore(Position $position)
@@ -59,8 +60,8 @@ class PositionController extends Controller
         return $this->success($position->restore());
     }
 
-    public function massRestore(IdRequest $request, MassDeleteInterface $restore)
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
     {
-        return $restore->massRestore(new Position(), $request->validated());
+        return $this->success($restore->massRestore(new Position(), $request->validated()));
     }
 }

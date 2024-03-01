@@ -12,6 +12,7 @@ use App\Http\Resources\GoodResource;
 use App\Models\Currency;
 use App\Models\Good;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\GoodRepository;
 use App\Traits\ApiResponse;
 
@@ -34,7 +35,7 @@ class GoodController extends Controller implements \App\Repositories\Contracts\S
         return $this->success(GoodResource::make($repository->update($good, GoodUpdateDTO::fromRequest($request))));
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new GoodController(), $request->validated());
     }

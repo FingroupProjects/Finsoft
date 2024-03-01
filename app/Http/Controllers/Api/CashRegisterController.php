@@ -14,6 +14,7 @@ use App\Models\Currency;
 use App\Repositories\CashRegisterRepository;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Traits\ApiResponse;
 
 class CashRegisterController extends Controller
@@ -49,7 +50,7 @@ class CashRegisterController extends Controller
         return $this->deleted($cashRegister->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new CashRegister(), $request->validated());
     }
