@@ -13,6 +13,7 @@ use App\Models\Currency;
 use App\Repositories\CategoryRepository;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
@@ -44,7 +45,7 @@ class CategoryController extends Controller
         return $this->success(CategoryResource::make($repository->update($category, CategoryDTO::fromRequest($request))));
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new Category(), $request->validated());
     }

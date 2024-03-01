@@ -10,6 +10,7 @@ use App\Http\Resources\UnitResource;
 use App\Models\Currency;
 use App\Models\Unit;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\UnitRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -38,8 +39,9 @@ class UnitController extends Controller
         return $this->deleted($unit->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
+
         return $delete->massDelete(new Unit(), $request->validated());
     }
 }

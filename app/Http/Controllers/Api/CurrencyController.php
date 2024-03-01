@@ -16,6 +16,7 @@ use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -78,7 +79,7 @@ class CurrencyController extends Controller
     }
 
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $this->success($delete->massDelete(new Currency(), $request->validated()));
     }

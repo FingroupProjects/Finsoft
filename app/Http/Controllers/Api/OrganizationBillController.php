@@ -20,6 +20,7 @@ use App\Models\Currency;
 use App\Models\ExchangeRate;
 use App\Models\OrganizationBill;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -57,7 +58,7 @@ class OrganizationBillController extends Controller
         return $this->deleted($organizationBill->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new OrganizationBill(), $request->validated());
     }

@@ -15,6 +15,7 @@ use App\Models\Currency;
 use App\Models\Storage;
 use App\Models\User;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Repositories\StorageRepository;
 use App\Repositories\UserRepository;
@@ -55,7 +56,7 @@ class StorageController extends Controller
         return $this->deleted($storage->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new Storage(), $request->validated());
     }
