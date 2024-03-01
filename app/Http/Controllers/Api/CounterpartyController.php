@@ -71,7 +71,12 @@ class CounterpartyController extends Controller
 
     public function massDelete(IdRequest $request, MassDeleteInterface $delete)
     {
-        return $delete->massDelete(new Counterparty(), $request->validated());
+        return $this->deleted($delete->massDelete(new Counterparty(), $request->validated()));
+    }
+
+    public function massRestore(IdRequest $request, MassDeleteInterface $restore)
+    {
+        return $restore->massRestore(new Counterparty(), $request->validated());
     }
 }
 

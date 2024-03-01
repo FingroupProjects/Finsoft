@@ -33,6 +33,8 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         return Organization::create([
             'name' => $DTO->name,
+            'address' => $DTO->address,
+            'description' => $DTO->description
         ]);
     }
 
@@ -40,6 +42,8 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $organization->update([
             'name' => $DTO->name,
+            'address' => $DTO->address,
+            'description' => $DTO->description
         ]);
 
         return $organization;

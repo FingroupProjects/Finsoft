@@ -53,4 +53,14 @@ class PositionController extends Controller
     {
         return $delete->massDelete(new Position(), $request->validated());
     }
+
+    public function restore(Position $position)
+    {
+        return $this->success($position->restore());
+    }
+
+    public function massRestore(IdRequest $request, MassDeleteInterface $restore)
+    {
+        return $restore->massRestore(new Position(), $request->validated());
+    }
 }

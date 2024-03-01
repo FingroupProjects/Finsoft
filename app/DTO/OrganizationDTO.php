@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class OrganizationDTO
 {
-    public function __construct(public string $name)
+    public function __construct(public string $name, public string $address, public string $description)
     {
     }
 
@@ -15,6 +15,8 @@ class OrganizationDTO
     {
         return new static(
             $request->get('name'),
+            $request->get('address'),
+            $request->get('description'),
         );
     }
 }
