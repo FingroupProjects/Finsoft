@@ -26,7 +26,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
 
         $query = CashRegister::search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['organization', 'currency']);
+        $query = $this->sort($filterParams, $query, ['organization', 'currency', 'responsiblePerson']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -37,6 +37,7 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id,
             'organization_id' => $DTO->organization_id,
+            'responsible_person_id' => $DTO->responsible_person_id
         ]);
     }
 
@@ -46,8 +47,9 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id,
             'organization_id' => $DTO->organization_id,
+            'responsible_person_id' => $DTO->responsible_person_id
         ]);
 
-        return $cashRegister->load(['currency', 'organization']);
+        return $cashRegister->load(['currency', 'organization', 'responsiblePerson']);
     }
 }

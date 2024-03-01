@@ -56,4 +56,9 @@ class CounterpartyAgreementController extends Controller
     {
         return $delete->massDelete(new CounterpartyAgreement(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new CounterpartyAgreement(), $request->validated()));
+    }
 }

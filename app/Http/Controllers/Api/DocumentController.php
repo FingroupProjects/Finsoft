@@ -49,4 +49,9 @@ class DocumentController extends Controller
     {
         return $delete->massDelete(new Document(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Document(), $request->validated()));
+    }
 }

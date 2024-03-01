@@ -31,7 +31,7 @@ class Organization extends Model implements \App\Repositories\Contracts\SoftDele
         return $this->belongsTo(Employee::class, 'director_id', 'id');
     }
 
-    public function chief_accountant(): BelongsTo
+    public function chiefAccountant(): BelongsTo
     {
         return $this->belongsTo(Employee::class, 'chief_accountant_id', 'id');
     }

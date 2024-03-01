@@ -39,4 +39,9 @@ class GoodController extends Controller implements \App\Repositories\Contracts\S
     {
         return $delete->massDelete(new GoodController(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Good(), $request->validated()));
+    }
 }

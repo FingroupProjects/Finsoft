@@ -49,4 +49,9 @@ class CategoryController extends Controller
     {
         return $delete->massDelete(new Category(), $request->validated());
     }
+
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new Category(), $request->validated()));
+    }
 }
