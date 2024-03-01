@@ -6,6 +6,7 @@ use App\DTO\LoginDTO;
 use App\Models\User;
 use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\SoftDeleteInterface;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-class MassDelete implements MassDeleteInterface
+class MassOperation implements MassOperationInterface
 {
     public function massDelete(SoftDeleteInterface $model, array $ids)
     {

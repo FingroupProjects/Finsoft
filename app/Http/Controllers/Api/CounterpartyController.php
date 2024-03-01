@@ -25,6 +25,7 @@ use App\Models\PriceType;
 use App\Repositories\Contracts\CounterpartyRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -69,14 +70,14 @@ class CounterpartyController extends Controller
         return $this->success($counterparty->restore());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $this->deleted($delete->massDelete(new Counterparty(), $request->validated()));
+        return $this->success($delete->massDelete(new Counterparty(), $request->validated()));
     }
 
-    public function massRestore(IdRequest $request, MassDeleteInterface $restore)
+    public function massRestore(IdRequest $request, MassOperationInterface $restore)
     {
-        return $restore->massRestore(new Counterparty(), $request->validated());
+        return $this->success($restore->massRestore(new Counterparty(), $request->validated()));
     }
 }
 

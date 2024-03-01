@@ -12,6 +12,7 @@ use App\Http\Resources\OrganizationResource;
 use App\Models\Currency;
 use App\Models\Organization;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\OrganizationRepository;
 use App\Traits\ApiResponse;
@@ -52,7 +53,7 @@ class OrganizationController extends Controller
         return $this->deleted($organization->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new Organization(), $request->validated());
     }

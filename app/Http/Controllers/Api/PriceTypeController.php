@@ -19,6 +19,7 @@ use App\Models\ExchangeRate;
 use App\Models\PriceType;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
 use App\Repositories\Contracts\MassDeleteInterface;
+use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -58,7 +59,7 @@ class PriceTypeController extends Controller
         return $this->deleted($priceType->delete());
     }
 
-    public function massDelete(IdRequest $request, MassDeleteInterface $delete)
+    public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
         return $delete->massDelete(new PriceType(), $request->validated());
     }
