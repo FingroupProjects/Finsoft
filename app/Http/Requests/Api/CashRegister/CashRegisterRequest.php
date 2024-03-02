@@ -27,6 +27,7 @@ class CashRegisterRequest extends FormRequest
             'name' => ['required', 'string'],
             'currency_id' => ['required', 'exists:currencies,id'],
             'organization_id' => ['required', 'exists:organizations,id'],
+            'responsible_person_id' => ['required', 'exists:employees,id'],
         ];
     }
 }
