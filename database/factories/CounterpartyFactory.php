@@ -15,7 +15,7 @@ class CounterpartyFactory extends Factory
             'name' => fake()->name(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'email' => fake()->safeEmail()
+            'email' => rand(1, 1000) . fake()->safeEmail()
         ];
     }
 }

@@ -132,6 +132,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'currency'], function () {
         Route::get('/restore/{currency}', [CurrencyController::class, 'restore']);
         Route::post('/massDelete', [CurrencyController::class, 'massDelete']);
+        Route::post('/massRestore', [CurrencyController::class, 'massRestore']);
     });
 
     Route::group(['prefix' => 'position'], function () {
