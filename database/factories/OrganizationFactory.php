@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Employee;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,11 @@ class OrganizationFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'address' => fake()->text(),
+            'description' => fake()->text(),
+            'INN' => time(),
+            'director_id' => Employee::factory(),
+            'chief_accountant_id' => Employee::factory(),
         ];
     }
 

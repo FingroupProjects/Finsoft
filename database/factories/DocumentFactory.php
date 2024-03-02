@@ -38,7 +38,7 @@ class DocumentFactory extends Factory
             'storage_id' => Storage::factory(),
             'author_id' => User::factory(),
             'status_id' => $this->faker->randomElement([Status::CLIENT_RETURN, Status::CLIENT_PURCHASE, Status::PROVIDER_RETURN, Status::PROVIDER_PURCHASE]),
-            'doc_number' => $this->getLastDocumentNumber()
+            'doc_number' => time() + rand(1, 1000)
         ];
     }
 
@@ -54,6 +54,5 @@ class DocumentFactory extends Factory
 
         return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
     }
-
 
 }

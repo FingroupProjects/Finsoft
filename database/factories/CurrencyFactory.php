@@ -12,7 +12,7 @@ class CurrencyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'  => fake()->name(),
+            'name'  => fake()->name,
             'symbol_code'  => fake()->numberBetween(1, 10),
             'digital_code' => fake()->numberBetween(100, 999)
         ];

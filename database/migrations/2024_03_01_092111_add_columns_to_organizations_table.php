@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('organizations', function (Blueprint $table) {
             $table->unsignedBigInteger('INN')->after('name');
-            $table->foreignId('director_id')->after('INN')->constrained('employees');
-            $table->foreignId('chief_accountant_id')->after('director_id')->constrained('employees',);
+            $table->foreignId('director_id')->after('INN')->constrained('employees', 'id');
+            $table->foreignId('chief_accountant_id')->after('director_id')->constrained('employees', 'id');
             $table->text('address')->after('chief_accountant_id');
             $table->text('description')->nullable()->after('address');
         });
