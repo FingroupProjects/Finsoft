@@ -15,7 +15,7 @@ class GoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->name,
             'vendor_code' => fake()->numberBetween(1000, 9999),
             'description' => fake()->text(),
             'category_id' => Category::factory(),

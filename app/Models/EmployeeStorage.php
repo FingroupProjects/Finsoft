@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class EmployeeStorage extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'storage_id',
         'employee_id',
