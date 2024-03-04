@@ -2,19 +2,16 @@
 
 namespace App\Repositories;
 
-use App\DTO\CashRegisterDTO;
 use App\DTO\StorageDTO;
-use App\Models\CashRegister;
+use App\DTO\StorageUpdateDTO;
 use App\Models\EmployeeStorage;
 use App\Models\Storage;
-use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class StorageRepository implements StorageRepositoryInterface
@@ -53,26 +50,12 @@ class StorageRepository implements StorageRepositoryInterface
         }
     }
 
-    public function update(Storage $storage, StorageDTO $DTO): Storage
+    public function update(Storage $storage, StorageUpdateDTO $DTO): Storage
     {
-//        try {
-//            DB::transaction(function () use ($storage, $DTO) {
-//                $storage->update([
-//                    'name' => $DTO->name,
-//                    'employee_id' => $DTO->employee_id,
-//                ]);
-//
-//                EmployeeStorage::create([
-//                    'storage_id' => $storage->id,
-//                    'employee_id' => $DTO->employee_id,
-//                    'organization_id' => $DTO->organization_id,
-//                    'from' => $DTO->from,
-//                    'to' => $DTO->to
-//                ]);
-//            });
-//        } catch (Exception $e) {
-//            dd($e->getMessage());
-//        }
+        $storage->update([
+            'name' => $DTO->name,
+            'organization_id' => $DTO->organization_id
+        ]);
 
         return $storage;
     }
@@ -91,10 +74,14 @@ class StorageRepository implements StorageRepositoryInterface
         }, $storage_data);
     }
 
-    public function getEmployeesByStorageId(Storage $storage)
+    public function getEmployeesByStorageId(Storage $storage, array $data)
     {
-        return EmployeeStorage::where('storage_id', $storage->id)
-            ->with('employee')
-            ->get();
+        $filterParams = $this->processSearchData($data);
+
+        $query = EmployeeStorage::search($filterParams['search']);
+
+        $query = $this->sort($filterParams, $query, ['employee']);
+
+        return $query->paginate($filterParams['itemsPerPage']);
     }
 }
