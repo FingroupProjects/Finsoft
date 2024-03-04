@@ -83,18 +83,6 @@ class StorageRepository implements StorageRepositoryInterface
         ]);
     }
 
-    public function getEmployeesByStorageId(Storage $storage, array $data)
-    {
-        $filterParams = $this->processSearchData($data);
-
-        $query = EmployeeStorage::search($filterParams['search'])
-            ->where('storage_id', $storage->id);
-
-        $query = $this->sort($filterParams, $query, ['employee']);
-
-        return $query->paginate($filterParams['itemsPerPage']);
-    }
-
     public function storageData(array $storage_data, Storage $storage): array
     {
         return array_map(function ($item) use ($storage) {

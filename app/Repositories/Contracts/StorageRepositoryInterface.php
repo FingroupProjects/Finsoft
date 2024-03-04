@@ -18,6 +18,4 @@ interface StorageRepositoryInterface extends IndexInterface
     public function updateEmployee(EmployeeStorage $employee, StorageEmployeeUpdateDTO $DTO) :EmployeeStorage;
 
     public function addEmployee(Storage $storage, StorageEmployeeDTO $DTO);
-
-    public function getEmployeesByStorageId(Storage $storage, array $data);
 }

@@ -22,6 +22,7 @@ use App\Repositories\Contracts\OrganizationBillRepositoryInterface;
 use App\Repositories\Contracts\OrganizationRepositoryInterface;
 use App\Repositories\Contracts\PositionRepositoryInterface;
 use App\Repositories\Contracts\PriceTypeRepository;
+use App\Repositories\Contracts\StorageEmployeeRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
 use App\Repositories\Contracts\UnitRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -37,6 +38,7 @@ use App\Repositories\MassOperation;
 use App\Repositories\OrganizationBillRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\PositionRepository;
+use App\Repositories\StorageEmployeeRepository;
 use App\Repositories\StorageRepository;
 use App\Repositories\UnitRepository;
 use App\Repositories\UserRepository;
@@ -72,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ExchangeRateInterface::class, ExchangeRateRepository::class);
         $this->app->singleton(MassOperationInterface::class, MassOperation::class);
         $this->app->singleton(GroupRepositoryInterface::class, GroupRepository::class);
+        $this->app->singleton(StorageEmployeeRepositoryInterface::class, StorageEmployeeRepository::class);
 
 
     }

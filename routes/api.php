@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PriceTypeController;
 
 use App\Http\Controllers\Api\StorageController;
+use App\Http\Controllers\Api\StorageEmployeeController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -47,8 +48,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/{currency}', [ExchangeRateController::class, 'index']);
         Route::patch('/{exchangeRate}', [CurrencyController::class, 'updateExchange']);
         Route::delete('/{exchangeRate}', [CurrencyController::class, 'removeExchangeRate']);
-        Route::post('massDelete', [CurrencyController::class, 'massDelete']);
-        Route::post('massRestore', [CurrencyController::class, 'massRestore']);
+        Route::post('massDelete', [CurrencyController::class, 'massDeleteCurrencyRate']);
+        Route::post('massRestore', [CurrencyController::class, 'massRestoreCurrencyRate']);
     });
 
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
@@ -105,7 +106,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/massDeleteEmployee', [StorageController::class, 'massDeleteEmployee']);
         Route::post('/massRestoreEmployee', [StorageController::class, 'massRestoreEmployee']);
         Route::post('/add-employee/{storage}', [StorageController::class, 'addEmployee']);
-        Route::get('/get-employees-by-storage_id/{storage}', [StorageController::class, 'getEmployeesByStorageId']);
+        Route::get('/get-employees-by-storage_id/{storage}', [StorageEmployeeController::class, 'getEmployeesByStorageId']);
         Route::get('/show-employee/{employee}', [StorageController::class, 'showEmployee']);
         Route::patch('/update-employee/{employee}', [StorageController::class, 'updateEmployee']);
     });
