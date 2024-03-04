@@ -102,8 +102,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'storage'], function () {
         Route::post('/massDelete', [StorageController::class, 'massDelete']);
         Route::post('/massRestore', [StorageController::class, 'massRestore']);
-        Route::post('add-employee/{storage}', [StorageController::class, 'addEmployee']);
-        Route::get('get-employees-by-storage_id/{storage}', [StorageController::class, 'getEmployeesByStorageId']);
+        Route::post('/add-employee/{storage}', [StorageController::class, 'addEmployee']);
+        Route::get('/get-employees-by-storage_id/{storage}', [StorageController::class, 'getEmployeesByStorageId']);
+        Route::patch('/update-employee/{employee}', [StorageController::class, 'updateEmployee']);
     });
 
     Route::group(['prefix' => 'category'], function () {

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\DTO\StorageDTO;
 use App\DTO\StorageEmployeeDTO;
+use App\DTO\StorageEmployeeUpdateDTO;
 use App\DTO\StorageUpdateDTO;
 use App\Models\EmployeeStorage;
 use App\Models\Storage;
@@ -59,6 +60,16 @@ class StorageRepository implements StorageRepositoryInterface
         ]);
 
         return $storage;
+    }
+
+    public function updateEmployee(EmployeeStorage $employee, StorageEmployeeUpdateDTO $DTO): EmployeeStorage
+    {
+        $employee->update([
+            'from' => $DTO->from,
+            'to' => $DTO->to
+        ]);
+
+        return $employee;
     }
 
     public function addEmployee(Storage $storage, StorageEmployeeDTO $DTO)

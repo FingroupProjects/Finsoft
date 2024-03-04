@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\StorageDTO;
 use App\DTO\StorageEmployeeDTO;
+use App\DTO\StorageEmployeeUpdateDTO;
 use App\DTO\StorageUpdateDTO;
 use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Storage\StorageEmployeeRequest;
+use App\Http\Requests\Api\Storage\StorageEmployeeUpdateRequest;
 use App\Http\Requests\Api\Storage\StorageRequest;
 use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
@@ -16,6 +18,7 @@ use App\Http\Resources\EmployeeStorageResource;
 use App\Http\Resources\StorageResource;
 use App\Http\Resources\UserResource;
 use App\Models\Currency;
+use App\Models\EmployeeStorage;
 use App\Models\Storage;
 use App\Models\User;
 use App\Repositories\Contracts\MassDeleteInterface;
@@ -55,9 +58,9 @@ class StorageController extends Controller
         return $this->success(StorageResource::make($this->repository->update($storage, StorageUpdateDTO::fromRequest($request))));
     }
 
-    public function updateEmployee()
+    public function updateEmployee(EmployeeStorage $employee, StorageEmployeeUpdateRequest $request)
     {
-        return $this;
+        return $this->success($this->repository->updateEmployee($employee, StorageEmployeeUpdateDTO::fromRequest($request)));
     }
 
     public function addEmployee(Storage $storage, StorageEmployeeRequest $request)
