@@ -82,12 +82,12 @@ class CurrencyController extends Controller
 
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $this->success($delete->massDelete(new Currency(), $request->validated()));
+        return $this->success($delete->massDelete(new ExchangeRate(), $request->validated()));
     }
 
     public function massRestore(IdRequest $request, MassOperationInterface $restore)
     {
-        return $this->success($restore->massRestore(new Currency(), $request->validated()));
+        return $this->success($restore->massRestore(new ExchangeRate(), $request->validated()));
     }
 
 

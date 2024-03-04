@@ -35,4 +35,5 @@ class Currency extends Model implements SoftDeleteInterface
             'digital_code' => $this->digital_code,
         ];
     }
+
 }
