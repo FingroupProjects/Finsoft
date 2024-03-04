@@ -20,7 +20,7 @@ class GoodFactory extends Factory
             'description' => fake()->text(),
             'category_id' => Category::factory(),
             'unit_id' => Unit::factory(),
-            'barcode' => fake()->numberBetween(1292992,939393939),
+            'barcode' => time() . fake()->numberBetween(1292992,939393939),
             'storage_id' => Storage::factory()
         ];
     }

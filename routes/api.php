@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 
 use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\ProviderDocumentController;
 
 use App\Http\Controllers\Api\EmployeeController;
@@ -64,6 +65,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('unit', UnitController::class);
     Route::apiResource('good', GoodController::class);
+    Route::apiResource('group', GroupController::class);
 
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 

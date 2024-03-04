@@ -17,7 +17,7 @@ class CounterpartyAgreementFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'contract_number' => $this->faker->randomNumber(),
+            'contract_number' => $this->faker->randomNumber() . time(),
             'date' => $this->faker->date(),
             'organization_id' => Organization::factory(),
             'counterparty_id' => Counterparty::factory(),

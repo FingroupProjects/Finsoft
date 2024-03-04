@@ -23,7 +23,6 @@ class EmployeeStorageFactory extends Factory
         return [
             'storage_id' => Storage::factory(),
             'employee_id' => Employee::factory(),
-            'organization_id' => Organization::factory(),
             'from' => Carbon::now(),
             'to' => Carbon::now()
         ];
