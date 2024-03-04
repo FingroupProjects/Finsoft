@@ -33,6 +33,7 @@ class PriceTypeRequest extends FormRequest
                 'required',
                 'exists:currencies,id',
             ],
+            'description' => ['']
         ];
     }
 }

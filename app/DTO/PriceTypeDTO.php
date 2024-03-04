@@ -8,7 +8,7 @@ use Illuminate\Auth\Events\Login;
 
 class PriceTypeDTO
 {
-    public function __construct(public string $name, public int $currency_id)
+    public function __construct(public string $name, public int $currency_id, public ?string $description)
     {
     }
 
@@ -16,7 +16,8 @@ class PriceTypeDTO
     {
         return new static(
             $request->get('name'),
-            $request->get('currency_id')
+            $request->get('currency_id'),
+            $request->get('description')
         );
     }
 }
