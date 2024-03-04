@@ -52,7 +52,7 @@ class StorageController extends Controller
 
     public function update(Storage $storage, StorageRequest $request)
     {
-        return $this->success(UserResource::make($this->repository->update($storage, StorageUpdateDTO::fromRequest($request))));
+        return $this->success(StorageResource::make($this->repository->update($storage, StorageUpdateDTO::fromRequest($request))));
     }
 
     public function addEmployee(Storage $storage, StorageEmployeeRequest $request)
