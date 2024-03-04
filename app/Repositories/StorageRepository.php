@@ -63,7 +63,12 @@ class StorageRepository implements StorageRepositoryInterface
 
     public function addEmployee(Storage $storage, StorageEmployeeDTO $DTO)
     {
-        EmployeeStorage::insert($this->storageData($DTO->storage_data, $storage));
+        return EmployeeStorage::create([
+            'storage_id' => $storage->id,
+            'employee_id' => $DTO->employee_id,
+            'from' => $DTO->from,
+            'to' => $DTO->to
+        ]);
     }
 
     public function getEmployeesByStorageId(Storage $storage, array $data)
