@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/massRestore', [StorageController::class, 'massRestore']);
         Route::post('/add-employee/{storage}', [StorageController::class, 'addEmployee']);
         Route::get('/get-employees-by-storage_id/{storage}', [StorageController::class, 'getEmployeesByStorageId']);
+        Route::get('/showEmployee/{employee}', [StorageController::class, 'showEmployee']);
         Route::patch('/update-employee/{employee}', [StorageController::class, 'updateEmployee']);
     });
 

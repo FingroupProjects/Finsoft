@@ -63,6 +63,11 @@ class StorageController extends Controller
         return $this->success($this->repository->updateEmployee($employee, StorageEmployeeUpdateDTO::fromRequest($request)));
     }
 
+    public function showEmployee(EmployeeStorage $employee)
+    {
+        return $this->success(EmployeeStorageResource::make($employee->load('employee')));
+    }
+
     public function addEmployee(Storage $storage, StorageEmployeeRequest $request)
     {
         return $this->created($this->repository->addEmployee($storage, StorageEmployeeDTO::fromRequest($request)));
