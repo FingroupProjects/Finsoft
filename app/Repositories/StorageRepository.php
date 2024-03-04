@@ -78,7 +78,8 @@ class StorageRepository implements StorageRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = EmployeeStorage::search($filterParams['search']);
+        $query = EmployeeStorage::search($filterParams['search'])
+            ->where('storage_id', $storage->id);
 
         $query = $this->sort($filterParams, $query, ['employee']);
 
