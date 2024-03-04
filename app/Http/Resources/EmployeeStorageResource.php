@@ -19,8 +19,8 @@ class EmployeeStorageResource extends JsonResource
         return [
             'from' => Carbon::parse($this->from),
             'to' => Carbon::parse($this->to),
-            'employee' => EmployeeResource::make($this->employee),
-            'organization' => OrganizationResource::make($this->organization)
+            'employee' => EmployeeResource::make($this->whenLoaded('employee')),
+            'organization' => OrganizationResource::make($this->whenLoaded('organization'))
         ];
     }
 }

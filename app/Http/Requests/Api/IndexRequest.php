@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use ErrorException;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -14,6 +15,7 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         $model = $this->getModel();
+
         $fillableFields = $this->getFillableWithRelationships($model);
 
         return [
@@ -39,7 +41,8 @@ class IndexRequest extends FormRequest
 
         foreach ($reflector->getMethods() as $reflectionMethod) {
             $returnType = $reflectionMethod->getReturnType();
-            if ($returnType && class_basename($returnType->getName()) == 'BelongsTo') {
+
+            if ($returnType && class_basename($returnType->getName()) == 'BelongsTo' || class_basename($returnType?->getName()) == 'hasOne') {
                 $relatedModel = $model->{$reflectionMethod->getName()}()->getRelated();
                 $relatedFillable = $relatedModel->getFillable();
 
