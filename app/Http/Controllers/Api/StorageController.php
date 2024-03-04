@@ -92,4 +92,14 @@ class StorageController extends Controller
     {
         return $this->success($restore->massRestore(new Storage(), $request->validated()));
     }
+
+    public function massDeleteEmployee(IdRequest $request, MassOperationInterface $delete)
+    {
+        return $this->deleted($delete->massDelete(new EmployeeStorage(), $request->validated()));
+    }
+
+    public function massRestoreEmployee(IdRequest $request, MassOperationInterface $restore)
+    {
+        return $this->success($restore->massRestore(new EmployeeStorage(), $request->validated()));
+    }
 }

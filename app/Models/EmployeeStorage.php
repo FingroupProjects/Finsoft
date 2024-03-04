@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class EmployeeStorage extends Model
+class EmployeeStorage extends Model implements \App\Repositories\Contracts\SoftDeleteInterface
 {
     use HasFactory, SoftDeletes, Searchable;
 
@@ -30,6 +30,11 @@ class EmployeeStorage extends Model
         return [
             'name' => $this->name
         ];
+    }
+
+    public static function bootSoftDeletes()
+    {
+
     }
 
 }
