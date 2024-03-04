@@ -13,9 +13,9 @@ class CounterpartyFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->phoneNumber() . time(),
             'address' => fake()->address(),
-            'email' => rand(1, 1000) . fake()->safeEmail()
+            'email' => rand(1, 100000) . fake()->safeEmail()
         ];
     }
 }

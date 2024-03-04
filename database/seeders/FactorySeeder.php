@@ -29,23 +29,23 @@ class FactorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(20000)->create();
-        Employee::factory(20000)->create();
-        CounterpartyAgreement::factory(20000)->create();
-        Counterparty::factory(20000)->create();
-        Currency::factory(20000)->create();
-        Document::factory(20000)->create();
-        Good::factory(20000)->create();
-        Organization::factory(20000)->create();
-        Position::factory(20000)->create();
-        PriceType::factory(20000)->create();
-        Storage::factory(20000)->create();
-        Unit::factory(20000)->create();
-        User::factory(20000)->create();
-        CashRegister::factory(20000)->create();
-        EmployeeStorage::factory(20000)->create();
-        ExchangeRate::factory(20000)->create();
-        OrganizationBill::factory(20000)->create();
+        Category::factory(500)->create();
+        Employee::factory(500)->create();
+        CounterpartyAgreement::factory(500)->create();
+        Counterparty::factory(500)->create();
+        Currency::factory(500)->create();
+        Document::factory(500)->create();
+        Good::factory(500)->create();
+        Organization::factory(500)->create();
+        Position::factory(500)->create();
+        PriceType::factory(500)->create();
+        Storage::factory(500)->create();
+        Unit::factory(500)->create();
+        User::factory(500)->create();
+        CashRegister::factory(500)->create();
+        EmployeeStorage::factory(500)->create();
+        ExchangeRate::factory(500)->create();
+        OrganizationBill::factory(500)->create();
 
 
 
