@@ -29,8 +29,7 @@ class StorageRepository implements StorageRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['employeeStorage']);
-
+        $query = $this->sort($filterParams, $query, ['organization']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -90,5 +89,12 @@ class StorageRepository implements StorageRepositoryInterface
                 'updated_at' => Carbon::now()
             ];
         }, $storage_data);
+    }
+
+    public function getEmployeesByStorageId(Storage $storage)
+    {
+        return EmployeeStorage::where('storage_id', $storage->id)
+            ->with('employee')
+            ->get();
     }
 }

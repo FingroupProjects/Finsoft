@@ -18,7 +18,7 @@ class StorageResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'data' => EmployeeStorageResource::make($this->whenLoaded('employeeStorage')),
+            'organization' => OrganizationResource::make($this->whenLoaded('organization')),
             'deleted_at' => $this->deleted_at
 
         ];
