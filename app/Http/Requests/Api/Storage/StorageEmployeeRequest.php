@@ -23,10 +23,9 @@ class StorageEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'storage_data' => ['array', 'nullable'],
-            'storage_data.*.employee_id' => ['nullable', Rule::exists('employees', 'id')],
-            'storage_data.*.from' => ['nullable', 'date'],
-            'storage_data.*.to' => ['nullable', 'date']
+            'employee_id' => ['nullable', Rule::exists('employees', 'id')],
+            'from' => ['nullable', 'date'],
+            'to' => ['nullable', 'date']
         ];
     }
 }
