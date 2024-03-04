@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\StorageDTO;
+use App\DTO\StorageEmployeeDTO;
 use App\DTO\StorageUpdateDTO;
 use App\Models\EmployeeStorage;
 use App\Models\Storage;
@@ -60,18 +61,9 @@ class StorageRepository implements StorageRepositoryInterface
         return $storage;
     }
 
-    public function storageData(array $storage_data, Storage $storage): array
+    public function addEmployee(Storage $storage, StorageEmployeeDTO $DTO)
     {
-        return array_map(function ($item) use ($storage) {
-            return [
-                'storage_id' => $storage->id,
-                'employee_id' => $item['employee_id'],
-                'from' => $item['from'],
-                'to' => $item['to'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ];
-        }, $storage_data);
+        EmployeeStorage::insert($this->storageData($DTO->storage_data, $storage));
     }
 
     public function getEmployeesByStorageId(Storage $storage, array $data)
@@ -84,5 +76,19 @@ class StorageRepository implements StorageRepositoryInterface
         $query = $this->sort($filterParams, $query, ['employee']);
 
         return $query->paginate($filterParams['itemsPerPage']);
+    }
+
+    public function storageData(array $storage_data, Storage $storage): array
+    {
+        return array_map(function ($item) use ($storage) {
+            return [
+                'storage_id' => $storage->id,
+                'employee_id' => $item['employee_id'],
+                'from' => $item['from'],
+                'to' => $item['to'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+        }, $storage_data);
     }
 }

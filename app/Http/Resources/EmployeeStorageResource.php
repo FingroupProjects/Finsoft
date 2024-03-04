@@ -20,6 +20,7 @@ class EmployeeStorageResource extends JsonResource
             'from' => Carbon::parse($this->from),
             'to' => Carbon::parse($this->to),
             'employee' => EmployeeResource::make($this->whenLoaded('employee')),
+            'deleted_at' => $this->deleted_at
         ];
     }
 }

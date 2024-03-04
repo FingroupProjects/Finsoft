@@ -102,7 +102,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'storage'], function () {
         Route::post('/massDelete', [StorageController::class, 'massDelete']);
         Route::post('/massRestore', [StorageController::class, 'massRestore']);
-
+        Route::post('add-employee/{storage}', [StorageController::class, 'addEmployee']);
         Route::get('get-employees-by-storage_id/{storage}', [StorageController::class, 'getEmployeesByStorageId']);
     });
 
