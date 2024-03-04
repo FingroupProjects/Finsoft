@@ -52,9 +52,9 @@ class StorageController extends Controller
         return $this->success(UserResource::make($this->repository->update($storage, StorageDTO::fromRequest($request))));
     }
 
-    public function getEmployeesByStorageId(Storage $storage)
+    public function getEmployeesByStorageId(Storage $storage, IndexRequest $indexRequest)
     {
-        return $this->success(EmployeeStorageResource::collection($this->repository->getEmployeesByStorageId($storage)));
+        return $this->paginate(EmployeeStorageResource::collection($this->repository->getEmployeesByStorageId($storage, $indexRequest->validated())));
     }
 
     public function destroy(Storage $storage)

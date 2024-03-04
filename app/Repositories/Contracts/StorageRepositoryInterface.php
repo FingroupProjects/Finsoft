@@ -2,18 +2,15 @@
 
 namespace App\Repositories\Contracts;
 
-use App\DTO\CashRegisterDTO;
 use App\DTO\StorageDTO;
-use App\Models\CashRegister;
+use App\DTO\StorageUpdateDTO;
 use App\Models\Storage;
-use Illuminate\Support\Collection;
 
 interface StorageRepositoryInterface extends IndexInterface
 {
-
     public function store(StorageDTO $DTO);
 
-    public function update(Storage $cashRegister, StorageDTO $DTO) :Storage;
+    public function update(Storage $cashRegister, StorageUpdateDTO $DTO) :Storage;
 
-    public function getEmployeesByStorageId(Storage $storage);
+    public function getEmployeesByStorageId(Storage $storage, array $data);
 }

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class EmployeeStorage extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Searchable;
 
     protected $fillable = [
         'storage_id',
@@ -22,6 +23,13 @@ class EmployeeStorage extends Model
     public function employee(): belongsTo
     {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public function toSearchableArray() :array
+    {
+        return [
+            'name' => $this->name
+        ];
     }
 
 }
