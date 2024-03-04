@@ -6,7 +6,6 @@ use App\DTO\StorageDTO;
 use App\DTO\StorageEmployeeDTO;
 use App\DTO\StorageEmployeeUpdateDTO;
 use App\DTO\StorageUpdateDTO;
-use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Storage\StorageEmployeeRequest;
@@ -16,19 +15,14 @@ use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\EmployeeStorageResource;
 use App\Http\Resources\StorageResource;
-use App\Http\Resources\UserResource;
-use App\Models\Currency;
 use App\Models\EmployeeStorage;
 use App\Models\Storage;
-use App\Models\User;
 use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\MassOperationInterface;
+use App\Repositories\Contracts\StorageEmployeeRepositoryInterface;
 use App\Repositories\Contracts\StorageRepositoryInterface;
-use App\Repositories\StorageRepository;
-use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StorageController extends Controller
 {
@@ -73,9 +67,9 @@ class StorageController extends Controller
         return $this->created($this->repository->addEmployee($storage, StorageEmployeeDTO::fromRequest($request)));
     }
 
-    public function getEmployeesByStorageId(Storage $storage, IndexRequest $indexRequest)
+    public function getEmployeesByStorageId(Storage $storage, IndexRequest $indexRequest, StorageEmployeeRepositoryInterface $repository)
     {
-        return $this->paginate(EmployeeStorageResource::collection($this->repository->getEmployeesByStorageId($storage, $indexRequest->validated())));
+        return $this->paginate(EmployeeStorageResource::collection($repository->getEmployeesByStorageId($storage, $indexRequest->validated())));
     }
 
     public function destroy(Storage $storage)
