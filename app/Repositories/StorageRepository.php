@@ -65,6 +65,7 @@ class StorageRepository implements StorageRepositoryInterface
     public function updateEmployee(EmployeeStorage $employee, StorageEmployeeUpdateDTO $DTO): EmployeeStorage
     {
         $employee->update([
+            'employee_id' => $DTO->employee_id,
             'from' => $DTO->from,
             'to' => $DTO->to
         ]);

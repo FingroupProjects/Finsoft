@@ -23,6 +23,7 @@ class StorageEmployeeUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'employee_id' => ['required', Rule::exists('employees', 'id')],
             'from' => ['required', 'date'],
             'to' => ['required', 'date']
         ];
