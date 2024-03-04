@@ -29,7 +29,7 @@ class StorageRepository implements StorageRepositoryInterface
 
         $query = $this->model::search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query);
+        $query = $this->sort($filterParams, $query, ['employeeStorage']);
 
 
         return $query->paginate($filterParams['itemsPerPage']);

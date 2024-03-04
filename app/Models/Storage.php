@@ -13,11 +13,16 @@ class Storage extends Model implements \App\Repositories\Contracts\SoftDeleteInt
 {
     use Searchable, SoftDeletes, HasFactory;
 
-    protected $guarded = false;
+    protected $fillable = ['name', 'organization_id', 'group_id'];
 
     public function employeeStorage() :hasOne
     {
         return $this->hasOne(EmployeeStorage::class);
+    }
+
+    public function organization(): belongsTo
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function toSearchableArray() :array

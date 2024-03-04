@@ -15,7 +15,6 @@ class EmployeeStorage extends Model
     protected $fillable = [
         'storage_id',
         'employee_id',
-        'organization_id',
         'from',
         'to'
     ];
@@ -25,8 +24,4 @@ class EmployeeStorage extends Model
         return $this->belongsTo(Employee::class, 'employee_id');
     }
 
-    public function organization(): belongsTo
-    {
-        return $this->belongsTo(Organization::class, 'organization_id');
-    }
 }
