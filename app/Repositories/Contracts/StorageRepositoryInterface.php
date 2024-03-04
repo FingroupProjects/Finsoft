@@ -14,4 +14,6 @@ interface StorageRepositoryInterface extends IndexInterface
     public function store(StorageDTO $DTO);
 
     public function update(Storage $cashRegister, StorageDTO $DTO) :Storage;
+
+    public function getEmployeesByStorageId(Storage $storage);
 }

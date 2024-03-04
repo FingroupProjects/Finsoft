@@ -9,6 +9,7 @@ use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\Storage\StorageRequest;
 use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
+use App\Http\Resources\EmployeeStorageResource;
 use App\Http\Resources\StorageResource;
 use App\Http\Resources\UserResource;
 use App\Models\Currency;
@@ -49,6 +50,11 @@ class StorageController extends Controller
     public function update(Storage $storage, StorageRequest $request)
     {
         return $this->success(UserResource::make($this->repository->update($storage, StorageDTO::fromRequest($request))));
+    }
+
+    public function getEmployeesByStorageId(Storage $storage)
+    {
+        return $this->success(EmployeeStorageResource::collection($this->repository->getEmployeesByStorageId($storage)));
     }
 
     public function destroy(Storage $storage)
