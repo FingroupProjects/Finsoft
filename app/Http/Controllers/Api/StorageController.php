@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTO\StorageDTO;
+use App\DTO\StorageEmployeeDTO;
+use App\DTO\StorageUpdateDTO;
 use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
+use App\Http\Requests\Api\Storage\StorageEmployeeRequest;
 use App\Http\Requests\Api\Storage\StorageRequest;
 use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
@@ -49,7 +52,12 @@ class StorageController extends Controller
 
     public function update(Storage $storage, StorageRequest $request)
     {
-        return $this->success(UserResource::make($this->repository->update($storage, StorageDTO::fromRequest($request))));
+        return $this->success(UserResource::make($this->repository->update($storage, StorageUpdateDTO::fromRequest($request))));
+    }
+
+    public function addEmployee(Storage $storage, StorageEmployeeRequest $request)
+    {
+        return $this->created($this->repository->addEmployee($storage, StorageEmployeeDTO::fromRequest($request)));
     }
 
     public function getEmployeesByStorageId(Storage $storage, IndexRequest $indexRequest)
