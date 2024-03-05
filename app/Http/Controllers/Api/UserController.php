@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\User\ChangePasswordRequest;
 use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
@@ -24,9 +25,14 @@ class UserController extends Controller
 {
     use ApiResponse;
 
-    public function index(UserRepositoryInterface $repository)
+
+    public function __construct(public UserRepositoryInterface $repository)
     {
-        return $this->success(UserResource::collection($repository->index()));
+    }
+
+    public function index(IndexRequest $request)
+    {
+        return $this->paginate(UserResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(User $user): JsonResponse
