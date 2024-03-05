@@ -17,7 +17,7 @@ class PriceType extends Model implements \App\Repositories\Contracts\SoftDeleteI
 
     }
 
-    protected $fillable = ['name', 'currency_id'];
+    protected $fillable = ['name', 'currency_id', 'description'];
 
     public function currency(): BelongsTo
     {
