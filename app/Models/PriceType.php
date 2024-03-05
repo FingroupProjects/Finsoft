@@ -28,6 +28,7 @@ class PriceType extends Model implements \App\Repositories\Contracts\SoftDeleteI
     {
         return [
             'name' => $this->name,
+            'description' => $this->description
         ];
     }
 }
