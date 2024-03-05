@@ -38,6 +38,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         $this->model::create([
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id,
+            'description' => $DTO->description
         ]);
     }
 
@@ -46,6 +47,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         $priceType->update([
             'name' => $DTO->name,
             'currency_id' => $DTO->currency_id,
+            'description' => $DTO->description
         ]);
 
         return $priceType->load('currency');
