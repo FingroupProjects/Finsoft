@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\User\ChangePasswordRequest;
 use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\UserResource;
@@ -16,6 +17,8 @@ use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -26,7 +29,7 @@ class UserController extends Controller
         return $this->success(UserResource::collection($repository->index()));
     }
 
-    public function show(User $user) :JsonResponse
+    public function show(User $user): JsonResponse
     {
         return $this->success(UserResource::make($user));
     }
@@ -39,6 +42,23 @@ class UserController extends Controller
     public function update(User $user, UserRequest $request, UserRepositoryInterface $repository)
     {
         return $this->success(UserResource::make($repository->update($user, UserDTO::fromRequest($request))));
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $data = $request->validated();
+
+        $user = User::where('id', Auth::id())->first();
+
+        if (!Hash::check($data['oldPassword'], $user->password)) {
+            return $this->error('Старый пароль неверен!');
+        }
+
+        $user->update([
+            'password' => Hash::make($data['password'])
+        ]);
+
+        return $this->success('Пароль успешно изменен!');
     }
 
     public function massDelete(IdRequest $request, MassOperationInterface $delete)

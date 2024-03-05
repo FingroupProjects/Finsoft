@@ -14,7 +14,7 @@ class OrganizationBill extends Model implements \App\Repositories\Contracts\Soft
     use SoftDeletes, Searchable, HasFactory;
 
 
-    protected $fillable = ['name', 'currency_id', 'bill_number', 'organization_id'];
+    protected $fillable = ['name', 'currency_id', 'bill_number', 'organization_id', 'date', 'comment'];
 
     public function currency(): BelongsTo
     {
