@@ -5,21 +5,36 @@ namespace App\Repositories;
 use App\DTO\UserDTO;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\Sort;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function index() :Collection
+    use Sort, FilterTrait;
+
+    public $model = User::class;
+
+    public function index(array $data):LengthAwarePaginator
     {
-        return User::whereHas('roles', function ($query) {
-            $query->where('name', 'user');
-        })->with('organization')->get();
+        $filteredParams = $this->processSearchData($data);
+
+        $query = $this->model::search($filteredParams['search'])
+            ->query(function ($query) {
+                return $query->whereHas('roles', function ($query) {
+                    $query->where('name', 'user');
+                });
+            });
+
+        $query = $this->sort($filteredParams, $query, ['organization']);
+
+        return $query->paginate($filteredParams['itemsPerPage']);
     }
 
     public function store(UserDTO $DTO)
     {
-        User::create([
+        $this->model::create([
             'name' => $DTO->name,
             'surname' => $DTO->surname,
             'lastname' => $DTO->lastname,

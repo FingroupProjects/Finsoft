@@ -4,11 +4,12 @@ namespace App\Repositories\Contracts;
 
 use App\DTO\UserDTO;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
-interface UserRepositoryInterface
+interface UserRepositoryInterface extends IndexInterface
 {
-    public function index() :Collection;
+    public function index(array $data) :LengthAwarePaginator;
 
     public function store(UserDTO $DTO);
 
