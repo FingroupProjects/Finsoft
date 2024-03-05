@@ -40,6 +40,11 @@ class OrganizationBillRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'date' => [
+                'required',
+                'date'
+            ],
+            'comment' => ['']
         ];
     }
 }
