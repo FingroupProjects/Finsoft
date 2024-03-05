@@ -96,6 +96,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::group(['prefix' => 'user'], function () {
+        Route::post('/change-password', [UserController::class, 'changePassword']);
         Route::post('/massDelete', [UserController::class, 'massDelete']);
         Route::post('/massRestore', [UserController::class, 'massRestore']);
     });

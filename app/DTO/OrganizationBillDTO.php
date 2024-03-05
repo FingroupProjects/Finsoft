@@ -8,7 +8,7 @@ use Illuminate\Auth\Events\Login;
 
 class OrganizationBillDTO
 {
-    public function __construct(public string $name, public int $organization_id, public string $currency_id, public string $bill_number)
+    public function __construct(public string $name, public int $organization_id, public string $currency_id, public string $bill_number, public string $date, public ?string $comment)
     {
     }
 
@@ -18,7 +18,9 @@ class OrganizationBillDTO
             $request->get('name'),
             $request->get('organization_id'),
             $request->get('currency_id'),
-            $request->get('bill_number')
+            $request->get('bill_number'),
+            $request->get('date'),
+            $request->get('comment'),
         );
     }
 }

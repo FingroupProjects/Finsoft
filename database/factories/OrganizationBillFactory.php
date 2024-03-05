@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Currency;
 use App\Models\Organization;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,9 @@ class OrganizationBillFactory extends Factory
             'name' => fake()->name,
             'currency_id' => Currency::factory(),
             'organization_id' => Organization::factory(),
-            'bill_number' => time()
+            'bill_number' => time(),
+            'date' => Carbon::now(),
+            'comment' => fake()->text
         ];
     }
 }
