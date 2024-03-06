@@ -29,7 +29,7 @@ class CounterpartyAgreementRequest extends FormRequest
             'counterparty_id' => ['required', Rule::exists('counterparties', 'id')],
             'contact_person' => ['required'],
             'currency_id' => ['required', Rule::exists('currencies', 'id')],
-            'payment_id' => ['required', Rule::exists('currencies', 'id')],
+            'payment_id' => ['nullable', Rule::exists('currencies', 'id')],
             'comment' => [''],
             'price_type_id' => ['required', Rule::exists('price_types', 'id')],
         ];
