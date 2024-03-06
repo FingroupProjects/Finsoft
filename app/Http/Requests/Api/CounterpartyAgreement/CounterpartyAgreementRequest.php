@@ -24,7 +24,6 @@ class CounterpartyAgreementRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required'],
-            'contract_number' => ['required', 'string'],
             'date' => ['required'],
             'organization_id' => ['required', Rule::exists('organizations', 'id')],
             'counterparty_id' => ['required', Rule::exists('counterparties', 'id')],
