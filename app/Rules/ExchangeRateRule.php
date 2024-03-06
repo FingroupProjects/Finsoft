@@ -20,7 +20,7 @@ class ExchangeRateRule implements Rule
         }
 
         $latestRate = ExchangeRate::where('currency_id', $currency->id)
-            ->whereDate('date', Carbon::today())
+            ->whereDate('date', $value)
             ->first();
 
         return !$latestRate;
@@ -29,6 +29,6 @@ class ExchangeRateRule implements Rule
 
     public function message() : string
     {
-        return 'Сегодня уже был записан курс валюты';
+        return 'На этот день уже был записан курс валюты!';
     }
 }
