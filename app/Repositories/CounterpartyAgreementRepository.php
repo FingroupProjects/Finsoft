@@ -36,7 +36,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
     {
         CounterpartyAgreement::create([
             'name' => $DTO->name,
-            'contract_number' => $DTO->contract_number,
+            'contract_number' => $this->contractNumber(),
             'date' => Carbon::parse($DTO->date),
             'organization_id' => $DTO->organization_id,
             'counterparty_id' => $DTO->counterparty_id,
@@ -52,7 +52,6 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
     {
         $counterpartyAgreement->update([
             'name' => $DTO->name,
-            'contract_number' => $DTO->contract_number,
             'date' => $DTO->date,
             'organization_id' => $DTO->organization_id,
             'counterparty_id' => $DTO->counterparty_id,
@@ -70,11 +69,11 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search'])->query(function ($query) use ($counterparty){
+        $query = $this->model::search($filteredParams['search'])->query(function ($query) use ($counterparty) {
             $query->where('counterparty_id', $counterparty->id)->with(['organization', 'counterparty', 'currency', 'payment', 'priceType']);
         });
 
-        if (! is_null($filteredParams['orderBy'])) {
+        if (!is_null($filteredParams['orderBy'])) {
             $query->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
 
@@ -82,5 +81,16 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
     }
 
 
+    public function contractNumber(): string
+    {
+        $lastRecord = CounterpartyAgreement::query()->latest()->first();
 
+        if (!$lastRecord) {
+            $lastNumber = 1;
+        } else {
+            $lastNumber = (int)$lastRecord->contract_number + 1;
+        }
+
+        return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
+    }
 }
