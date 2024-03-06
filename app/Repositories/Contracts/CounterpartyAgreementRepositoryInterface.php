@@ -12,7 +12,7 @@ interface CounterpartyAgreementRepositoryInterface extends IndexInterface
 {
     public function store(CounterpartyAgreementDTO $DTO);
 
-    public function update(CounterpartyAgreement $counterparty, CounterpartyAgreementDTO $DTO) :CounterpartyAgreement;
+    public function update(CounterpartyAgreement $cpAgreement, CounterpartyAgreementDTO $DTO) :CounterpartyAgreement;
 
     public function getAgreementByCounterpartyId(Counterparty $counterparty, array $data) :LengthAwarePaginator;
 }
