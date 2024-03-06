@@ -20,7 +20,7 @@ class ExchangeRateRule implements Rule
         }
 
         $latestRate = ExchangeRate::where('currency_id', $currency->id)
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('date', Carbon::today())
             ->first();
 
         return !$latestRate;
