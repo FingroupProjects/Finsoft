@@ -42,9 +42,9 @@ class CounterpartyAgreementController extends Controller
         return $this->created($this->repository->store(CounterpartyAgreementDTO::fromRequest($request)));
     }
 
-    public function update(CounterpartyAgreement $counterpartyAgreement, CounterpartyAgreementUpdateRequest $request) :JsonResponse
+    public function update(CounterpartyAgreement $cpAgreement, CounterpartyAgreementRequest $request) :JsonResponse
     {
-        return $this->success(CounterpartyAgreementResource::make($this->repository->update($counterpartyAgreement, CounterpartyAgreementDTO::fromRequest($request))));
+        return $this->success(CounterpartyAgreementResource::make($this->repository->update($cpAgreement, CounterpartyAgreementDTO::fromRequest($request))));
     }
 
     public function getAgreementByCounterpartyId(IndexRequest $request,Counterparty $counterparty): JsonResponse
