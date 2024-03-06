@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->foreignId('counterparty_id')->constrained();
             $table->string('contact_person');
             $table->foreignId('currency_id')->constrained('currencies');
-            $table->foreignId('payment_id')->constrained('currencies');
+            $table->foreignId('payment_id')->nullable()->constrained('currencies');
             $table->text('comment');
             $table->foreignId('price_type_id');
             $table->softDeletes();
