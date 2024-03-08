@@ -24,7 +24,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::whereAny(['name', 'symbol_code', 'digital_code'], 'like',  "%" . $filteredParams['search'] . "%");
+        $query = $this->model::search($filteredParams['search']);
 
         $query = $this->sort($filteredParams, $query, ['exchangeRates']);
 
