@@ -23,6 +23,7 @@ class ExchangeRateRule implements Rule
             ->whereDate('date', $value)
             ->first();
 
+
         return !$latestRate;
 
     }

@@ -9,7 +9,7 @@ use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\IndexInterface;
 use App\Traits\FilterTrait;
 use App\Traits\Sort;
-use Cassandra\Index;
+
 use Illuminate\Pagination\LengthAwarePaginator;
 use function PHPUnit\Framework\isFalse;
 
@@ -22,8 +22,19 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     public function index(array $data): LengthAwarePaginator
     {
         $filterParams = $this->processSearchData($data);
+        $search = $filterParams['search'];
 
-        $query = CashRegister::search($filterParams['search']);
+        $query = $this->model->where('name', 'like', '%' . $search . '%', function ($query) use($search) {
+            $query->whereHas('organization', function ($query) use($search) {
+                $query->where('name', 'like', "%" . $search . "%");
+            });
+            $query->whereHas('currency', function ($query) use($search) {
+                $query->where('name', 'like', "%" . $search . "%");
+            });
+            $query->whereHas('responsiblePerson', function ($query) use($search) {
+                $query->where('name', 'like', "%" . $search . "%");
+            });
+        });
 
         $query = $this->sort($filterParams, $query, ['organization', 'currency', 'responsiblePerson']);
 
