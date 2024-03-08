@@ -22,19 +22,8 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     public function index(array $data): LengthAwarePaginator
     {
         $filterParams = $this->processSearchData($data);
-        $search = $filterParams['search'];
 
-        $query = $this->model::where('name', 'like', '%' . $search . '%', function ($query) use($search) {
-            $query->whereHas('organization', function ($query) use($search) {
-                $query->where('name', 'like', "%" . $search . "%");
-            });
-            $query->whereHas('currency', function ($query) use($search) {
-                $query->where('name', 'like', "%" . $search . "%");
-            });
-            $query->whereHas('responsiblePerson', function ($query) use($search) {
-                $query->where('name', 'like', "%" . $search . "%");
-            });
-        });
+        $query = $this->model::search($filterParams['search']);
 
         $query = $this->sort($filterParams, $query, ['organization', 'currency', 'responsiblePerson']);
 
