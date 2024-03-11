@@ -20,6 +20,9 @@ class EmployeeResource extends JsonResource
             'name' => $this->name,
             'position' => PositionResource::make($this->whenLoaded('position')),
             'image' => $this->image ? Storage::url($this->image) : '',
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'address' => $this->address,
             'deleted_at' => $this->deleted_at
 
         ];
