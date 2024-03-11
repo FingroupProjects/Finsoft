@@ -51,7 +51,7 @@ trait Sort
             }
             return  $query->with($relations);
         }
-        return $query->with($relations)->orderBy('deleted_at');
+        return $query->with($relations)->orderBy('created_at', 'desc')->orderBy('deleted_at',);
     }
 
 

@@ -17,11 +17,11 @@ class UserDTO
         return new static(
             $request->get('name'),
             $request->get('organization_id'),
+            $request->file('image'),
             $request->get('login'),
             $request->get('password'),
             $request->get('phone'),
             $request->get('email'),
-            $request->file('image')
         );
     }
 }
