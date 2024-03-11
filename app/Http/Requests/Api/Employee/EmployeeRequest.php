@@ -24,9 +24,10 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'surname' => ['required', 'string'],
-            'lastname' => [''],
             'image' => ['nullable', 'file'],
+            'phone' => [''],
+            'email' => ['nullable', Rule::unique('employees','email')],
+            'address' => [''],
         ];
     }
 }

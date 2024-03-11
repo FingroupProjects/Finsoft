@@ -13,7 +13,8 @@ class Employee extends Model implements \App\Repositories\Contracts\SoftDeleteIn
 {
     use Searchable, SoftDeletes, HasFactory;
 
-    protected $fillable = ['name', 'lastname', 'surname', 'image', 'position_id'];
+    protected $fillable = ['name', 'lastname', 'surname', 'image', 'position_id',
+                'phone', 'email', 'address'];
 
     public function toSearchableArray(): array
     {

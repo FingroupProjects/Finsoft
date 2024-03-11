@@ -3,10 +3,11 @@
 namespace App\DTO;
 
 use App\Http\Requests\Api\User\UserRequest;
+use Illuminate\Http\UploadedFile;
 
 class UserDTO
 {
-    public function __construct(public string $name, public string $surname, public string $lastname, public int $organization_id,
+    public function __construct(public string $name, public int $organization_id, public ?UploadedFile $image,
                 public string $login, public string $password, public string $phone, public string $email)
     {
     }
@@ -15,13 +16,12 @@ class UserDTO
     {
         return new static(
             $request->get('name'),
-            $request->get('surname'),
-            $request->get('lastname'),
             $request->get('organization_id'),
             $request->get('login'),
             $request->get('password'),
             $request->get('phone'),
             $request->get('email'),
+            $request->file('image')
         );
     }
 }

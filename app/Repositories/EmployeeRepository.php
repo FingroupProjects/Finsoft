@@ -37,9 +37,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
         return Employee::create([
             'name' => $DTO->name,
-            'surname' => $DTO->surname,
-            'lastname' => $DTO->lastname,
             'image' => $image,
+            'phone' => $DTO->phone,
+            'email' => $DTO->email,
+            'address' => $DTO->address
         ]);
     }
 
@@ -51,9 +52,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
         $employee->update([
             'name' => $DTO->name,
-            'surname' => $DTO->surname,
-            'lastname' => $DTO->lastname,
             'image' => $image ?? $employee->image,
+            'phone' => $DTO->phone,
+            'email' => $DTO->email,
+            'address' => $DTO->address
         ]);
 
         return $employee;
@@ -61,6 +63,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function search(string $search)
     {
-        return $this->model::whereAny(['name', 'surname', 'lastname'], 'like', '%' . $search . '%');
+        return $this->model::where('name', 'like', '%' . $search . '%');
     }
 }
