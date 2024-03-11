@@ -26,9 +26,9 @@ class StorageRepository implements StorageRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search']);
+        $query = $this->search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['organization']);
+        $query = $this->sort1($filterParams, $query, ['organization']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -95,5 +95,10 @@ class StorageRepository implements StorageRepositoryInterface
                 'updated_at' => Carbon::now()
             ];
         }, $storage_data);
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%');
     }
 }

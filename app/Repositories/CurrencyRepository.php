@@ -24,9 +24,9 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search']);
+        $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort($filteredParams, $query, ['exchangeRates']);
+        $query = $this->sort1($filteredParams, $query, ['exchangeRates']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
@@ -86,5 +86,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     public function getCurrencyExchangeRateByCurrencyRate(Currency $currency): Collection
     {
         return $currency->exchangeRates()->get();
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['name', 'symbol_code', 'digital_code'], 'like', '%' . $search . '%');
     }
 }

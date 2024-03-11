@@ -35,12 +35,17 @@ class PositionRepository implements PositionRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search']);
+        $query = $this->search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, []);
+        $query = $this->sort1($filterParams, $query, []);
 
 
         return $query->paginate($filterParams['itemsPerPage']);
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%');
     }
 
 }

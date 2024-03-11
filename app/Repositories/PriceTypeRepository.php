@@ -26,9 +26,9 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search']);
+        $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort($filteredParams, $query, ['currency']);
+        $query = $this->sort1($filteredParams, $query, ['currency']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
@@ -51,5 +51,13 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
         ]);
 
         return $priceType->load('currency');
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['name', 'description'], 'like', '%' . $search . '%')
+            ->orWhereHas('currency', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
     }
 }
