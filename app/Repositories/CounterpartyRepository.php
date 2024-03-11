@@ -29,11 +29,9 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
+        $query = $this->search($filterParams['search']);
 
-        $query = $this->model::search($filterParams['search']);
-
-        $query = $this->sort($filterParams, $query, []);
-
+        $query = $this->sort1($filterParams, $query, []);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -82,5 +80,13 @@ class CounterpartyRepository implements CounterpartyRepositoryInterface
         ]);
 
         \DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['name', 'phone', 'address', 'email'], 'like', '%' . $search . '%')
+            ->orWhereHas('roles', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
     }
 }

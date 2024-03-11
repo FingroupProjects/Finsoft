@@ -21,9 +21,9 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search']);
+        $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort($filteredParams, $query, ['director', 'chiefAccountant']);
+        $query = $this->sort1($filteredParams, $query, ['director', 'chiefAccountant']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
@@ -52,5 +52,16 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         ]);
 
         return $organization;
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%')
+            ->orWhereHas('chiefAccountant', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('director', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
     }
 }

@@ -37,7 +37,7 @@ class CashRegister extends Model implements \App\Repositories\Contracts\SoftDele
 
     public function responsiblePerson(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'responsible_person_id');
+        return $this->belongsTo(Employee::class, 'responsible_person_id', 'id');
     }
 
     public function toSearchableArray(): array

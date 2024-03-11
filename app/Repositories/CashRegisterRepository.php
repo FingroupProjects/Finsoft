@@ -23,9 +23,9 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search']);
+        $query = $this->search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['organization', 'currency', 'responsiblePerson']);
+       $query = $this->sort1($filterParams, $query, ['organization', 'currency', 'responsiblePerson']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -50,5 +50,19 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
         ]);
 
         return $cashRegister->load(['currency', 'organization', 'responsiblePerson']);
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%')
+            ->orWhereHas('currency', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('organization', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('responsiblePerson', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
     }
 }

@@ -20,13 +20,7 @@ class UserRepository implements UserRepositoryInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search'])
-            ->query(function ($query) {
-                return $query->whereHas('roles', function ($query) {
-                    $query->where('name', 'user');
-                });
-            });
-
+        $query = $this->search($filteredParams['search']);
         $query = $this->sort($filteredParams, $query, ['organization']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
@@ -60,5 +54,15 @@ class UserRepository implements UserRepositoryInterface
         ]);
 
         return $user->load('organization');
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['name', 'surname', 'lastname'], 'like', '%' . $search . '%')
+            ->query(function ($query) {
+                return $query->whereHas('roles', function ($query) {
+                    $query->where('name', 'user');
+                });
+            });
     }
 }

@@ -24,9 +24,9 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filterParams['search']);
+        $query = $this->search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['position']);
+        $query = $this->sort1($filterParams, $query, ['position']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -57,5 +57,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         ]);
 
         return $employee;
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['name', 'surname', 'lastname'], 'like', '%' . $search . '%');
     }
 }
