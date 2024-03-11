@@ -25,13 +25,12 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'surname' => ['required', 'string'],
-            'lastname' => [''],
             'organization_id' => ['exists:organizations,id'],
             'login' => ['required', 'unique:users,login'],
             'password' => ['required'],
             'phone' => ['unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email'],
+            'image' => ['nullable', 'file'],
         ];
     }
 }
