@@ -10,10 +10,15 @@ class Good extends Model implements \App\Repositories\Contracts\SoftDeleteInterf
 {
     use SoftDeletes, HasFactory;
 
-    protected $guarded = false;
+    protected $fillable = ['name', 'vendor_code', 'description', 'category_id', 'unit_id', 'barcode', 'storage_id'];
 
     public static function bootSoftDeletes()
     {
 
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

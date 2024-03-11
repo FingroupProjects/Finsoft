@@ -24,9 +24,10 @@ class EmployeeUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'surname' => ['required', 'string'],
-            'lastname' => [''],
             'image' => ['nullable', 'file'],
+            'phone' => ['required'],
+            'email' => ['required', Rule::unique('employees','email')],
+            'address' => ['required'],
         ];
     }
 }

@@ -26,9 +26,10 @@ class EmployeeFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'surname' => fake()->lastName(),
-            'lastname' => fake()->lastName(),
-            'position_id' => Position::factory()
+            'position_id' => Position::factory(),
+            'phone' => time() . rand(1, 1000),
+            'email' => fake()->email . rand(1, 1000),
+            'address' => fake()->address
         ];
     }
 

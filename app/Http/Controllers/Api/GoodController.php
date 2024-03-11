@@ -7,11 +7,10 @@ use App\DTO\GoodUpdateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Good\GoodRequest;
 use App\Http\Requests\Api\Good\GoodUpdateRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\GoodResource;
-use App\Models\Currency;
 use App\Models\Good;
-use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\GoodRepository;
 use App\Traits\ApiResponse;
@@ -20,9 +19,13 @@ class GoodController extends Controller implements \App\Repositories\Contracts\S
 {
     use ApiResponse;
 
-    public function index(GoodRepository $repository)
+    public function __construct(public GoodRepository $repository)
     {
-        return $this->success(GoodResource::collection($repository->index()));
+    }
+
+    public function index(IndexRequest $request)
+    {
+        return $this->paginate(GoodResource::collection($this->repository->index($request->validated())));
     }
 
     public function store(GoodRequest $request, GoodRepository $repository)
@@ -37,7 +40,7 @@ class GoodController extends Controller implements \App\Repositories\Contracts\S
 
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $delete->massDelete(new GoodController(), $request->validated());
+        return $delete->massDelete(new Good(), $request->validated());
     }
 
     public function massRestore(IdRequest $request, MassOperationInterface $restore)

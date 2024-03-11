@@ -7,16 +7,29 @@ use App\DTO\GoodUpdateDTO;
 use App\Models\Good;
 use App\Models\GoodImages;
 use App\Repositories\Contracts\GoodRepositoryInterface;
+use App\Traits\FilterTrait;
+use App\Traits\Sort;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class GoodRepository implements GoodRepositoryInterface
 {
-    public function index(): Collection
+    use Sort, FilterTrait;
+
+    public $model = Good::class;
+
+    public function index(array $data): LengthAwarePaginator
     {
-        return Good::get();
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->search($filterParams['search']);
+
+        $query = $this->sort1($filterParams, $query, ['category']);
+
+        return $query->paginate($filterParams['itemsPerPage']);
     }
 
     public function store(GoodDTO $DTO)
@@ -66,5 +79,10 @@ class GoodRepository implements GoodRepositoryInterface
         }
 
         return $imgs;
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%');
     }
 }
