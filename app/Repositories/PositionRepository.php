@@ -37,7 +37,7 @@ class PositionRepository implements PositionRepositoryInterface
 
         $query = $this->search($filterParams['search']);
 
-        $query = $this->sort1($filterParams, $query, []);
+        $query = $this->sort($filterParams, $query, []);
 
 
         return $query->paginate($filterParams['itemsPerPage']);

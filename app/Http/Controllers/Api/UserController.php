@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTO\UserDTO;
+use App\DTO\UserUpdateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\User\ChangePasswordRequest;
 use App\Http\Requests\Api\User\UserRequest;
+use App\Http\Requests\Api\User\UserUpdateRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Currency;
@@ -45,9 +47,9 @@ class UserController extends Controller
         return $this->created($repository->store(UserDTO::fromRequest($request)));
     }
 
-    public function update(User $user, UserRequest $request, UserRepositoryInterface $repository)
+    public function update(User $user, UserUpdateRequest $request, UserRepositoryInterface $repository)
     {
-        return $this->success(UserResource::make($repository->update($user, UserDTO::fromRequest($request))));
+        return $this->success(UserResource::make($repository->update($user, UserUpdateDTO::fromRequest($request))));
     }
 
     public function changePassword(ChangePasswordRequest $request)

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Api\Good;
+namespace App\Http\Requests\Api\User;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class GoodRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,13 @@ class GoodRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'vendor_code' => ['required', 'unique:goods,vendor_code'],
-            'description' => [''],
-            'category_id' => ['required', 'exists:categories,id'],
-            'unit_id' => ['required', 'exists:units,id'],
-            'barcode' => ['nullable', 'unique:goods,barcode'],
-            'storage_id' => ['required', 'exists:storages,id'],
-            'images' => ['required', 'array'],
-            'images.*.image' => ['required', 'file'],
-            'images.*.is_main' => ['required'],
+            'organization_id' => ['exists:organizations,id'],
+            'login' => ['required', Rule::unique('users', 'login')->ignore($this->route()->user->id)],
+            'password' => ['required'],
+            'phone' => [Rule::unique('users', 'phone')->ignore($this->route()->user->id)],
+            'email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this->route()->user->id)],
+            'image' => ['nullable', 'file'],
+            'status' => ['boolean']
         ];
     }
-
-
 }
