@@ -19,11 +19,11 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'login' => $this->login,
-            'email'=> $this->email ?? '',
+            'email'=> $this->email,
             'organization' => OrganizationResource::make($this->whenLoaded('organization')),
-            'phone' => $this->phone ?? '',
+            'phone' => $this->phone,
             'status' => $this->status,
-            'image' => $this->image ? Storage::url($this->image) : '',
+            'image' => $this->image ? Storage::url($this->image) : null,
             'deleted_at' => $this->deleted_at
         ];
     }

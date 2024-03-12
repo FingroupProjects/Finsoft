@@ -24,7 +24,7 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search']);
+        $query = $this->search($filteredParams['search']);
 
         $query = $this->sort($filteredParams, $query, ['organization', 'counterparty', 'currency', 'payment', 'priceType']);
 
@@ -92,5 +92,10 @@ class CounterpartyAgreementRepository implements CounterpartyAgreementRepository
         }
 
         return str_pad($lastNumber, 7, '0', STR_PAD_LEFT);
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%');
     }
 }

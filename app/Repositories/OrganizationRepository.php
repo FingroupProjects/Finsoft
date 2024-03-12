@@ -23,7 +23,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
 
         $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort1($filteredParams, $query, ['director', 'chiefAccountant']);
+        $query = $this->sort($filteredParams, $query, ['director', 'chiefAccountant']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }

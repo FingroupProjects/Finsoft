@@ -27,7 +27,7 @@ class GoodRepository implements GoodRepositoryInterface
 
         $query = $this->search($filterParams['search']);
 
-        $query = $this->sort1($filterParams, $query, ['category']);
+        $query = $this->sort($filterParams, $query, ['category']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }

@@ -28,7 +28,7 @@ class PriceTypeRepository implements PriceTypeRepositoryInterface
 
         $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort1($filteredParams, $query, ['currency']);
+        $query = $this->sort($filteredParams, $query, ['currency']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }

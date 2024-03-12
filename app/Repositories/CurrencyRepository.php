@@ -26,7 +26,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
         $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort1($filteredParams, $query, ['exchangeRates']);
+        $query = $this->sort($filteredParams, $query, ['exchangeRates']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }

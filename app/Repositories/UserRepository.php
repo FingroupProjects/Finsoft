@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\UserDTO;
+use App\DTO\UserUpdateDTO;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Traits\FilterTrait;
@@ -23,7 +24,7 @@ class UserRepository implements UserRepositoryInterface
 
         $query = $this->search($filteredParams['search']);
 
-        $query = $this->sort1($filteredParams, $query, ['organization']);
+        $query = $this->sort($filteredParams, $query, ['organization']);
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
@@ -43,7 +44,7 @@ class UserRepository implements UserRepositoryInterface
         ])->assignRole('user');
     }
 
-    public function update(User $user, UserDTO $DTO)
+    public function update(User $user, UserUpdateDTO $DTO)
     {
         if ($DTO->image != null) {
             $image = Storage::disk('public')->put('userPhoto', $DTO->image);
@@ -56,7 +57,8 @@ class UserRepository implements UserRepositoryInterface
             'password' => $DTO->password,
             'phone' => $DTO->phone,
             'email' => $DTO->email,
-            'image' => $image ?? $user->image
+            'image' => $image ?? $user->image,
+            'status' => $DTO->status
         ]);
 
         return $user->load('organization');
