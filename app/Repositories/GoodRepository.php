@@ -43,6 +43,7 @@ class GoodRepository implements GoodRepositoryInterface
                 'unit_id' => $DTO->unit_id,
                 'barcode' => $DTO->barcode,
                 'storage_id' => $DTO->storage_id,
+                'good_group_id' => $DTO->good_group_id
             ]);
 
             GoodImages::insert($this->goodImages($good, $DTO->images));
@@ -59,6 +60,7 @@ class GoodRepository implements GoodRepositoryInterface
             'unit_id' => $DTO->unit_id,
             'barcode' => $DTO->barcode,
             'storage_id' => $DTO->storage_id,
+            'good_group_id' => $DTO->good_group_id
         ]);
 
         return $good;
