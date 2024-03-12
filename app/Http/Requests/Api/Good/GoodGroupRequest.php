@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api\Good;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class UserUpdateRequest extends FormRequest
+class GoodGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,10 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'organization_id' => ['exists:organizations,id'],
-            'login' => ['required', Rule::unique('users', 'login')->ignore($this->route()->user->id)],
-            'phone' => [Rule::unique('users', 'phone')->ignore($this->route()->user->id)],
-            'email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this->route()->user->id)],
-            'image' => ['nullable', 'file'],
-            'status' => ['required', 'boolean']
+            'is_good' => ['required', 'boolean'],
+            'is_service' => ['required', 'boolean']
         ];
     }
+
+
 }
