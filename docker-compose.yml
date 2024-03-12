@@ -8,9 +8,9 @@ services:
         ports:
             - "8410:80"
         depends_on:
-            - app
+            - appp
         container_name: server
-    app:
+    appp:
         build:
             context: .
             dockerfile: _docker/app/Dockerfile
@@ -18,7 +18,7 @@ services:
             - ./:/var/www
         depends_on:
             -   database
-        container_name: app
+        container_name: appp
     database:
         image: mysql:8.0
         restart: always
