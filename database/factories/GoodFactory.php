@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Good;
+use App\Models\GoodGroup;
 use App\Models\Storage;
 use App\Models\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,8 @@ class GoodFactory extends Factory
             'category_id' => Category::factory(),
             'unit_id' => Unit::factory(),
             'barcode' => time() . fake()->numberBetween(1292992,939393939),
-            'storage_id' => Storage::factory()
+            'storage_id' => Storage::factory(),
+            'good_group_id' => GoodGroup::factory()
         ];
     }
 }

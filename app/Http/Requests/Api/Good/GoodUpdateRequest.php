@@ -27,12 +27,13 @@ class GoodUpdateRequest extends FormRequest
         return [
             'id' => ['required'],
             'name' => ['required', 'string'],
-            'vendor_code' => ['required', Rule::unique('goods')->ignore($this->id)],
+            'vendor_code' => ['required', Rule::unique('goods')->ignore($this->route()->user->id)],
             'description' => [''],
             'category_id' => ['required', 'exists:categories,id'],
             'unit_id' => ['required', 'exists:units,id'],
-            'barcode' => ['required', Rule::unique('goods')->ignore($this->id)],
+            'barcode' => ['required', Rule::unique('goods')->ignore($this->route()->user->id)],
             'storage_id' => ['required', 'exists:storages,id'],
+            'good_group_id' => ['required', 'exists:storages,id'],
         ];
     }
 
