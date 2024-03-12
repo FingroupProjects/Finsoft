@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-use App\Http\Requests\Api\Good\GoodRequest;
+use App\Http\Requests\Api\Good\GoodGroupRequest;
 
 class GoodGroupDTO
 {
@@ -10,7 +10,7 @@ class GoodGroupDTO
     {
     }
 
-    public static function fromRequest(GoodRequest $request) :self
+    public static function fromRequest(GoodGroupRequest $request) :self
     {
         return new static(
             $request->get('name'),
