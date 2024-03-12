@@ -54,7 +54,6 @@ class UserRepository implements UserRepositoryInterface
             'name' => $DTO->name,
             'organization_id' => $DTO->organization_id,
             'login' => $DTO->login,
-            'password' => $DTO->password,
             'phone' => $DTO->phone,
             'email' => $DTO->email,
             'image' => $image ?? $user->image,

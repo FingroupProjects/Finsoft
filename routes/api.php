@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CounterpartyController;
 use App\Http\Controllers\Api\CurrencyController;
 
 use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\GoodGroupController;
 use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\ProviderDocumentController;
 
@@ -67,6 +68,7 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('unit', UnitController::class);
     Route::apiResource('good', GoodController::class);
     Route::apiResource('group', GroupController::class);
+    Route::apiResource('good-group', GoodGroupController::class);
 
     Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
