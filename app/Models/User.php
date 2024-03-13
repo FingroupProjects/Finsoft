@@ -38,4 +38,9 @@ class User extends Authenticatable implements \App\Repositories\Contracts\SoftDe
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public static function bootSoftDeletes()
+    {
+
+    }
 }

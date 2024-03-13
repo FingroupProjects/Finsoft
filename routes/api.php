@@ -94,12 +94,12 @@ Route::group(['prefix' => 'organization'], function () {
     Route::post('/massRestore', [OrganizationController::class, 'massRestore']);
 });
 
-Route::group(['prefix' => 'employee'], function () {
-    Route::post('/massDeletes', [EmployeeController::class, 'massDelete']);
+Route::group(['prefix' => 'employees'], function () {
+    Route::post('/massDelete', [EmployeeController::class, 'massDelete']);
     Route::post('/massRestore', [EmployeeController::class, 'massRestore']);
 });
 
-Route::group(['prefix' => 'user'], function () {
+Route::group(['prefix' => 'users'], function () {
     Route::post('/change-password', [UserController::class, 'changePassword']);
     Route::post('/massDelete', [UserController::class, 'massDelete']);
     Route::post('/massRestore', [UserController::class, 'massRestore']);

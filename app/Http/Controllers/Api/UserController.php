@@ -71,7 +71,7 @@ class UserController extends Controller
 
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $delete->massDelete(new User(), $request->validated());
+        return $this->deleted($delete->massDelete(new User(), $request->validated()));
     }
 
     public function massRestore(IdRequest $request, MassOperationInterface $restore)

@@ -54,7 +54,7 @@ class EmployeeController extends Controller
 
     public function massDelete(IdRequest $request, MassOperationInterface $delete)
     {
-        return $delete->massDelete(new Employee(), $request->validated());
+        return $this->deleted($delete->massDelete(new Employee(), $request->validated()));
     }
 
     public function massRestore(IdRequest $request, MassOperationInterface $restore)
