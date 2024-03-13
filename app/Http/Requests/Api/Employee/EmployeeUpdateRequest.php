@@ -25,8 +25,8 @@ class EmployeeUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'image' => ['nullable', 'file'],
-            'phone' => ['required'],
-            'email' => ['required', Rule::unique('employees','email')->ignore($this->route()->user->id)],
+            'phone' => ['required', Rule::unique('employees','phone')->ignore($this->route()->employee->id)],
+            'email' => ['required', Rule::unique('employees','email')->ignore($this->route()->employee->id)],
             'address' => ['required'],
         ];
     }
