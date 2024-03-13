@@ -4,8 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
-class GoodResource extends JsonResource
+class GoodWithImagesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,8 +24,8 @@ class GoodResource extends JsonResource
             'unit_id' => UnitResource::make($this->whenLoaded('unit')),
             'barcode' => $this->barcode,
             'storage_id' => StorageResource::make($this->whenLoaded('storage')),
-            'deleted_at' => $this->deleted_at
-
+            'deleted_at' => $this->deleted_at,
+            'images' => ImageResource::collection($this->images),
         ];
     }
 }

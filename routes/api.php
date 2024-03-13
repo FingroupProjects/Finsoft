@@ -100,7 +100,7 @@ Route::group(['prefix' => 'employees'], function () {
 });
 
 Route::group(['prefix' => 'users'], function () {
-    Route::post('/change-password', [UserController::class, 'changePassword']);
+    Route::post('/change-password/{user}', [UserController::class, 'changePassword']);
     Route::post('/massDelete', [UserController::class, 'massDelete']);
     Route::post('/massRestore', [UserController::class, 'massRestore']);
 });
@@ -182,7 +182,6 @@ Route::group(['prefix' => 'document'], function () {
     Route::get('approve/{document}', [DocumentController::class, 'approve']);
     Route::get('unApprove/{document}', [DocumentController::class, 'unApprove']);
 });
-
 
 Route::get('logout', [AuthController::class, 'logout']);
 //});

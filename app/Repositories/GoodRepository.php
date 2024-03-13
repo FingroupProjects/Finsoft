@@ -27,7 +27,7 @@ class GoodRepository implements GoodRepositoryInterface
 
         $query = $this->search($filterParams['search']);
 
-        $query = $this->sort($filterParams, $query, ['category']);
+        $query = $this->sort($filterParams, $query, ['category', 'unit']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
@@ -46,7 +46,7 @@ class GoodRepository implements GoodRepositoryInterface
                 'good_group_id' => $DTO->good_group_id
             ]);
 
-            GoodImages::insert($this->goodImages($good, $DTO->images));
+            GoodImages::insert($this->goodImages($good, $DTO->add_images));
         });
     }
 
@@ -68,17 +68,27 @@ class GoodRepository implements GoodRepositoryInterface
 
     public function goodImages($good, $images)
     {
-        foreach ($images as $image) {
-            $img = Storage::disk('public')->put('goodImages', $image->img);
+        $img = $images['main_image'] ? Storage::disk('public')->put('goodImages', $images['main_image']) : null;
 
-            $imgs[] = [
+        $imgs[] = [
+            'good_id' => $good->id,
+            'image' => $img,
+            'is_main' => true,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+
+        $imgs = array_merge($imgs, array_map(function ($image) use ($good) {
+            $img = Storage::disk('public')->put('goodImages', $image);
+
+            return [
                 'good_id' => $good->id,
                 'image' => $img,
-                'is_main' => $image->is_main,
+                'is_main' => false,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ];
-        }
+        }, $images['add_images']));
 
         return $imgs;
     }
