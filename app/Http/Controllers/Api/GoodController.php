@@ -10,7 +10,9 @@ use App\Http\Requests\Api\Good\GoodUpdateRequest;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\IdRequest;
 use App\Http\Resources\GoodResource;
+use App\Http\Resources\GoodWithImagesResource;
 use App\Models\Good;
+use App\Repositories\Contracts\GoodRepositoryInterface;
 use App\Repositories\Contracts\MassOperationInterface;
 use App\Repositories\GoodRepository;
 use App\Traits\ApiResponse;
@@ -28,9 +30,14 @@ class GoodController extends Controller implements \App\Repositories\Contracts\S
         return $this->paginate(GoodResource::collection($this->repository->index($request->validated())));
     }
 
-    public function store(GoodRequest $request, GoodRepository $repository)
+    public function store(GoodRequest $request, GoodRepositoryInterface $repository)
     {
-        return $this->created(GoodResource::make($repository->store(GoodDTO::fromRequest($request))));
+        return $this->created($repository->store(GoodDTO::fromRequest($request)));
+    }
+
+    public function show(Good $good)
+    {
+        return $this->success(GoodWithImagesResource::make($good->load(['category', 'unit', 'images'])));
     }
 
     public function update(Good $good, GoodUpdateRequest $request, GoodRepository $repository)

@@ -52,15 +52,11 @@ class UserController extends Controller
         return $this->success(UserResource::make($repository->update($user, UserUpdateDTO::fromRequest($request))));
     }
 
-    public function changePassword(ChangePasswordRequest $request)
+    public function changePassword(User $user, ChangePasswordRequest $request)
     {
         $data = $request->validated();
 
-        $user = User::where('id', Auth::id())->first();
-
-        if (!Hash::check($data['oldPassword'], $user->password)) {
-            return $this->error('Старый пароль неверен!');
-        }
+        $user = User::where('id', $user->id);
 
         $user->update([
             'password' => Hash::make($data['password'])
