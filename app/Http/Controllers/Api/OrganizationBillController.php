@@ -9,6 +9,7 @@ use App\DTO\PriceTypeDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CurrencyRequest;
 use App\Http\Requests\Api\ExchangeRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\OrganizationBillRequest;
 use App\Http\Requests\Api\PriceTypeRequest;
 use App\Http\Requests\IdRequest;
@@ -33,9 +34,9 @@ class OrganizationBillController extends Controller
     {
     }
 
-    public function index() :JsonResponse
+    public function index(IndexRequest $request) :JsonResponse
     {
-        return $this->success(OrganizationBillResource::collection($this->repository->index()));
+        return $this->paginate(OrganizationBillResource::collection($this->repository->index($request->validated())));
     }
 
     public function show(OrganizationBill $organizationBill) :JsonResponse
