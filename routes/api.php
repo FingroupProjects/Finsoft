@@ -61,9 +61,10 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('position', PositionController::class);
     Route::apiResource('cashRegister', CashRegisterController::class);
     Route::apiResource('organization', OrganizationController::class);
-    Route::apiResource('employee', EmployeeController::class);
+    Route::apiResource('employee', EmployeeController::class)->except('update');
+    Route::post('employee/{employee}', [EmployeeController::class, 'update']);
     Route::apiResource('user', UserController::class);
-    Route::apiResource('storage', StorageController::class);
+    Route::apiResource('storage', StorageController::class)->except('update');
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('unit', UnitController::class);
     Route::apiResource('good', GoodController::class);
@@ -93,7 +94,7 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::group(['prefix' => 'employee'], function () {
-        Route::post('/massDelete', [EmployeeController::class, 'massDelete']);
+        Route::post('/massDeletes', [EmployeeController::class, 'massDelete']);
         Route::post('/massRestore', [EmployeeController::class, 'massRestore']);
     });
 
