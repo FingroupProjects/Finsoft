@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTO\EmployeeDTO;
+use App\DTO\EmployeeUpdateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Employee\EmployeeRequest;
 use App\Http\Requests\Api\Employee\EmployeeUpdateRequest;
@@ -41,9 +42,9 @@ class EmployeeController extends Controller
         return $this->created(EmployeeResource::make($repository->store(EmployeeDTO::fromRequest($request))));
     }
 
-    public function update(Employee $employee, EmployeeRequest $request, EmployeeRepositoryInterface $repository)
+    public function update(Employee $employee, EmployeeUpdateRequest $request, EmployeeRepositoryInterface $repository)
     {
-        return $this->success(EmployeeResource::make($repository->update($employee, EmployeeDTO::fromRequest($request))));
+        return $this->success(EmployeeResource::make($repository->update($employee, EmployeeUpdateDTO::fromRequest($request))));
     }
 
     public function destroy(Employee $employee)

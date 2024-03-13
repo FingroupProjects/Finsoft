@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\DTO\CashRegisterDTO;
 use App\DTO\EmployeeDTO;
+use App\DTO\EmployeeUpdateDTO;
 use App\Models\CashRegister;
 use App\Models\Employee;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
@@ -44,7 +45,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         ]);
     }
 
-    public function update(Employee $employee, EmployeeDTO $DTO): Employee
+    public function update(Employee $employee, EmployeeUpdateDTO $DTO): Employee
     {
         if ($DTO->image != null) {
             $image = Storage::disk('public')->put('employeePhoto', $DTO->image);
