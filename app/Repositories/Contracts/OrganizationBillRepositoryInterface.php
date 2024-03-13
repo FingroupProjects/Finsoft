@@ -7,11 +7,12 @@ use App\DTO\OrganizationBillDTO;
 use App\Models\OrganizationBill;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 interface OrganizationBillRepositoryInterface
 {
-    public function index() :Collection;
+    public function index(array $data) :LengthAwarePaginator;
 
     public function store(OrganizationBillDTO $dto);
 
