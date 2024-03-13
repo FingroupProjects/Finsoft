@@ -18,7 +18,6 @@ class MassOperation implements MassOperationInterface
 {
     public function massDelete(SoftDeleteInterface $model, array $ids)
     {
-
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         $model->whereIn('id', $ids['ids'])->update([
