@@ -20,8 +20,10 @@ trait Sort
                         ->orderBy("{$relatedTable}.{$field}", $filteredParams['direction'])
                         ->select("{$thisTable}.*");
             }
-            return  $query->with($relations);
+
+            return  $query->with($relations)->orderBy($filteredParams['orderBy'], $filteredParams['direction']);
         }
+
         return $query->with($relations)->orderBy('created_at', 'desc')->orderBy('deleted_at');
     }
 
