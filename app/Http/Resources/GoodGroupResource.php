@@ -19,6 +19,7 @@ class GoodGroupResource extends JsonResource
             'name' => $this->name,
             'is_good' => $this->is_good,
             'is_service' => $this->is_service,
+            'deleted_at' => $this->deleted_at
         ];
     }
 }
