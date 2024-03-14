@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\StorageEmployeeController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -154,8 +155,14 @@ Route::group(['prefix' => 'position'], function () {
     Route::post('/massRestore', [PositionController::class, 'massRestore']);
 });
 
-Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index']);
-Route::post('/settings', [\App\Http\Controllers\SettingsController::class, 'store']);
+Route::group(['prefix' => 'good-group'], function () {
+    Route::get('get-goods/{goodGroup}', [GoodGroupController::class, 'getGoods']);
+    Route::post('/massDelete', [GoodGroupController::class, 'massDelete']);
+    Route::post('/massRestore', [GoodGroupController::class, 'massRestore']);
+});
+
+Route::get('/settings', [SettingsController::class, 'index']);
+Route::post('/settings', [SettingsController::class, 'store']);
 
 
 Route::group(['prefix' => 'document'], function () {
