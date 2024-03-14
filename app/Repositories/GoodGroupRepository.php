@@ -20,6 +20,21 @@ use Illuminate\Support\Facades\Storage;
 
 class GoodGroupRepository implements GoodGroupRepositoryInterface
 {
+    use Sort, FilterTrait;
+
+    public $model = GoodGroup::class;
+
+    public function index(array $data): LengthAwarePaginator
+    {
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->search($filterParams['search']);
+
+        $query = $this->sort($filterParams, $query, ['goods']);
+
+        return $query->paginate($filterParams['itemsPerPage']);
+    }
+
     public function store(GoodGroupDTO $DTO)
     {
         $good = GoodGroup::create([
@@ -31,4 +46,27 @@ class GoodGroupRepository implements GoodGroupRepositoryInterface
         return $good;
     }
 
+    public function getGoods(GoodGroup $goodGroup, array $data)
+    {
+        $filterParams = $this->processSearchData($data);
+
+        $query = $this->searchGood($filterParams['search'], $goodGroup);
+
+        $query = $this->sort($filterParams, $query, []);
+
+        return $query->paginate($filterParams['itemsPerPage']);
+    }
+
+    public function search(string $search)
+    {
+        return $this->model::where('name', 'like', '%' . $search . '%');
+    }
+
+    public function searchGood(string $search, GoodGroup $goodGroup)
+    {
+        return Good::where([
+            ['good_group_id', $goodGroup->id],
+            ['name', 'like', '%' . $search . '%']
+        ]);
+    }
 }
