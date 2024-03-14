@@ -65,8 +65,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function search(string $search)
     {
-        return $this->model::where('name', 'like', '%' . $search . '%')
-            ->orderBy('created_at', 'desc');
+        return $this->model::where('name', 'like', '%' . $search . '%');
 //            ->whereHas('roles', function ($query) {
 //                $query->where('name', '!=', 'admin');
 //            });
