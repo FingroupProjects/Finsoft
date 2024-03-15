@@ -18,11 +18,10 @@ class GoodDTO
             $request->get('name'),
             $request->get('vendor_code'),
             $request->get('description'),
-            $request->get('category_id'),
             $request->get('unit_id'),
             $request->get('storage_id'),
             $request->get('good_group_id'),
-            $request->allFiles('main_image'),
+            $request->file('main_image'),
             $request->allFiles('add_images'),
         );
     }
