@@ -17,7 +17,11 @@ class GroupResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'employees' =>  EmployeeResource::collection($this->whenLoaded('employees')),
+            'storages' => StorageResource::collection($this->whenLoaded('storages'))
+
+
         ];
     }
 }
