@@ -31,5 +31,12 @@ class GoodGroupRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.'
+        ];
+    }
+
 
 }

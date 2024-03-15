@@ -27,19 +27,20 @@ class StorageEmployeeRepository implements StorageEmployeeRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->search($filterParams['search'])
-            ->where('storage_id', $storage->id);
+        $query = $this->search($filterParams['search'], $storage);
 
         $query = $this->sort($filterParams, $query, ['employee']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
 
-    public function search(string $search)
+    public function search(string $search, Storage $storage)
     {
-        return $this->model::whereAny(['from', 'to'], 'like', '%' . $search . '%')
-            ->orWhereHas('employee', function ($query) use ($search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            });
+        return $this->model::where('storage_id', $storage->id, function ($query) use ($search) {
+            return $query->whereAny(['from', 'to'], 'like', '%' . $search . '%')
+                ->orWhereHas('employee', function ($query) use ($search) {
+                    return $query->where('name', 'like', '%' . $search . '%');
+                });
+        });
     }
 }
