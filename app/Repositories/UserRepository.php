@@ -40,7 +40,8 @@ class UserRepository implements UserRepositoryInterface
             'password' => $DTO->password,
             'phone' => $DTO->phone,
             'email' => $DTO->email,
-            'image' => $image
+            'image' => $image,
+            'group_id' => $DTO->group_id
         ])->assignRole('user');
     }
 

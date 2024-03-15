@@ -28,7 +28,6 @@ class GoodRequest extends FormRequest
             'name' => ['required', 'string'],
             'vendor_code' => ['required', 'unique:goods,vendor_code'],
             'description' => [''],
-            'category_id' => ['required', 'exists:categories,id'],
             'unit_id' => ['required', 'exists:units,id'],
             'barcode' => ['nullable', 'unique:goods,barcode'],
             'storage_id' => ['required', 'exists:storages,id'],
@@ -43,8 +42,6 @@ class GoodRequest extends FormRequest
         return [
             'name.required' => 'Поле наименование обязательно для заполнения.',
             'vendor_code.required' => 'Поле артикул обязательно для заполнения.',
-            'category_id.required' => 'Поле категория обязательно для заполнения.',
-            'category_id.exists' => 'Выбранное значение для категория не существует.',
             'unit_id.required' => 'Поле единица обязательно для заполнения.',
             'unit_id.exists' => 'Выбранное значение для единица не существует.',
             'storage_id.required' => 'Поле склад обязательно для заполнения.',

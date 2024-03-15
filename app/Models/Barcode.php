@@ -7,8 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barcode extends Model
 {
-    use HasFactory;
-
-
-    protected $guarded = false;
+    protected $fillable = ['barcode', 'good_id'];
 }

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,9 +36,14 @@ class User extends Authenticatable implements \App\Repositories\Contracts\SoftDe
         'password' => 'hashed',
     ];
 
-    public function organization()
+    public function organization() :BelongsTo
     {
         return $this->belongsTo(Organization::class, 'organization_id');
+    }
+
+    public function group() :BelongsTo
+    {
+        return $this->belongsTo(GroupResource::class, 'group_id');
     }
 
     public static function bootSoftDeletes()

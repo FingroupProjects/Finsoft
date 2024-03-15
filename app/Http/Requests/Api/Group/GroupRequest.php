@@ -23,7 +23,8 @@ class GroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'required']
+            'name' => ['string', 'required'],
+            'type' => ['integer', 'required']
         ];
     }
 
