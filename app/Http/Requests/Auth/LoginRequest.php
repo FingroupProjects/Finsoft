@@ -26,4 +26,12 @@ class LoginRequest extends FormRequest
             'password' => ['required'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'login.required' => 'Поле логин обязательно для заполнения.',
+            'password.required' => 'Поле пароль обязательно для заполнения.',
+        ];
+    }
 }

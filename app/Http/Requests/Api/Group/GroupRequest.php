@@ -26,4 +26,11 @@ class GroupRequest extends FormRequest
             'name' => ['string', 'required']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+        ];
+    }
 }

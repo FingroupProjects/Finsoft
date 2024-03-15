@@ -37,13 +37,19 @@ class GoodUpdateRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    public function messages()
     {
-        $response = response()->json([
-            'status' => false,
-            'errors' => $validator->errors(),
-        ], 422);
-
-        throw new HttpResponseException($response);
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'vendor_code.required' => 'Поле артикул обязательно для заполнения.',
+            'category_id.required' => 'Поле категория обязательно для заполнения.',
+            'category_id.exists' => 'Выбранное значение для категория не существует.',
+            'unit_id.required' => 'Поле единица обязательно для заполнения.',
+            'unit_id.exists' => 'Выбранное значение для единица не существует.',
+            'storage_id.required' => 'Поле склад обязательно для заполнения.',
+            'storage_id.exists' => 'Выбранное значение для склад не существует.',
+            'good_group_id.required' => 'Поле группа номенклатур обязательно для заполнения.',
+            'good_group_id.exists' => 'Выбранное значение для группа номенклатур не существует.',
+        ];
     }
 }

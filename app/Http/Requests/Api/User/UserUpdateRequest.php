@@ -34,4 +34,20 @@ class UserUpdateRequest extends FormRequest
             'status' => ['required', 'boolean']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'login.required' => 'Поле логин обязательно для заполнения.',
+            'login.unique' => 'Такое значение поля логин уже существует.',
+            'phone.unique' => 'Такое значение поля телефон уже существует.',
+            'password.required' => 'Поле пароль обязательно для заполнения.',
+            'organization_id.required' => 'Поле организация обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для организация не существует.',
+            'email' => 'Поле почта имеет ошибочный формат.',
+            'email.unique' => 'Такое значение поля почта уже существует.',
+            'status.required' => 'Поле статус обязательно для заполнения.',
+        ];
+    }
 }

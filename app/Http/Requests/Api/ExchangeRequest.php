@@ -35,4 +35,12 @@ class ExchangeRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'date.required' => 'Поле дата обязательно для заполнения.',
+            'value.required' => 'Поле значение обязательно для заполнения.',
+        ];
+    }
 }

@@ -36,4 +36,13 @@ class PriceTypeRequest extends FormRequest
             'description' => ['']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'currency_id.required' => 'Поле валюта обязательно для заполнения.',
+            'currency_id.exists' => 'Выбранное значение для валюта не существует.',
+        ];
+    }
 }

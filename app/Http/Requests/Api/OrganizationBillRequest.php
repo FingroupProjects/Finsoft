@@ -60,4 +60,5 @@ class OrganizationBillRequest extends FormRequest
             'organization_id.exists' => 'Выбранное значение для поле организация не существует.',
         ];
     }
+
 }

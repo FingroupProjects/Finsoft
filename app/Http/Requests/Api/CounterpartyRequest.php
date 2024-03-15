@@ -39,12 +39,24 @@ class CounterpartyRequest extends FormRequest
                 'unique:counterparties,phone',
                 'min:13',
             ],
-            'email' =>[
+            'email' => [
                 'email',
                 'required',
                 'unique:counterparties,email',
             ],
             'roles' => ['required', 'array', Rule::exists('user_roles', 'id')],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'address.required' => 'Поле адрес обязательно для заполнения.',
+            'phone.required' => 'Поле телефон обязательно для заполнения.',
+            'phone.unique' => 'Такое значение поля телефон уже существует.',
+            'email.required' => 'Поле почта обязательно для заполнения.',
+            'email.unique' => 'Такое значение почта телефон уже существует.',
         ];
     }
 }

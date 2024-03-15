@@ -44,4 +44,17 @@ class CounterpartyUpdateRequest extends FormRequest
             'roles' => ['required', 'array'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'address.required' => 'Поле адрес обязательно для заполнения.',
+            'phone.required' => 'Поле телефон обязательно для заполнения.',
+            'phone.unique' => 'Такое значение поля телефон уже существует.',
+            'email.required' => 'Поле почта обязательно для заполнения.',
+            'email.unique' => 'Такое значение почта телефон уже существует.',
+            'roles.required' => 'Поле роль обязательно для заполнения.',
+        ];
+    }
 }

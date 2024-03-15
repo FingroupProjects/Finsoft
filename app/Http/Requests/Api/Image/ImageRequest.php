@@ -29,4 +29,12 @@ class ImageRequest extends FormRequest
             'images.*.is_main' => ['required'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'good_id.required' => 'Поле продукт обязательно для заполнения.',
+            'good_id.exists' => 'Выбранное значение для продукт не существует.',
+        ];
+    }
 }
