@@ -31,4 +31,17 @@ class OrganizationRequest extends FormRequest
             'description' => ['']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'INN.required' => 'Поле ИНН обязательно для заполнения.',
+            'director_id.required' => 'Поле директор обязательно для заполнения.',
+            'director_id.exists' => 'Выбранное значение для директор не существует.',
+            'chief_accountant_id.required' => 'Поле гл. бухгалтер обязательно для заполнения.',
+            'chief_accountant_id.exists' => 'Выбранное значение для гл. бухгалтер не существует.',
+            'address.required' => 'Поле адрес обязательно для заполнения.',
+        ];
+    }
 }

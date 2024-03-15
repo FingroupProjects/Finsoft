@@ -40,4 +40,14 @@ class CurrencyRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'digital_code.required' => 'Поле цифровой код обязательно для заполнения.',
+            'symbol_code.required' => 'Поле символьный код обязательно для заполнения.',
+
+        ];
+    }
 }

@@ -32,4 +32,13 @@ class StorageRequest extends FormRequest
             'storage_data.*.to' => ['nullable', 'date']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'organization_id.required' => 'Поле организация обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для организация не существует.'
+        ];
+    }
 }

@@ -27,4 +27,11 @@ class ChangePasswordRequest extends FormRequest
             'password' => ['required', 'confirmed'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'password.required' => 'Поле пароль обязательно для заполнения.',
+        ];
+    }
 }

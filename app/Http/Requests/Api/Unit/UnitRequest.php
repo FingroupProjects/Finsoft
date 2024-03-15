@@ -26,4 +26,11 @@ class UnitRequest extends FormRequest
             'name' => ['required', 'string'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+        ];
+    }
 }

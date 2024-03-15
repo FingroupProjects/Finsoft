@@ -28,4 +28,5 @@ class StorageEmployeeRequest extends FormRequest
             'to' => ['nullable', 'date']
         ];
     }
+
 }
