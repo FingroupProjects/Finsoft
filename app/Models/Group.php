@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Group extends Model
 {
-    use SoftDeletes;
     protected $fillable = ['name'];
 
 
@@ -16,9 +15,10 @@ class Group extends Model
     {
         return $this->hasMany(User::class);
     }
-      public static function bootSoftDeletes()
-    {
 
+    public function storages(): HasMany
+    {
+        return $this->hasMany(Storage::class);
     }
 
 }
