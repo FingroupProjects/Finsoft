@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Api\User;
 
+use App\Enums\Groups;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class UserRequest extends FormRequest
 {
@@ -31,7 +34,7 @@ class UserRequest extends FormRequest
             'phone' => ['unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email'],
             'image' => ['nullable', 'file'],
-            'group_id' => ['integer', 'required', 'exists:groups,id']
+            'group_id' => ['integer', 'required', 'exists:groups,id', Rule::enum(Groups::class)]
         ];
     }
 

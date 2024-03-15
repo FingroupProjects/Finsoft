@@ -19,7 +19,7 @@ class User extends Authenticatable implements \App\Repositories\Contracts\SoftDe
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, Searchable;
 
     protected $fillable = ['name', 'surname', 'lastname', 'login', 'email',
-            'password', 'phone', 'organization_id', 'status', 'image'];
+            'password', 'phone', 'organization_id', 'status', 'image', 'group_id'];
 
     protected $hidden = [
         'password',
