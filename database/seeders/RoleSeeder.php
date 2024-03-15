@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Role;
+use App\Models\Unit;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,13 @@ class RoleSeeder extends Seeder
             ['name' => 'Клиент'],
             ['name' => 'Поставщик'],
             ['name' => 'Прочие'],
+        ]);
+
+        Unit::create([
+            'name' => 'кг'
+        ]);
+        Unit::create([
+            'name' => 'м'
         ]);
     }
 }
