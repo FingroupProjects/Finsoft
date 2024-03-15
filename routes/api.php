@@ -73,7 +73,8 @@ Route::apiResource('unit', UnitController::class);
 Route::apiResource('good', GoodController::class);
 Route::apiResource('barcode', BarcodeController::class)->except('index', 'show');
 Route::get('barcode/{good}', [BarcodeController::class, 'index']);
-Route::apiResource('group', GroupController::class);
+Route::apiResource('group', GroupController::class)->except('index', 'show');
+
 Route::apiResource('good-group', GoodGroupController::class);
 
 Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);

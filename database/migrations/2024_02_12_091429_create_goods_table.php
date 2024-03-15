@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('vendor_code')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignId('unit_id')->constrained();
             $table->string('barcode')->unique();
             $table->foreignId('storage_id')->constrained();
