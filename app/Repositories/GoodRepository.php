@@ -56,9 +56,7 @@ class GoodRepository implements GoodRepositoryInterface
             'name' => $DTO->name,
             'vendor_code' => $DTO->vendor_code,
             'description' => $DTO->description,
-            'category_id' => $DTO->category_id,
             'unit_id' => $DTO->unit_id,
-            'barcode' => $DTO->barcode,
             'storage_id' => $DTO->storage_id,
             'good_group_id' => $DTO->good_group_id
         ]);

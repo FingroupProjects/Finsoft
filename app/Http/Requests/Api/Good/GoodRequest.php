@@ -29,7 +29,6 @@ class GoodRequest extends FormRequest
             'vendor_code' => ['required', 'unique:goods,vendor_code'],
             'description' => [''],
             'unit_id' => ['required', 'exists:units,id'],
-            'barcode' => ['nullable', 'unique:goods,barcode'],
             'storage_id' => ['required', 'exists:storages,id'],
             'good_group_id' => ['required', 'exists:good_groups,id'],
             'main_image' => ['nullable', 'file'],

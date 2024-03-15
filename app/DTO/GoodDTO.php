@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 class GoodDTO
 {
     public function __construct(public string $name, public string $vendor_code, public string $description,
-               public int $category_id, public int $unit_id, public string $barcode, public int $storage_id, public ?array $add_images, public ?int $good_group_id)
+                public int $unit_id, public int $storage_id,  public ?int $good_group_id, public string $main_image, public ?array $add_images,)
     {
     }
 
@@ -20,10 +20,10 @@ class GoodDTO
             $request->get('description'),
             $request->get('category_id'),
             $request->get('unit_id'),
-            $request->get('barcode'),
             $request->get('storage_id'),
-            $request->allFiles('add_images'),
             $request->get('good_group_id'),
+            $request->allFiles('main_image'),
+            $request->allFiles('add_images'),
         );
     }
 }
