@@ -6,6 +6,7 @@ use App\Repositories\AuthRepository;
 use App\Repositories\CashRegisterRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\Contracts\AuthRepositoryInterface;
+use App\Repositories\Contracts\BarcodeRepository;
 use App\Repositories\Contracts\CashRegisterRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\CounterpartyAgreementRepositoryInterface;
@@ -78,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(GroupRepositoryInterface::class, GroupRepository::class);
         $this->app->singleton(StorageEmployeeRepositoryInterface::class, StorageEmployeeRepository::class);
         $this->app->singleton(GoodGroupRepositoryInterface::class, GoodGroupRepository::class);
+        $this->app->singleton(BarcodeRepository::class, \App\Repositories\BarcodeRepository::class);
 
 
     }
