@@ -43,7 +43,7 @@ class User extends Authenticatable implements \App\Repositories\Contracts\SoftDe
 
     public function group() :BelongsTo
     {
-        return $this->belongsTo(GroupResource::class, 'group_id');
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
     public static function bootSoftDeletes()
