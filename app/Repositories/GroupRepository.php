@@ -15,6 +15,8 @@ class GroupRepository implements GroupRepositoryInterface
 {
     use Sort, FilterTrait;
 
+    public $model = Group::class;
+
     public function index(int $id, array $data): LengthAwarePaginator
     {
         $filterParams = $this->processSearchData($data);
