@@ -29,11 +29,11 @@ class DatabaseSeeder extends Seeder
             'login' => 'admin',
             'password' => Hash::make('password'),
         ])->assignRole('admin');
-
-        $this->call([
-            RoleSeeder::class,
-            StatusSeeder::class,
-            FactorySeeder::class
-        ]);
+//
+//        $this->call([
+//            RoleSeeder::class,
+//            StatusSeeder::class,
+//            FactorySeeder::class
+//        ]);
     }
 }
