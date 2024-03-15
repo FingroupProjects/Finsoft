@@ -23,9 +23,20 @@ class StorageEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'employee_id' => ['nullable', Rule::exists('employees', 'id')],
-            'from' => ['nullable', 'date'],
-            'to' => ['nullable', 'date']
+            'employee_id' => ['required', Rule::exists('employees', 'id')],
+            'from' => ['required', 'date'],
+            'to' => ['required', 'date']
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'employee_id.required' => 'Поле сотрудник обязательно для заполнения.',
+            'employee_id.exists' => 'Выбранное значение для сотрудник не существует.',
+            'from.required' => 'Поле дата начала обязательно для заполнения.',
+            'to.required' => 'Поле дата конец обязательно для заполнения.',
         ];
     }
 
