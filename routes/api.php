@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\StorageController;
 use App\Http\Controllers\Api\StorageEmployeeController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,8 @@ Route::apiResource('storage', StorageController::class)->except('update');
 Route::apiResource('category', CategoryController::class);
 Route::apiResource('unit', UnitController::class);
 Route::apiResource('good', GoodController::class);
+Route::apiResource('barcode', BarcodeController::class)->except('index');
+Route::get('barcode/{good}', [BarcodeController::class, 'index']);
 Route::apiResource('group', GroupController::class);
 Route::apiResource('good-group', GoodGroupController::class);
 
