@@ -21,7 +21,7 @@ class GroupController extends Controller
 
     public function index(int $id, IndexRequest $request)
     {
-        return $this->paginate(GroupResource::make($this->repository->index($id, $request->validated())));
+        return $this->paginate(GroupResource::collection($this->repository->index($id, $request->validated())));
     }
 
     public function store(GroupRequest $request)
