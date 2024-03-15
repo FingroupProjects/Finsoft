@@ -71,7 +71,7 @@ Route::apiResource('storage', StorageController::class)->except('update');
 Route::apiResource('category', CategoryController::class);
 Route::apiResource('unit', UnitController::class);
 Route::apiResource('good', GoodController::class);
-Route::apiResource('barcode', BarcodeController::class)->except('index');
+Route::apiResource('barcode', BarcodeController::class)->except('index', 'show');
 Route::get('barcode/{good}', [BarcodeController::class, 'index']);
 Route::apiResource('group', GroupController::class);
 Route::apiResource('good-group', GoodGroupController::class);
