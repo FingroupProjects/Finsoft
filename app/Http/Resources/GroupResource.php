@@ -18,7 +18,7 @@ class GroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'employees' =>  UserResource::collection($this->whenLoaded('users')),
+            'users' =>  UserResource::collection($this->whenLoaded('users')),
             'storages' => StorageResource::collection($this->whenLoaded('storages'))
 
 
