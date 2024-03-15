@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\DTO\GroupDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Group\GroupRequest;
+use App\Http\Requests\Api\IndexRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Repositories\Contracts\GroupRepositoryInterface;
@@ -16,6 +17,11 @@ class GroupController extends Controller
 
     public function __construct(public GroupRepositoryInterface $repository)
     {
+    }
+
+    public function index(int $id, IndexRequest $request)
+    {
+        return $this->success(GroupResource::make($this->repository->index($id, $request->validated())));
     }
 
     public function store(GroupRequest $request)

@@ -76,7 +76,7 @@ Route::get('barcode/{good}', [BarcodeController::class, 'index']);
 Route::apiResource('group', GroupController::class)->except('index', 'show');
 
 Route::apiResource('good-group', GoodGroupController::class);
-
+Route::get('group/{id}', [GroupController::class, 'index']);
 Route::get('getExchangeRateByCurrencyId/{currency}', [CurrencyController::class, 'getExchangeRateByCurrencyId']);
 
 Route::group(['prefix' => 'organizationBill'], function () {
