@@ -27,7 +27,7 @@ class ExchangeRateRepository implements ExchangeRateInterface
     {
         $filteredParams = $this->processSearchData($data);
 
-        $query = $this->model::search($filteredParams['search'])->where('currency_id', $currency->id);
+        $query = $this->search($filteredParams['search'])->where('currency_id', $currency->id);
 
         $query = $this->sort($filteredParams, $query, []);
 
