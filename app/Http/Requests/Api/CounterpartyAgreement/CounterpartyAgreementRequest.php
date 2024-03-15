@@ -34,4 +34,20 @@ class CounterpartyAgreementRequest extends FormRequest
             'price_type_id' => ['required', Rule::exists('price_types', 'id')],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'date.required' => 'Поле дата обязательно для заполнения.',
+            'contact_person.required' => 'Поле контактное лицо обязательно для заполнения.',
+            'currency_id.required' => 'Поле валюта обязательно для заполнения.',
+            'currency_id.exists' => 'Выбранное значение для поле валюта не существует.',
+            'organization_id.required' => 'Поле организация обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для поле организация не существует.',
+            'counterparty_id.required' => 'Поле контрагент обязательно для заполнения.',
+            'counterparty_id.exists' => 'Выбранное значение для поле контрагент не существует.',
+
+        ];
+    }
 }

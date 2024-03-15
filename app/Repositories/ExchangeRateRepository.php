@@ -33,4 +33,9 @@ class ExchangeRateRepository implements ExchangeRateInterface
 
         return $query->paginate($filteredParams['itemsPerPage']);
     }
+
+    public function search(string $search)
+    {
+        return $this->model::whereAny(['date', 'value'], 'like', '%' . $search . '%');
+    }
 }

@@ -30,4 +30,17 @@ class CashRegisterRequest extends FormRequest
             'responsible_person_id' => ['required', 'exists:employees,id'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'currency_id.required' => 'Поле валюта обязательно для заполнения.',
+            'currency_id.exists' => 'Выбранное значение для поле валюта не существует.',
+            'organization_id.required' => 'Поле организация обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для поле организация не существует.',
+            'responsible_person_id.required' => 'Поле ответственное лицо обязательно для заполнения.',
+            'responsible_person_id.exists' => 'Выбранное значение для поле ответственное лицо не существует.',
+        ];
+    }
 }
