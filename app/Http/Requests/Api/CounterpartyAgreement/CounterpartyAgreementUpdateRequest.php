@@ -48,8 +48,8 @@ class CounterpartyAgreementUpdateRequest extends FormRequest
             'organization_id.exists' => 'Выбранное значение для поле организация не существует.',
             'counterparty_id.required' => 'Поле контрагент обязательно для заполнения.',
             'counterparty_id.exists' => 'Выбранное значение для поле контрагент не существует.',
-            'price_type_id.required' => 'Поле контрагент обязательно для заполнения.',
-            'price_type_id.exists' => 'Выбранное значение для поле контрагент не существует.',
+            'price_type_id.required' => 'Поле вид цены обязательно для заполнения.',
+            'price_type_id.exists' => 'Выбранное значение для поле вид цены не существует.',
 
         ];
     }
