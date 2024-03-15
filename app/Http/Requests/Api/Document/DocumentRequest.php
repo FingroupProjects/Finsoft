@@ -29,11 +29,26 @@ class DocumentRequest extends FormRequest
             'counterparty_agreement_id' => ['required', Rule::exists('counterparty_agreements', 'id')],
             'organization_id' => ['required', Rule::exists('organizations', 'id')],
             'storage_id' => ['required', Rule::exists('storages', 'id')],
-            'author_id' => ['required', Rule::exists('users', 'id')],
             'goods' => ['nullable', 'array'],
             'goods.*.good_id' => ['required', Rule::exists('goods', 'id')],
             'goods.*.amount' => ['required', 'min:1'],
             'goods.*.price' => ['required', 'numeric'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'date.required' => 'Поле дата обязательно для заполнения.',
+            'counterparty_id.required' => 'Поле контрагент обязательно для заполнения.',
+            'counterparty_id.exists' => 'Выбранное значение для поле контрагент не существует.',
+            'counterparty_agreement_id.required' => 'Поле договор контрагента обязательно для заполнения.',
+            'counterparty_agreement_id.exists' => 'Выбранное значение для поле договор контрагента не существует.',
+            'organization_id.required' => 'Поле договор контрагента обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для поле договор контрагента не существует.',
+            'storage_id.required' => 'Поле склад обязательно для заполнения.',
+            'storage_id.exists' => 'Выбранное значение для поле склад не существует.',
+
         ];
     }
 }

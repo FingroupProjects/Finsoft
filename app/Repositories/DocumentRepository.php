@@ -10,6 +10,7 @@ use App\Traits\FilterTrait;
 use App\Traits\Sort;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Comment\Doc;
 
@@ -42,7 +43,7 @@ class DocumentRepository implements DocumentRepositoryInterface
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
                 'storage_id' => $dto->storage_id,
-                'author_id' => $dto->author_id,
+                'author_id' => Auth::id(),
                 'status_id' => $status
             ]);
 
@@ -63,7 +64,7 @@ class DocumentRepository implements DocumentRepositoryInterface
                 'counterparty_agreement_id' => $dto->counterparty_agreement_id,
                 'organization_id' => $dto->organization_id,
                 'storage_id' => $dto->storage_id,
-                'author_id' => $dto->author_id
+                'author_id' => Auth::id()
             ]);
 
             if (!is_null($dto->goods))

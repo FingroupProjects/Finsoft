@@ -35,7 +35,18 @@ class GoodRequest extends FormRequest
             'good_group_id' => ['required', 'exists:good_groups,id'],
             'main_image' => ['nullable', 'file'],
             'add_images' => ['nullable', ''],
+        ];
+    }
 
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'vendor_code.required' => 'Поле артикул обязательно для заполнения.',
+            'phone.unique' => 'Такое значение поле телефон уже существует.',
+            'email.required' => 'Поле почта обязательно для заполнения.',
+            'email.unique' => 'Такое значение поле почта уже существует.',
+            'address.required' => 'Поле адрес обязательно для заполнения.',
         ];
     }
 }
