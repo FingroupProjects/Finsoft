@@ -11,9 +11,9 @@ class Group extends Model
     protected $fillable = ['name'];
 
 
-    public function employees(): HasMany
+    public function users(): HasMany
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(User::class);
     }
 
 }
