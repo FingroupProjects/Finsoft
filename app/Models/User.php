@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements \App\Repositories\Contracts\SoftDeleteInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, Searchable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     protected $fillable = ['name', 'surname', 'lastname', 'login', 'email',
             'password', 'phone', 'organization_id', 'status', 'image', 'group_id'];

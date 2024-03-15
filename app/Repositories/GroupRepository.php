@@ -13,6 +13,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GroupRepository implements GroupRepositoryInterface
 {
+
+    public $model = Group::class;
     use Sort, FilterTrait;
 
     public $model = Group::class;
@@ -23,7 +25,7 @@ class GroupRepository implements GroupRepositoryInterface
 
         $query = Group::where('type', $id);
 
-        $query = $this->sort($filterParams, $query, ['employees']);
+        $query = $this->sort($filterParams, $query, ['users']);
 
         return $query->paginate($filterParams['itemsPerPage']);
     }
