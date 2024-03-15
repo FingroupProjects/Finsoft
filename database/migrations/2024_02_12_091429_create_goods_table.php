@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('name');
             $table->string('vendor_code')->unique();
             $table->text('description');
-            $table->foreignId('category_id')->constrained();
             $table->foreignId('unit_id')->constrained();
             $table->string('barcode')->unique();
             $table->foreignId('storage_id')->constrained();

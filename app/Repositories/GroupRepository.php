@@ -12,6 +12,7 @@ class GroupRepository implements GroupRepositoryInterface
     {
         return Group::create([
             'name' => $DTO->name,
+            'type' => $DTO->type
         ]);
     }
 
