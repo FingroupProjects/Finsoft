@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,9 +18,11 @@ class OrganizationBillResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'date' => Carbon::parse($this->date),
             'currency' => CurrencyResource::make($this->whenLoaded('currency')),
             'organization' => OrganizationResource::make($this->whenLoaded('organization')),
             'bill_number' => $this->bill_number,
+            'comment' => $this->comment,
             'deleted_at' => $this->deleted_at
         ];
     }

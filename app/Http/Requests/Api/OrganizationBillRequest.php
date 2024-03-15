@@ -47,4 +47,17 @@ class OrganizationBillRequest extends FormRequest
             'comment' => ['']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле наименование обязательно для заполнения.',
+            'bill_number.required' => 'Поле номер счета обязательно для заполнения.',
+            'date.required' => 'Поле дата обязательно для заполнения.',
+            'currency_id.required' => 'Поле валюта обязательно для заполнения.',
+            'currency_id.exists' => 'Выбранное значение для поле валюта не существует.',
+            'organization_id.required' => 'Поле организация обязательно для заполнения.',
+            'organization_id.exists' => 'Выбранное значение для поле организация не существует.',
+        ];
+    }
 }
