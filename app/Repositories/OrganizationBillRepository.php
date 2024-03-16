@@ -26,7 +26,9 @@ class OrganizationBillRepository implements OrganizationBillRepositoryInterface
     {
         $filterParams = $this->processSearchData($data);
 
-        $query = $this->search($filterParams['search']);
+        $query = $this->search($filterParams);
+
+        $query = $this->filter($query, $filterParams);
 
         $query = $this->sort($filterParams, $query, ['organization', 'currency']);
 
@@ -45,14 +47,24 @@ class OrganizationBillRepository implements OrganizationBillRepositoryInterface
         return $bill->load(['currency', 'organization']);
     }
 
-    public function search(string $search)
+    public function search(array $filterParams)
     {
-        return $this->model::whereAny(['name', 'bill_number',  'date', 'comment' ], 'like', '%' . $search . '%')
-            ->orWhereHas('currency', function ($query) use ($search) {
-                return $query->where('name', 'like', '%' . $search . '%');
+        $query = $this->model::whereAny(['name', 'bill_number', 'date', 'comment'], 'like', '%' . $filterParams['search'] . '%');
+
+        return $query->where(function ($query) use ($filterParams) {
+            $query->orWhereHas('currency', function ($query) use ($filterParams) {
+                $query->where('name', 'like', '%' . $filterParams['search'] . '%');
             })
-            ->orWhereHas('organization', function ($query) use ($search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            });
+                ->orWhereHas('organization', function ($query) use ($filterParams) {
+                    $query->where('name', 'like', '%' . $filterParams['search'] . '%');
+                });
+        });
+    }
+
+    public function filter($query, array $data)
+    {
+        return $query->when($data['currency_id'], function ($query) use ($data) {
+            return $query->where('currency_id', $data['currency_id']);
+        });
     }
 }
