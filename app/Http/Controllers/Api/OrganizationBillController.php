@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\DTO\CurrencyDTO;
-use App\DTO\ExchangeRateDTO;
 use App\DTO\OrganizationBillDTO;
-use App\DTO\PriceTypeDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\CurrencyRequest;
-use App\Http\Requests\Api\ExchangeRequest;
 use App\Http\Requests\Api\IndexRequest;
-use App\Http\Requests\Api\OrganizationBillRequest;
-use App\Http\Requests\Api\PriceTypeRequest;
+use App\Http\Requests\Api\OrganizationBill\FilterRequest;
+use App\Http\Requests\Api\OrganizationBill\OrganizationBillRequest;
 use App\Http\Requests\IdRequest;
-use App\Http\Resources\CurrencyResource;
-use App\Http\Resources\ExchangeRateResource;
 use App\Http\Resources\OrganizationBillResource;
-use App\Http\Resources\PriceTypeResource;
-use App\Models\Currency;
-use App\Models\ExchangeRate;
 use App\Models\OrganizationBill;
 use App\Repositories\Contracts\MassDeleteInterface;
 use App\Repositories\Contracts\MassOperationInterface;
@@ -34,7 +24,7 @@ class OrganizationBillController extends Controller
     {
     }
 
-    public function index(IndexRequest $request) :JsonResponse
+    public function index(FilterRequest $request) :JsonResponse
     {
         return $this->paginate(OrganizationBillResource::collection($this->repository->index($request->validated())));
     }

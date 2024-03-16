@@ -13,6 +13,8 @@ trait FilterTrait
             'orderBy' => $data['orderBy'] ?? null,
             'direction' => $data['sort'] ?? 'asc',
             'itemsPerPage' => isset($data['itemsPerPage']) ? ($data['itemsPerPage'] == 10 ? 25 : $data['itemsPerPage']) : 25,
+            'currency_id' => $data['currency_id'] ?? null,
+            'organization_id' => $data['organization_id'] ?? null
         ];
     }
 

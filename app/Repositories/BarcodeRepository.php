@@ -15,6 +15,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class BarcodeRepository implements \App\Repositories\Contracts\BarcodeRepository
 {
     use Sort, FilterTrait;
+
+    public $model = Barcode::class;
+
     public function store(BarcodeDTO $DTO) :Barcode
     {
         return Barcode::create([

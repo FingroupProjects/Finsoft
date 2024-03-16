@@ -19,7 +19,6 @@ class GoodFactory extends Factory
             'name' => fake()->name,
             'vendor_code' => fake()->numberBetween(1000, 99999999),
             'description' => fake()->text(),
-            'category_id' => Category::factory(),
             'unit_id' => Unit::factory(),
             'barcode' => time() . fake()->numberBetween(1292992,939393939),
             'storage_id' => Storage::factory(),

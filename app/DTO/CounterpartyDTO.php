@@ -2,10 +2,6 @@
 
 namespace App\DTO;
 
-use App\Http\Requests\Api\CounterpartyRequest;
-use App\Http\Requests\Api\CurrencyRequest;
-use App\Http\Requests\Api\OrganizationBillRequest;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 
 class CounterpartyDTO

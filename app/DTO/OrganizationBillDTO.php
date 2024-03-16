@@ -2,9 +2,7 @@
 
 namespace App\DTO;
 
-use App\Http\Requests\Api\CurrencyRequest;
-use App\Http\Requests\Api\OrganizationBillRequest;
-use Illuminate\Auth\Events\Login;
+use App\Http\Requests\Api\OrganizationBill\OrganizationBillRequest;
 
 class OrganizationBillDTO
 {

@@ -47,10 +47,5 @@ class FactorySeeder extends Seeder
         ExchangeRate::factory(5)->create();
         OrganizationBill::factory(5)->create();
 
-
-
-
-
-
     }
 }
